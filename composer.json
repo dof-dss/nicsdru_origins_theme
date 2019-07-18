@@ -1,0 +1,16 @@
+{
+    "name": "dof-dss/nicsdru-origins-theme",
+    "type": "drupal-custom-theme",
+    "description": "Drupal 8 theme",
+    "keywords": ["Drupal", "theme"],
+    "license": "GPL-2.0+",
+    "homepage": "https://github.com/dof-dss/nicsdru-origins-theme",
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "David Corbett",
+            "email": "David.Corbett@finance-ni.gov.uk",
+            "role": "Maintainer"
+        }
+    ]
+}
