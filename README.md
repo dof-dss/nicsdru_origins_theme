@@ -1,4 +1,4 @@
-# nics-origins
+# nicsdru_origins_theme
 This repository contains code for a Drupal 8 theme from which NICS sites should be sub-themed from.
 
 ## Table of contents
@@ -11,12 +11,12 @@ This repository contains code for a Drupal 8 theme from which NICS sites should 
 - [Documentation](#documentation)
 
 ## Quick start
-- [Download the latest release](https://github.com/nics-digital-development/archive/master.zip) or clone the repo: `git clone https://github.com/nics-digital-development/nics-origins.git`
+- [Download the latest release](https://github.com/dof-dss/nicsdru_origins_theme/archive/master.zip) or clone the repo: `git clone https://github.com/dof-dss/nicsdru_origins_theme.git`
 - `npm install`
 
 ## What's included
 
-The kit uses [NPM scripts](https://docs.npmjs.com/misc/scripts) and packages to create tooling to:
+The theme uses [NPM scripts](https://docs.npmjs.com/misc/scripts) and packages to create tooling to:
 
 * write and compile scss to css
 * apply appropriate prefixing for css rules
@@ -24,25 +24,37 @@ The kit uses [NPM scripts](https://docs.npmjs.com/misc/scripts) and packages to 
 * detect features the user’s browser has to offer (via Modernizr)
 * code linting
 * optimise and compress images for the web
-* living style guide for the code via kss
+
+
 
 Within the download you'll find the following directories and files, logically grouping common assets, you'll see something like this:
 
 ```
-theming-codekit/
+nicsdru_origins_theme/
 └── config/
+│   ├── install/
 │   ├── .sass-lint.yml
 │   ├── modernizr-config.json
+└── css/
 └── docs/
+└── js/
 └── src/
 │   ├── images/
 │   ├── js/
 │   ├── scss/
 │   ├── styleguide/
+└── templates/
 └── .gitignore
+└── composer.json
 └── mkdocs.yml
+└── nicsdru-origins-theme.breakpoints.yml
+└── nicsdru-origins-theme.info.yml
+└── nicsdru-origins-theme.layouts.yml
+└── nicsdru-origins-theme.libraries.yml
+└── nicsdru-origins-theme.theme
 └── package.json
 └── README.md
+└── screenshot.png
 ```
 
 ## Using the NPM scripts

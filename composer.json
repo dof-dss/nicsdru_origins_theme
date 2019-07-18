@@ -1,10 +1,10 @@
 {
-    "name": "dof-dss/nicsdru-origins-theme",
+    "name": "dof-dss/nicsdru_origins_theme",
     "type": "drupal-custom-theme",
     "description": "Drupal 8 theme",
     "keywords": ["Drupal", "theme"],
     "license": "GPL-2.0+",
-    "homepage": "https://github.com/dof-dss/nicsdru-origins-theme",
+    "homepage": "https://github.com/dof-dss/nicsdru_origins_theme",
     "minimum-stability": "dev",
     "authors": [
         {
