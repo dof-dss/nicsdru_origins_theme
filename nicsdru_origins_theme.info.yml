@@ -1,0 +1,32 @@
+name: NICS Origins
+type: theme
+description: 'Base theme for Drupal 8 sites'
+package: NICS
+core: 8.x
+
+libraries:
+  - nicsdru_origins_theme/base-styling
+  - nicsdru_origins_theme/layout-styling
+  - nicsdru_origins_theme/component-styling
+
+libraries-override:
+  core/modernizr: nicsdru_origins_theme/override-modernizr
+  system/base:
+    css:
+      component:
+        css/components/sticky-header.module.css: false
+ 
+base theme: stable
+
+regions:
+  header: 'Header'
+  primary_menu: 'Primary menu'
+  page_top: 'Page top'
+  page_bottom: 'Page bottom'
+  breadcrumb: Breadcrumb
+  highlighted: Highlighted
+  help: Help
+  content: Content
+  sidebar_first: 'First sidebar'
+  sidebar_second: 'Sidebar second'
+  footer: 'Footer'

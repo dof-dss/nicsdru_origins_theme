@@ -1,0 +1,42 @@
+nicsdru_origins_theme.min:
+  label: minimal
+  mediaQuery: '(min-width: 0px)'
+  weight: 0
+  multipliers:
+    - 1x
+    - 2x
+nicsdru_origins_theme.mob:
+  label: mobile
+  mediaQuery: 'all and (min-width: 480px)'
+  weight: 1
+  multipliers:
+    - 1x
+    - 2x
+nicsdru_origins_theme.phab:
+  label: phablet
+  mediaQuery: 'all and (min-width: 600px)'
+  weight: 2
+  multipliers:
+    - 1x
+    - 2x
+nicsdru_origins_theme.tab:
+  label: tablet
+  mediaQuery: 'all and (min-width: 768px)'
+  weight: 3
+  multipliers:
+    - 1x
+    - 2x
+nicsdru_origins_theme.lap:
+  label: laptop
+  mediaQuery: 'all and (min-width: 980px)'
+  weight: 4
+  multipliers:
+    - 1x
+    - 2x
+nicsdru_origins_theme.desk:
+  label: desktop
+  mediaQuery: 'all and (min-width: 1382px)'
+  weight: 5
+  multipliers:
+    - 1x
+    - 2x

@@ -1,0 +1,23 @@
+nics_single_col:
+  label: 'NICS single column no wrapper'
+  category: 'NICS Layouts'
+  template: templates/layout/nics-1-col--nowrap
+  default_region: main
+  icon_map:
+    - [main]
+  regions:
+    main:
+      label: Main content
+nics_article:
+  label: 'NICS Article - Two column m:a'
+  category: 'NICS Layouts'
+  #  theme: nics_2_cols
+  template: templates/layout/nics-2-cols--article
+  default_region: main
+  icon_map:
+    - [main, sidebar]
+  regions:
+    main:
+      label: Main content
+    sidebar:
+      label: Sidebar
