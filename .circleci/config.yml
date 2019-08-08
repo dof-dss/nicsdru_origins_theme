@@ -1,0 +1,72 @@
+# PHP CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-php/ for more details
+version: 2
+
+jobs:
+  # Code linting.
+  lint:
+    docker:
+      - image: circleci/node:latest
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - node_modules-{{ checksum "package.json" }}
+      - run:
+          name: Fetch dependencies
+          command: npm install
+      - save_cache:
+          key: node_modules-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+      - run:
+          name: Lint all code
+          command: |
+            npm run lint
+
+  build-styleguide:
+    docker:
+      - image: circleci/node:latest
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - node_modules-{{ checksum "package.json" }}
+      - run:
+          name: Fetch dependencies
+          command: npm install
+      - save_cache:
+          key: node_modules-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+      - run:
+          name: Configure and build KSS styleguide
+          command: npm run kss
+
+  build-assets:
+    docker:
+      - image: circleci/node:latest
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - node_modules-{{ checksum "package.json" }}
+      - run:
+          name: Fetch dependencies
+          command: npm install
+      - save_cache:
+          key: node_modules-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+      - run:
+          name: Compile SCSS and JS assets
+          command: npm run build
+
+workflows:
+  version: 2
+  lint-build:
+    jobs:
+      - lint
+      - build-styleguide
+      - build-assets
