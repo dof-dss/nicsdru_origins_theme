@@ -21,4 +21,4 @@ See https://circleci.com/docs/2.0/local-cli/ for installation and further detail
 
 ## Interaction with other supporting repos/services
 
-This is a supporting project for the NIDirect site. It provides basic, but helpful, checks to trap simple issues earlier on. The full site test pipeline at https://github.com/dof-dss/nidirect-drupal will run whenever a new version of this project is referenced from the `composer.lock` file of the main repo; eg: after a `composer update dof-dss/<projectname> --with-depdendencies` command.
+This is a supporting project for the NIDirect site. It provides basic, but helpful, checks to trap simple issues earlier on. The full site test pipeline at https://github.com/dof-dss/nidirect-drupal will run whenever a new version of this project is referenced from the `composer.lock` file of the main repo; eg: after a `composer update dof-dss/projectname --with-depdendencies` command.
