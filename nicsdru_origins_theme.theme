@@ -144,3 +144,11 @@ function nicsdru_origins_theme_theme_suggestions_details_alter(array &$suggestio
  */
 function nicsdru_origins_theme_preprocess_menu_local_task(array &$variables) {
 }
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function nicsdru_origins_theme_form_user_login_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Alter login form to add out admin theming components.
+  $form['#attached']['library'][] = 'nicsdru_origins_theme/authenticated-styles';
+}
