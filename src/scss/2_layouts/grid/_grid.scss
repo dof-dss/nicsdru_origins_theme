@@ -31,11 +31,12 @@
 
 // Container
 //
-// `.container` defines a simple wrapper that fills the width of the page until it reaches a maximum width (defined by
-// the `$max-grid-width` variable in init/variables. When the container reaches the max-width, it is centered on the
-// page. All other layout structures should be nested inside this centered layout to ensure that content does not get
-// too wide on very large screens. Note that `.gd-row` class which indicates the start of a grid container can be applied
-// at the same level as `.container`, the grid will not be able to stretch beyond the maximum width of the container.
+// `.container` defines a simple wrapper class that permits the associated tag to fill the width of the page until it
+// reaches a maximum width (defined by the `$max-grid-width` variable in init/variables. When the container reaches
+// the max-width, it is centered on the page. All other layout structures should be nested inside this centered layout
+// to ensure that content does not get too wide on very large screens. Note that `.grid` class which indicates the start
+// of a grid container can be applied at the same level as `.container`, the grid will not be able to stretch beyond
+// the maximum width of the container.
 //
 // Weight: -1
 //
@@ -60,82 +61,48 @@
   }
 }
 
-//.container {
-//  display: grid;
-//  grid-template-columns:
-//    [full-start] minmax(1rem, 1fr)
-//    [main-start] minmax(0, $max-grid-width) [main-end]
-//    minmax(1rem, 1fr) [full-end];
-//
-//  & > * {
-//    grid-column: main;
-//  }
-//
-//  &-fluid {
-//    grid-column: full;
-//  }
-//}
-
-.gd-row {
+.grid,
+%grid {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
   grid-gap: $grid-gap;
   justify-content: space-between;
 
-  &.no-gutters {
+  &.no-gutter {
     grid-gap: 0;
   }
 }
 
-// set col spans / widths for each number upto our number of columns
-[class^='col-'] {
-  grid-column: span $total-columns;
-  width: 100%;
-}
-
-@each $breakpoint in map-keys($grid-breakpoints) {
-  $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
-  @include media-breakpoint-up($breakpoint, $grid-breakpoints) {
-    @for $i from 1 through $total-columns {
-      .col#{$infix}-#{$i} {
-        grid-column: span $i;
-        /* needed for the floated layout*/
-        @include gd-col-width($i);
-        clear: right;
-        float: left;
-
-        &.last-item {
-          width: percentage($i/$total-columns);
-        }
-      }
-    }
-  }
-}
-
-.last-item {
-  grid-column-end: $total-columns + 1;
-  /* needed for the floated layout*/
-  float: right;
-  margin-right: 0;
-}
-
-.gd-title {
-  grid-column: 1 / -1;
-  /* needed for the floated layout */
-  width: 100%;
-  clear: both;
-}
-
-.gd-new-row {
-  grid-column-start: 1;
-  clear: left;
-}
+//
+//// set col spans / widths for each number upto our number of columns
+//[class^='col-'] {
+//  grid-column: span $total-columns;
+//  width: 100%;
+//}
+//
+//@each $breakpoint in map-keys($grid-breakpoints) {
+//  $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+//  @include media-breakpoint-up($breakpoint, $grid-breakpoints) {
+//    @for $i from 1 through $total-columns {
+//      .col#{$infix}-#{$i} {
+//        grid-column: span $i;
+//        /* needed for the floated layout*/
+//        @include gd-col-width($i);
+//        clear: right;
+//        float: left;
+//
+//        &.last-item {
+//          width: percentage($i/$total-columns);
+//        }
+//      }
+//    }
+//  }
+//}
 
 /* We need to set the widths used on floated items back to auto, and remove the bottom margin as when we have grid we have gaps. */
 @supports (display: grid) {
-  .gd-row > * {
-    width: auto;
-    margin: 0;
+  .grid > * {
+    width: auto !important;
+    //margin: 0;
   }
 }
 
