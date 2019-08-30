@@ -1,0 +1,33 @@
+{#
+/**
+ * @file
+ * Theme implementation to display a two-column layout with content in a main
+ * <article> area and complementary content in an <aside>.
+ *
+ * Available variables:
+ * - content: The content for this layout.
+ * - attributes: HTML attributes for the layout <div>.
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+  set classes = [
+  'grid',
+  'layout--article-aside',
+]
+%}
+{% if content %}
+  <div {{ attributes.addClass(classes) }} role="presentation">
+    {% if content.main %}
+      <article {{ region_attributes.main.addClass('ga-main') }}>
+        {{- content.main -}}
+      </article>
+    {% endif %}
+    {% if content.sidebar %}
+      <aside {{ region_attributes.sidebar.addClass('ga-aside') }}>
+        {{- content.sidebar -}}
+      </aside>
+    {% endif %}
+  </div>
+{% endif %}
