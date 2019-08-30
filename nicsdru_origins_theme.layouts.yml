@@ -9,10 +9,10 @@ nics_single_col:
     main:
       label: Main content
 nics_article:
-  label: 'NICS Article - Two column m:a'
+  label: 'NICS article with aside'
   category: 'NICS Layouts'
-  #  theme: nics_2_cols
-  template: templates/layout/nics-2-cols--article
+  library: nicsdru_origins_theme/nics-layout-library
+  template: templates/layout/nics--article-aside
   default_region: main
   icon_map:
     - [main, sidebar]
