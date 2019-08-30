@@ -5,8 +5,9 @@
  * Functions to support theming in the nicsdru_origins_theme theme.
  */
 
-use Drupal\Component\Utility\Xss;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Link;
+use Drupal\Core\Url;
 
 /**
  * Implements hook_preprocess_HOOK() for html.html.twig.
@@ -65,6 +66,42 @@ function nicsdru_origins_theme_page_attachments_alter(array &$page) {
  * Implements hook_preprocess_page() for page.html.twig.
  */
 function nicsdru_origins_theme_preprocess_page(array &$variables) {
+  $platforms = [
+    'twitter' => t('Twitter'),
+    'facebook' => t('Facebook'),
+    'youtube' => t('YouTube'),
+    'rss' => t('RSS'),
+  ];
+  $links = [];
+
+  // Fetch links from the theme settings and use as part of render elements.
+  foreach ($platforms as $id => $label) {
+    $platform_url = theme_get_setting("social_links_$id", 'nicsdru_origins_theme');
+
+    if (empty($platform_url)) {
+      // Skip any blank values.
+      continue;
+    }
+
+    // Check for any internal paths.
+    if (preg_match('/^http/', $platform_url) == FALSE) {
+      // Strip leading / if present.
+      $platform_url = ltrim($platform_url, '/');
+      $platform_url = 'internal:/' . $platform_url;
+    }
+
+    $links[$id] = Link::fromTextAndUrl($label,
+      Url::fromUri($platform_url, [
+        'attributes' => ['title' => $label]
+      ]))->toRenderable();
+  }
+
+  if (!empty($links)) {
+    // Add to primary menu region.
+    $variables['page']['primary_menu']['social_links'] = $links;
+    // Add to footer region.
+    $variables['page']['footer']['social_links'] = $links;
+  }
 }
 
 /**
@@ -151,4 +188,47 @@ function nicsdru_origins_theme_preprocess_menu_local_task(array &$variables) {
 function nicsdru_origins_theme_form_user_login_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   // Alter login form to add out admin theming components.
   $form['#attached']['library'][] = 'nicsdru_origins_theme/authenticated-styles';
+}
+
+/**
+ * Implements hook_form_system_theme_settings_alter().
+ */
+function nicsdru_origins_theme_form_system_theme_settings_alter(&$form, FormStateInterface &$form_state, $form_id = NULL) {
+  // Work-around for a core bug affecting admin themes. See issue #943212.
+  if (isset($form_id)) {
+    return;
+  }
+
+  // Add a theme settings group to gather social media link URLs for
+  // presentation in the site header/footer regions.
+  $form['social_links'] = [
+    '#type' => 'details',
+    '#title' => t('Social media links'),
+    '#open' => TRUE,
+    '#description' => t('Add social media platform details here.'),
+  ];
+  $form['social_links']['social_links_twitter'] = [
+    '#type'          => 'textfield',
+    '#title'         => t('Twitter'),
+    '#default_value' => theme_get_setting('social_links_twitter'),
+    '#placeholder' => 'Enter a URL, such as https://twitter.com/yourorg',
+  ];
+  $form['social_links']['social_links_facebook'] = [
+    '#type'          => 'textfield',
+    '#title'         => t('Facebook'),
+    '#default_value' => theme_get_setting('social_links_facebook'),
+    '#placeholder' => 'Enter a URL, such as https://facebook.com/yourorg',
+  ];
+  $form['social_links']['social_links_youtube'] = [
+    '#type'          => 'textfield',
+    '#title'         => t('YouTube'),
+    '#default_value' => theme_get_setting('social_links_youtube'),
+    '#placeholder' => 'Enter a URL, such as https://youtube.com/yourorg',
+  ];
+  $form['social_links']['social_links_rss'] = [
+    '#type'          => 'textfield',
+    '#title'         => t('RSS'),
+    '#default_value' => theme_get_setting('social_links_rss'),
+    '#placeholder' => 'Enter a URL, such as https://example.com/rss.xml',
+  ];
 }
