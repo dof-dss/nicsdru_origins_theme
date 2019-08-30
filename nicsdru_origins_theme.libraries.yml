@@ -1,27 +1,35 @@
+# These libraries provide common css styling shared across all nics Drupal sites
 base-styling:
   version: 1.x
   css:
-    theme:
+    # The SMACSS category, "base", is loaded before other categories. Drupal 8
+    # loads stylesheets based on the SMACSS ordering of:
+    # base, layout, component, state, theme
+    base:
       css/1_base/base.css: { minified: true }
 
 layout-styling:
   version: 1.x
   css:
-    theme:
+    # The SMACSS category, "layout", is loaded after "base" styles.
+    layout:
       css/2_layouts/layouts.css: { minified: true }
 
 component-styling:
   version: 1.x
   css:
-    theme:
+    component:
       css/3_components/search-form/search-form.css: { minified: true }
 
+# This library provides styling for common admin interface components - the library is only loaded for
+# authenticated users and on the user login form - @see nicsdru_origins_theme.theme for processing functions
 authenticated-styles:
   version: VERSION
   css:
     theme:
       css/3_components/drupal-admin.css: { minified: true, weight: -5 }
 
+# Provide a custom modernizer script
 override-modernizr:
   # Block the page from being loaded until Modernizr is initialized.
   header: true
@@ -34,8 +42,8 @@ override-modernizr:
   js:
     js/modernizr.min.js: { preprocess: 0, weight: -21, minified: true }
 
-#nics-layout-library:
-#  version: 1.x
-#  css:
-#    theme:
-#      css/2_layout/nics-layout-2-cols.css: {}
+nics-layout-library:
+  version: 1.x
+  css:
+    layout:
+      css/2_layouts/layout-library.css: { minified: true }

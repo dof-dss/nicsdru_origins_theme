@@ -17,9 +17,7 @@
 
 p,
 %p {
-  @include adjust-font-size-to($p-font-size);
-  @include leader(1, $p-font-size);
-  @include trailer(1, $p-font-size);
+  @include responsive-typo-map($normal-text);
   color: color(text);
 }
 
@@ -254,12 +252,18 @@ sup {
 
 li {
   @extend %p;
-  margin-bottom: rhythm(1);
+  margin-bottom: 0.8rem;
+
+  @include breakpoint($tab) {
+    margin-bottom: 0.9rem;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  };
 }
 
 address {
-  @include adjust-font-size-to($p-font-size);
-  @include leader(1, $p-font-size);
-  @include trailer(1, $p-font-size);
+  @include responsive-typo-map($normal-text);
   font-style: normal;
 }
