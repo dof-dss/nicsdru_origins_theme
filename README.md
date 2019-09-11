@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/dof-dss/nicsdru_origins_theme.svg?style=svg)](https://circleci.com/gh/dof-dss/nicsdru_origins_theme)
+
 # nicsdru_origins_theme
 This repository contains code for a Drupal 8 theme from which NICS sites should be sub-themed from.
 
