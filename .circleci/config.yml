@@ -25,25 +25,6 @@ jobs:
           command: |
             npm run lint
 
-  build-styleguide:
-    docker:
-      - image: circleci/node:latest
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - node_modules-{{ checksum "package.json" }}
-      - run:
-          name: Fetch dependencies
-          command: npm install
-      - save_cache:
-          key: node_modules-{{ checksum "package.json" }}
-          paths:
-            - node_modules
-      - run:
-          name: Configure and build KSS styleguide
-          command: npm run kss
-
   build-assets:
     docker:
       - image: circleci/node:latest
@@ -68,5 +49,4 @@ workflows:
   lint-build:
     jobs:
       - lint
-      - build-styleguide
       - build-assets
