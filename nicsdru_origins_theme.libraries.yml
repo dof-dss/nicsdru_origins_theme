@@ -1,25 +1,32 @@
 # These libraries provide common css styling shared across all nics Drupal sites
-base-styling:
+global-styling:
   version: 1.x
   css:
     # The SMACSS category, "base", is loaded before other categories. Drupal 8
     # loads stylesheets based on the SMACSS ordering of:
     # base, layout, component, state, theme
     base:
-      css/1_base/base.css: { minified: true }
-
-layout-styling:
-  version: 1.x
-  css:
+      # css/1_base/fonts.css: { minified: true }
+      css/1_base/root.css: { minified: true }
+      css/1_base/html5.css: { minified: true }
+      css/1_base/links.css: { minified: true }
+      css/1_base/headings.css: { minified: true }
+      css/1_base/text.css: { minified: true }
+      css/1_base/grouping.css: { minified: true }
+      css/1_base/embedded.css: { minified: true }
+      css/1_base/forms.css: { minified: true }
+      css/1_base/tables.css: { minified: true }
     # The SMACSS category, "layout", is loaded after "base" styles.
     layout:
-      css/2_layouts/layouts.css: { minified: true }
-
-component-styling:
-  version: 1.x
-  css:
+      css/2_layouts/header.css: { weight: -100, minified: true }
+      css/2_layouts/layouts.css: { weight: -100, minified: true }
+    # The SMACSS category, "component", is loaded after "base and layout" styles.
     component:
-      css/3_components/search-form/search-form.css: { minified: true }
+      css/3_components/navigation/nav-menu.css: { minified: true }
+      css/3_components/navigation/main-menu.css: { minified: true }
+      css/3_components/navigation/breadcrumb.css: { minified: true }
+      css/3_components/block/search-form.css: { minified: true }
+
 
 # This library provides styling for common admin interface components - the library is only loaded for
 # authenticated users and on the user login form - @see nicsdru_origins_theme.theme for processing functions
@@ -46,4 +53,6 @@ nics-layout-library:
   version: 1.x
   css:
     layout:
-      css/2_layouts/layout-library.css: { minified: true }
+      css/2_layouts/nics-2-col-layouts.css: { minified: true }
+  dependencies:
+    - nicsdru_origins_theme/global-styling
