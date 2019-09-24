@@ -69,6 +69,5 @@
     "sasslintConfig": "config/.sass-lint.yml",
     "dockerRepo": "squidfunk/mkdocs-material",
     "dockerPort": "8000"
-  },
-  "author": "David.Corbett@finance-ni.gov.uk"
+  }
 }
