@@ -1,1 +1,0 @@
-@media (min-width: 768px){.layout--article-aside{grid-template-columns:2fr 1fr;grid-template-areas:"main aside"}.layout--article-aside .ga-main{grid-area:main;float:left;width:66%}.layout--article-aside .ga-aside{grid-area:aside;float:right;width:33%}}

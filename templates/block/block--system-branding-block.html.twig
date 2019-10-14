@@ -15,7 +15,7 @@
  * @ingroup themeable
  */
 #}
-<figure class="layout-header--logo">
+<div class="layout-header--logo" role="presentation">
   {% block content -%}
     {%- if site_logo -%}
       {%- if not is_front -%}
@@ -27,4 +27,4 @@
       {%- endif -%}
     {%- endif -%}
   {% endblock %}
-</figure>
+</div>

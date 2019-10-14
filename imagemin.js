@@ -5,7 +5,7 @@ const GIFImages = 'src/images/**/*.gif';
 const output = 'images';
 
 const imageminJpegtran = require('imagemin-jpegtran');
-const imageminJpegoptim = require('imagemin-jpegoptim');
+// const imageminJpegoptim = require('imagemin-jpegoptim');
 const imageminOptipng = require('imagemin-optipng');
 const imageminPngcrush = require('imagemin-pngcrush');
 const imageminPngout = require('imagemin-pngout');
@@ -19,7 +19,7 @@ imagemin([JPEGImages], output, {use: [imageminJpegtran()]}).then(() => {
 const optimiseJPEGImages = () =>
     imagemin([JPEGImages], output, {
       plugins: [
-        imageminJpegoptim(),
+        // imageminJpegoptim(),
         imageminJpegtran(),
       ]
     });
