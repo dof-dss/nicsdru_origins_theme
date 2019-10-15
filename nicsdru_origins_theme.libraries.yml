@@ -25,6 +25,7 @@ global-styling:
       css/3_components/navigation/nav-menu.css: { minified: true }
       css/3_components/navigation/main-menu.css: { minified: true }
       css/3_components/navigation/breadcrumb.css: { minified: true }
+      css/3_components/navigation/sub-menus.css: { minified: true }
       css/3_components/block/search-form.css: { minified: true }
 
 
