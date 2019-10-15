@@ -79,9 +79,7 @@
   "config": {
     "//": "Some useful configuration we can use to pass back to scripts",
     "scssfile": "src/scss/**/*.scss",
-    "sasslintConfig": "config/.sass-lint.yml",
-    "dockerRepo": "squidfunk/mkdocs-material",
-    "dockerPort": "8000"
+    "sasslintConfig": "config/.sass-lint.yml"
   },
   "dependencies": {}
 }
