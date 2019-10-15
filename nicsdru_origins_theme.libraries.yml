@@ -49,6 +49,16 @@ override-modernizr:
   js:
     js/modernizr.min.js: { preprocess: 0, weight: -21, minified: true }
 
+toggle-list:
+  version: VERSION
+  css:
+    component:
+      css/3_components/navigation/toggle-list.css: { minified: true }
+  js:
+    js/toggle-btn-script.js: { minified: true }
+  dependencies:
+    - core/jquery
+
 nics-layout-library:
   version: 1.x
   css:
