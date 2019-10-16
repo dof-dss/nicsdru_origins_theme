@@ -10,32 +10,32 @@
    * by default, can be changed by adding a `data-toggle-length` attribute to
    * the parent wrapper where the `.toggle-list` class is declared.
    */
-  // eslint-disable-next-line
-  var $relatedArticleList = $(".toggle-list ul"),
+  // eslint-disable-next-line one-var,no-var
+  var $relatedArticleList = $('.toggle-list ul'),
     maxRelated =
-      parseInt($(".toggle-list").attr("data-toggle-length"), 10) || 7,
-    relatedTotal = $relatedArticleList.children("li").length,
+      parseInt($('.toggle-list').attr('data-toggle-length'), 10) || 7,
+    relatedTotal = $relatedArticleList.children('li').length,
     // eslint-disable-next-line
-    relatedToggleText = "Show " + (relatedTotal - maxRelated) + " more";
+    relatedToggleText = 'Show ' + (relatedTotal - maxRelated) + ' more';
 
   if (relatedTotal > maxRelated) {
-    // $relatedArticleList.setAttribute('id', 'toggle-menu');
-    $relatedArticleList.attr({ id: "toggle-menu", "aria-live": "polite" });
+    $relatedArticleList.attr({ id: 'toggle-menu', 'aria-live': 'polite' });
 
-    // eslint-disable-next-line
-    $relatedArticleList.children('li:nth-child(n+' + (maxRelated + 1) + ')').toggle();
+    $relatedArticleList
+      .children('li:nth-child(n+' + (maxRelated + 1) + ')')
+      .toggle();
 
     // eslint-disable-next-line
     $relatedArticleList.after('<a href="#" id="related-toggle" class="toggle-btn" role="button" aria-pressed="false" aria-controls="toggle-menu">' + relatedToggleText + '</a>');
 
     // eslint-disable-next-line func-names
-    $("#related-toggle").click(function() {
+    $('#related-toggle').click(function() {
       $relatedArticleList
         // eslint-disable-next-line
         .children('li:nth-child(n+' + (maxRelated + 1) + ')')
-        .toggle("slow");
+        .toggle('slow');
       $(this)
-        .attr("aria-pressed", "true")
+        .attr('aria-pressed', 'true')
         .hide();
       return false;
     });
