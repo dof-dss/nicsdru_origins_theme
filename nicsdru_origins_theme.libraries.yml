@@ -25,6 +25,7 @@ global-styling:
       css/3_components/navigation/nav-menu.css: { minified: true }
       css/3_components/navigation/main-menu.css: { minified: true }
       css/3_components/navigation/breadcrumb.css: { minified: true }
+      css/3_components/navigation/sub-menus.css: { minified: true }
       css/3_components/block/search-form.css: { minified: true }
 
 
@@ -48,6 +49,16 @@ override-modernizr:
   version: "v3.6.0"
   js:
     js/modernizr.min.js: { preprocess: 0, weight: -21, minified: true }
+
+toggle-list:
+  version: VERSION
+  css:
+    component:
+      css/3_components/navigation/toggle-list.css: { minified: true }
+  js:
+    js/toggle-btn-script.js: { minified: true }
+  dependencies:
+    - core/jquery
 
 nics-layout-library:
   version: 1.x
