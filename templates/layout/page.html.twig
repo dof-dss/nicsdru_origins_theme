@@ -33,11 +33,18 @@
  * - page.secondary_menu: Items for the secondary menu region.
  * - page.highlighted: Items for the highlighted content region.
  * - page.help: Dynamic help text, mostly for admin pages.
+ * - page.top_banner: Items for the top banner region.
  * - page.content: The main content of the current page.
  * - page.sidebar_first: Items for the first sidebar.
  * - page.sidebar_second: Items for the second sidebar.
+ * - page.bottom_banner: Items for the bottom banner region.
  * - page.footer: Items for the footer region.
  * - page.breadcrumb: Items for the breadcrumb region.
+ *
+ * Attributes:
+ * - main_content_attr: HTML attributes for the main containing element.
+ * - sidebar_first_attr: Same as main_content_attr, except applied to the first sidebar
+ * - sidebar_second_attr: Same as main_content_attr, except applied to the second sidebar
  *
  * @see template_preprocess_page()
  * @see html.html.twig
@@ -46,35 +53,32 @@
 <header class="header">
   {{- page.header -}}
 </header>
-
 {{- page.primary_menu -}}
 {{- page.secondary_menu -}}
-
 {{- page.breadcrumb -}}
-
 {{- page.highlighted -}}
-
 {{- page.help -}}
-
-<main id="main-content" class="container">{# link is in html.html.twig #}
-  {{- page.content -}}
-</main>
-
-{%- if page.sidebar_first -%}
-  <aside class="layout-sidebar-first">
-    {{- page.sidebar_first -}}
-  </aside>
-{%- endif -%}
-
-{%- if page.sidebar_second -%}
-  <aside class="layout-sidebar-second">
-    {{- page.sidebar_second -}}
-  </aside>
-{%- endif -%}
-
-{% if page.footer %}
-  <footer id="footer" class="footer">
-    {{ page.footer }}
-  </footer>
+{%- if page.top_banner -%}
+{{- page.top_banner -}}
 {% endif %}
-
+<main{{ main_content_attr }}>{# @see skiplink in html.html.twig  which targets the ID for this element #}
+  {%- if page.sidebar_first -%}
+    <aside{{ sidebar_first_attr }}>
+      {{- page.sidebar_first -}}
+    </aside>
+  {%- endif -%}
+  {{- page.content -}}
+  {%- if page.sidebar_second -%}
+    <aside{{ sidebar_second_attr }}>
+      {{- page.sidebar_second -}}
+    </aside>
+  {%- endif -%}
+</main>
+{%- if page.bottom_banner -%}
+{{- page.bottom_banner -}}
+{% endif %}
+{%- if page.footer -%}
+  <footer id="footer" class="footer">
+    {{- page.footer -}}
+  </footer>
+{%- endif -%}

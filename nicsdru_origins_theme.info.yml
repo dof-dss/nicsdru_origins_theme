@@ -5,9 +5,8 @@ package: NICS
 core: 8.x
 
 libraries:
-  - nicsdru_origins_theme/base-styling
-  - nicsdru_origins_theme/layout-styling
-  - nicsdru_origins_theme/component-styling
+  - nicsdru_origins_theme/global-styling
+  - nicsdru_origins_theme/nics-layout-library
 
 libraries-override:
   core/modernizr: nicsdru_origins_theme/override-modernizr
@@ -15,7 +14,7 @@ libraries-override:
     css:
       component:
         css/components/sticky-header.module.css: false
- 
+
 base theme: stable
 
 regions:
@@ -23,10 +22,12 @@ regions:
   primary_menu: 'Primary menu'
   page_top: 'Page top'
   page_bottom: 'Page bottom'
-  breadcrumb: Breadcrumb
-  highlighted: Highlighted
-  help: Help
-  content: Content
+  breadcrumb: 'Breadcrumb'
+  highlighted: 'Highlighted'
+  help: 'Help'
+  top_banner: 'Banner top'
+  content: 'Content'
   sidebar_first: 'First sidebar'
   sidebar_second: 'Sidebar second'
+  bottom_banner: 'Page bottom'
   footer: 'Footer'

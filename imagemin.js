@@ -17,37 +17,37 @@ imagemin([JPEGImages], output, {use: [imageminJpegtran()]}).then(() => {
 });
 
 const optimiseJPEGImages = () =>
-    imagemin([JPEGImages], output, {
-      plugins: [
-        imageminJpegoptim(),
-        imageminJpegtran(),
-      ]
-    });
+  imagemin([JPEGImages], output, {
+    plugins: [
+      imageminJpegoptim(),
+      imageminJpegtran(),
+    ]
+  });
 
 optimiseJPEGImages()
-    .catch(error => console.log(error));
+  .catch(error => console.log(error));
 
 const optimisePNGImages = () =>
-    imagemin([PNGImages], output, {
-      plugins: [
-        imageminOptipng(),
-        imageminPngcrush({
-          reduce: true,
-        }),
-        imageminPngout(),
-        imageminZopfli(),
-      ]
-    });
+  imagemin([PNGImages], output, {
+    plugins: [
+      imageminOptipng(),
+      imageminPngcrush({
+        reduce: true,
+      }),
+      imageminPngout(),
+      imageminZopfli(),
+    ]
+  });
 
 optimisePNGImages()
-    .catch(error => console.log(error));
+  .catch(error => console.log(error));
 
 const optimiseGIFImages = () =>
-    imagemin([GIFImages], output, {
-      plugins: [
-        imageminGifsicle(),
-      ]
-    });
+  imagemin([GIFImages], output, {
+    plugins: [
+      imageminGifsicle(),
+    ]
+  });
 
 optimiseJPEGImages()
-    .catch(error => console.log(error));
+  .catch(error => console.log(error));

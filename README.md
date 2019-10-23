@@ -1,5 +1,7 @@
+[![CircleCI](https://circleci.com/gh/dof-dss/nicsdru_origins_theme.svg?style=svg)](https://circleci.com/gh/dof-dss/nicsdru_origins_theme)
+
 # nicsdru_origins_theme
-This repository contains code for a Drupal 8 theme from which NICS sites should be sub-themed from.
+This repository contains code for a Drupal 8 theme from which NICS sites could be sub-themed from.
 
 ## Table of contents
 
@@ -12,7 +14,7 @@ This repository contains code for a Drupal 8 theme from which NICS sites should 
 
 ## Quick start
 - [Download the latest release](https://github.com/dof-dss/nicsdru_origins_theme/archive/master.zip) or clone the repo: `git clone https://github.com/dof-dss/nicsdru_origins_theme.git`
-- `npm install`
+- `npm install` **NB:** you encounter issues with the image optimisation libraries if you don't have libjpeg library available on the host machine. To fix this `brew install libjpeg`
 
 ## What's included
 
@@ -35,8 +37,9 @@ nicsdru_origins_theme/
 │   ├── install/
 │   ├── .sass-lint.yml
 │   ├── modernizr-config.json
+│   ├── postcss.config.js
 └── css/
-└── docs/
+└── images/
 └── js/
 └── src/
 │   ├── images/
@@ -44,9 +47,16 @@ nicsdru_origins_theme/
 │   ├── scss/
 │   ├── styleguide/
 └── templates/
+│   ├── block/
+│   ├── content/
+│   ├── field/
+│   ├── layout/
+│   ├── misc/
+│   ├── navigation/
+│   ├── user/
 └── .gitignore
 └── composer.json
-└── mkdocs.yml
+└── imagemin.js
 └── nicsdru-origins-theme.breakpoints.yml
 └── nicsdru-origins-theme.info.yml
 └── nicsdru-origins-theme.layouts.yml
@@ -64,8 +74,7 @@ The `package.json` includes the following commands and tasks:
 | --- | --- |
 | `npm run build` | `npm run build` compiles files into their build directories ready for use in a production environment. **Uses [Sass](https://sass-lang.com/), [Autoprefixer][autoprefixer], [Modernizr](https://modernizr.com) and [UglifyJS](https://github.com/mishoo/UglifyJS2).** |
 | `npm run watch` | Watches for changes to scss and js files & compiles them for development purposes.|
-| `npm run lint`  | Will run all `.scss` and `.js` files through their respective linting tools - [eslint]() & [sass-lint](https://github.com/sasstools/sass-lint) |
-| `npm run lint-scss`  | Will run all `.scss` files through [sass-lint](https://github.com/sasstools/sass-lint). The command can also accept a parameter to lint an individual file. To do this `npm run lint-scss -- scssfile:name-of-file` where `name-of-file` is the file you want to lint relative to the package.json for the project. |
+| `npm run lint`  | Will run all `.scss` and `.js` files through their respective linting tools - [eslint]() & [sass-lint](https://github.com/sasstools/sass-lint), note however that linting is also performed as part of the the build scripts. This is useful for finding issues being flagged by the linting rules. To only lint css or js files, prefix the lint command with the file type you which to scope the linting to eg `npm run css-lint` or `npm run js-lint` |
 
 Run `npm run` to see all the npm scripts.
 
