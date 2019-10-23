@@ -4,7 +4,7 @@
  * @see documentation in src/scss/3_components/navigation/toggle-list.scss
  */
 // eslint-disable-next-line func-names
-(function($) {
+(function($, Drupal) {
   /* Make the list of related articles collapse to no more than max number of
    * items and add a toggle to show the rest. The default max number is 7 items
    * by default, can be changed by adding a `data-toggle-length` attribute to
@@ -15,8 +15,9 @@
     maxRelated =
       parseInt($('.toggle-list').attr('data-toggle-length'), 10) || 7,
     relatedTotal = $relatedArticleList.children('li').length,
+    available = relatedTotal - maxRelated,
     // eslint-disable-next-line
-    relatedToggleText = 'Show ' + (relatedTotal - maxRelated) + ' more';
+    relatedToggleText = Drupal.t('Show @num more', {'@num': available});
 
   if (relatedTotal > maxRelated) {
     $relatedArticleList.attr({ id: 'toggle-menu', 'aria-live': 'polite' });
@@ -40,4 +41,4 @@
       return false;
     });
   }
-})(jQuery);
+})(jQuery, Drupal);
