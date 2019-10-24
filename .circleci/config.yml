@@ -44,9 +44,30 @@ jobs:
           name: Compile SCSS and JS assets
           command: npm run build
 
+  phpcs:
+    docker:
+      - image: circleci/php:7.2.20-apache-browsers
+    steps:
+      - checkout
+      - run:
+          name: Fetch phpcs and dependencies
+          command: |
+            composer require drupal/coder --no-interaction --optimize-autoloader
+            # Move vendor directory up a level as we don't want to code-check all of that.
+            mv vendor ../
+      - run:
+          name: Fetch phpcs convenience script
+          command: |
+            curl https://raw.githubusercontent.com/dof-dss/nidirect-drupal/master/phpcs.sh -o /home/circleci/project/phpcs.sh
+            chmod +x /home/circleci/project/phpcs.sh
+      - run:
+          name: PHPCS static analysis
+          command: /home/circleci/project/phpcs.sh /home/circleci "/home/circleci/project"
+
 workflows:
   version: 2
   lint-build:
     jobs:
       - lint
       - build-assets
+      - phpcs
