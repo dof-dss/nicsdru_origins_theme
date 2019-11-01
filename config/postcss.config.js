@@ -9,12 +9,12 @@ module.exports = (ctx) => ({
   plugins: {
     'autoprefixer': {
       cascade: false,
-      overrideBrowserslist: ['last 2 versions', '> 1%', 'ie >= 10']
     },
     'postcss-assets': {
       cachebuster: true,
       relative: true,
-      loadPaths: ['images']
+      loadPaths: ['images'],
+      baseUrl: '/themes/custom/nicsdru_origins_theme/'
     }
   }
 })
