@@ -3,8 +3,9 @@
 module.exports = (ctx) => ({
   map: ctx.file.dirname.includes('examples') ? false : {
     inline: false,
-    annotation: true,
-    sourcesContent: true
+    prev: false,
+    annotation: false,
+    sourcesContent: false
   },
   plugins: {
     'autoprefixer': {
