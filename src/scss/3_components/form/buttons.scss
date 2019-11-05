@@ -1,0 +1,54 @@
+/*
+ * @file
+ * Provides the styling for button components.
+ */
+@import '../../init';
+@import 'button/button-defs';
+
+//
+.call-to-action {
+  @extend %btn;
+  @include btn-color($button-action);
+  @include btn-size('large');
+  position: relative;
+  padding-right: 3.6rem;
+
+  &::after {
+    content: '';
+    height: 2.4rem;
+    width: 1.5rem;
+    background: resolve('svg-sprite.svg') no-repeat -40px -85px;
+    position: absolute;
+    top: calc(50% - 1.4rem);
+    right: 1rem;
+
+    @include breakpoint($phab, $no-query: true) {
+      right: 1.2rem;
+    }
+  }
+
+  @at-root a#{&} {
+    text-align: left;
+    color: color(white);
+  }
+
+  .ico-elink {
+    background-position: -40px -129.5px;
+  }
+}
+
+.ico {
+  display: inline-block;
+  background: resolve('svg-sprite.svg') no-repeat;
+  margin-left: .2em;
+
+  &-elink {
+    @extend %symbol-elink-dimensions;
+    background-position: -40px -115px;
+
+    &--white {
+      @extend %symbol-elink-dimensions;
+      background-position: -40px -129.5px;
+    }
+  }
+}

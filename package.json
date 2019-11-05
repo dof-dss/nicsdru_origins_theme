@@ -48,18 +48,19 @@
   },
   "scripts": {
     "––––––– JS SCRIPTS": "–––––––––––––",
-    "js": "npm-run-all js-lint js-compile",
+    "js": "npm-run-all --sequential js-lint js-compile",
     "js-lint": "./node_modules/.bin/eslint src/js/**",
     "//": "mkdir -p js && uglifyjs src/js/*.js -o js/scripts.js",
     "js-compile": "npm-run-all --parallel js-compile-*",
     "js-compile-modernizr": "modernizr -uc config/modernizr-config.json -d js/modernizr.min.js",
     "js-compile-toggle-lib": "mkdir -p js && uglifyjs src/js/toggle-btn-script.js -o js/toggle-btn-script.js",
+    "js-compile-extwin-lib": "mkdir -p js && uglifyjs src/js/ext-win-script.js -o js/ext-win-script.js",
     "––––––– CSS SCRIPTS": "–––––––––––––",
     "css": "npm-run-all --sequential scss-dev css-post",
     "css-lint": "sass-lint -c $npm_package_config_sasslintConfig $npm_package_config_scssfile -v -q",
-    "css-post": "npx postcss --config config/postcss.config.js -r css/**/*.css --no-map",
+    "css-post": "postcss --config config/postcss.config.js --replace \"css/**/*.css\"",
     "scss-dev": "mkdir -p css && node-sass --source-map true --source-comments true --source-map-contents true --output-style expanded -o css src/scss",
-    "scss-prod": "mkdir -p css && node-sass --output-style compressed -o css src/scss",
+    "scss-prod": "mkdir -p css && node-sass --no-source-map --output-style compressed -o css src/scss",
     "––––––– IMG and SVG SCRIPTS": "–––––––––––––",
     "imgmin": "mkdir -p images && node imagemin.js",
     "svgmin": "mkdir -p images && svgo -f src/svgs -o images --config config/svgo-config.yml",
@@ -81,5 +82,10 @@
     "scssfile": "src/scss/**/*.scss",
     "sasslintConfig": "config/.sass-lint.yml"
   },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "ie >= 10"
+  ],
   "dependencies": {}
 }

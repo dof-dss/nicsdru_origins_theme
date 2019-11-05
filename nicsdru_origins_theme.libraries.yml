@@ -26,7 +26,11 @@ global-styling:
       css/3_components/navigation/main-menu.css: { minified: true }
       css/3_components/navigation/breadcrumb.css: { minified: true }
       css/3_components/navigation/sub-menus.css: { minified: true }
+      css/3_components/layout/cards.css: { minified: true }
       css/3_components/block/search-form.css: { minified: true }
+      css/3_components/form/buttons.css: { minified: true }
+  js:
+    js/ext-win-script.js: { minified: true }
 
 
 # This library provides styling for common admin interface components - the library is only loaded for
