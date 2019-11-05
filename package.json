@@ -48,7 +48,7 @@
   },
   "scripts": {
     "––––––– JS SCRIPTS": "–––––––––––––",
-    "js": "npm-run-all js-lint js-compile",
+    "js": "npm-run-all --sequential js-lint js-compile",
     "js-lint": "./node_modules/.bin/eslint src/js/**",
     "//": "mkdir -p js && uglifyjs src/js/*.js -o js/scripts.js",
     "js-compile": "npm-run-all --parallel js-compile-*",
