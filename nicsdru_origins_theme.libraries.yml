@@ -22,6 +22,7 @@ global-styling:
       css/2_layouts/layouts.css: { weight: -100, minified: true }
     # The SMACSS category, "component", is loaded after "base and layout" styles.
     component:
+      css/3_components/navigation/book.css: { minified: true }
       css/3_components/navigation/nav-menu.css: { minified: true }
       css/3_components/navigation/main-menu.css: { minified: true }
       css/3_components/navigation/breadcrumb.css: { minified: true }
