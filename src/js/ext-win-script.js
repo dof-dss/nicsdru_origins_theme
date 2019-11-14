@@ -7,6 +7,7 @@
  */
 /* eslint-disable */
 (function($, Drupal) {
+  
   var $extLinkText = Drupal.t('external link opens in a new window / tab'),
     $intLinkText = Drupal.t('opens in a new window / tab');
   // Internal links with data-ext-url - turn them into external links
@@ -22,14 +23,14 @@
     .filter(function() {
       return this.hostname && this.hostname !== location.hostname;
     })
-    .append('<span class="visually-hidden">(' + $extLinkText + ')</span><span class="ico ico-elink"></span>')
+    .append('<span class="visually-hidden">(' + $extLinkText + ')</span><svg aria-hidden="true" class="ico ico-elink"><title>' + $extLinkText + '</title><use xlink:href="#elink"></use></svg>')
     .attr('title', $extLinkText)
     .attr('target', '_blank')
     .attr('rel', 'noopener noreferrer');
   // Internal links in content that open new windows (should be very rare)
   $("#main-content a[target='_blank']")
     .not("a.no-ext-icon, a:has(img), #main-content a[href*='http://'], #main-content a[href*='https://'], #main-content a[href^='//']")
-    .append('<span class="visually-hidden">(' + $intLinkText + ')</span><span class="ico ico-elink"></span>')
+    .append('<span class="visually-hidden">(' + $intLinkText + ')</span><svg aria-hidden="true" class="ico ico-elink"><title>' + $intLinkText + '</title><use xlink:href="#elink"></use></svg>')
     .attr('title', $intLinkText)
     .attr('rel', 'noopener noreferrer');
 })(jQuery, Drupal);
