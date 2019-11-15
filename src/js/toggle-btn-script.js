@@ -3,7 +3,7 @@
  * Provides a script for adding a button and toggling items in a unordered list.
  * @see documentation in src/scss/3_components/navigation/toggle-list.scss
  */
-// eslint-disable-next-line func-names
+/* eslint-disable */
 (function($, Drupal) {
   Drupal.behaviors.nicsdruOriginsToggleBtn = {
     attach: function (context) {
