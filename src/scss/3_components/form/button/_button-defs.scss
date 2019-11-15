@@ -51,7 +51,7 @@
 
   @include breakpoint($phab, $no-query: true) {
     min-width: 120px;
-    padding: 1.2rem 1em;
+    padding: 1.2rem 2.4rem;
   }
 
   &:link,
@@ -62,12 +62,6 @@
   &:focus {
     outline: 1px dotted $charcoal;
   }
-}
-
-%symbol-elink-dimensions {
-  width: 1.5rem;
-  height: 1.2rem;
-  margin-bottom: .3rem;
 }
 
 // The disabled variation should always go last, so that it overrides any
