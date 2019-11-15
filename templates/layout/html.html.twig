@@ -40,6 +40,7 @@
     <js-placeholder token="{{ placeholder_token|raw }}">
   </head>
   <body{{ attributes.addClass(body_classes) }}>
+  {% include active_theme_path() ~ '/images/icons.svg' %}
     {#
       Keyboard navigation/accessibility link to main content section in
       page.html.twig.
