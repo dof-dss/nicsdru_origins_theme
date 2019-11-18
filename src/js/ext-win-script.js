@@ -12,8 +12,8 @@
       var $extLinkText = Drupal.t('external link opens in a new window / tab'),
         $intLinkText = Drupal.t('opens in a new window / tab');
 
-      // External links - add identifiers
-      $("#main-content a[href*='http://'],#main-content a[href*='https://'],#main-content a[href^='//']", context)
+      // External links - add identifiers.
+      $("#main-content a[href*='http://'], #main-content a[href*='https://'], #main-content a[href^='//']", context)
         .once('elink').each(function () {
         $(this).not('a.no-ext-icon, a:has(img), .social-links a')
           .filter(function () {
@@ -25,15 +25,15 @@
           .attr('rel', 'noopener noreferrer');
       });
 
-      // Internal links with data-ext-url - turn them into external links
+      // Internal links with data-ext-url - turn them into external links.
       $("#main-content a[data-ext-type^='External']", context).once('elink').each(function() {
         $(this).attr('href', $(this).attr('data-ext-url'));
-        if ($(this).parent().hasClass('moreLink')) {
+        if ($(this).parent().hasClass('more-link')) {
           $(this).html('visit site');
         }
       });
 
-      // Internal links in content that open new windows (should be very rare)
+      // Internal links in content that open new windows (should be very rare).
       $("#main-content a[target='_blank']", context).once('elink').each(function () {
         $(this).not("a.no-ext-icon, a:has(img), #main-content a[href*='http://'], #main-content a[href*='https://'], #main-content a[href^='//']")
           .append('<span class="visually-hidden">(' + $intLinkText + ')</span><svg aria-hidden="true" class="ico ico-elink"><title>' + $intLinkText + '</title><use xlink:href="#elink"></use></svg>')
