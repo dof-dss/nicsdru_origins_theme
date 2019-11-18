@@ -59,7 +59,9 @@
 {{- page.highlighted -}}
 {{- page.help -}}
 {%- if page.top_banner -%}
-{{- page.top_banner -}}
+  <div class="container" role="presentation">
+    {{- page.top_banner -}}
+  </div>
 {% endif %}
 <main{{ main_content_attr }}>{# @see skiplink in html.html.twig  which targets the ID for this element #}
   {%- if page.sidebar_first -%}

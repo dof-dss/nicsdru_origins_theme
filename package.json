@@ -63,7 +63,7 @@
     "scss-prod": "mkdir -p css && node-sass --no-source-map --output-style compressed -o css src/scss",
     "––––––– IMG and SVG SCRIPTS": "–––––––––––––",
     "imgmin": "mkdir -p images && node imagemin.js",
-    "svgmin": "mkdir -p images && svgo -f src/svgs -o images --config config/svgo-config.yml",
+    "svgmin": "mkdir -p images && svgo -f src/images -o images --config config/svgo-config.yml",
     "icons": "svgo -f src/images/icons && mkdir -p images && svg-sprite-generate -d src/images/icons -o images/icons.svg",
     "––––––– WATCH SCRIPTS": "–––––––––––––",
     "watch": "npm-run-all --parallel watch-*",
