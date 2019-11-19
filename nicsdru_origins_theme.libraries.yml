@@ -35,6 +35,7 @@ global-styling:
       css/3_components/content/lists.css: { minified: true }
   js:
     js/ext-win-script.js: { minified: true }
+    js/empty-tags-script.js: { minified: true }
   dependencies:
     - core/drupal
     - core/jquery
