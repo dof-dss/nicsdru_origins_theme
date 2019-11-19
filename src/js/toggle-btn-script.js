@@ -6,7 +6,7 @@
 /* eslint-disable */
 (function($, Drupal) {
   Drupal.behaviors.nicsdruOriginsToggleBtn = {
-    attach: function (context) {
+    attach: function attach (context) {
       /* Make the list of related articles collapse to no more than max number
        * of items and add a toggle to show the rest. The default max number is 7
        * items by default, can be changed by adding a `data-toggle-length`

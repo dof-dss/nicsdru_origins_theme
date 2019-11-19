@@ -8,7 +8,7 @@
 /* eslint-disable */
 (function($, Drupal) {
   Drupal.behaviors.nicsdruOriginsExtWin = {
-    attach: function (context) {
+    attach: function attach (context) {
       var $extLinkText = Drupal.t('external link opens in a new window / tab'),
         $intLinkText = Drupal.t('opens in a new window / tab');
 
@@ -28,9 +28,6 @@
       // Internal links with data-ext-url - turn them into external links.
       $("#main-content a[data-ext-type^='External']", context).once('elink').each(function() {
         $(this).attr('href', $(this).attr('data-ext-url'));
-        if ($(this).parent().hasClass('more-link')) {
-          $(this).html('visit site');
-        }
       });
 
       // Internal links in content that open new windows (should be very rare).
