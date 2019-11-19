@@ -1,16 +1,16 @@
-/*
+/**
  * @file
- * Provides a simple script to remove empty tags, in particular 'p' tags
- * from the page.
+ * A simple script to remove empty tags, in particular 'p' tags from the page.
  */
-// eslint-disable-next-line func-names
-(function($) {
+
+// eslint-disable-next-line
+(function ($) {
   Drupal.behaviors.nicsdruOriginsRemoveEmptyTags = {
     attach: function attach(context) {
       $('p', context)
         .once('emptyTags')
-        // eslint-disable-next-line func-names
-        .filter(function() {
+        // eslint-disable-next-line
+        .filter(function () {
           return (
             $.trim(
               $(this)
