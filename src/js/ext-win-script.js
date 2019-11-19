@@ -1,12 +1,14 @@
-/*
+/**
  * @file
  * Provides a script to append an icon to links that open in a new window / tab.
+ *
  * There are 3x different types of link / scenario where an icon should be
  * appended to a link in the `#main-content` area. Each is set out below.
  * @see documentation in src/scss/3_components/content/icons.scss
  */
+
 /* eslint-disable */
-(function($, Drupal) {
+(function ($, Drupal) {
   Drupal.behaviors.nicsdruOriginsExtWin = {
     attach: function attach (context) {
       var $extLinkText = Drupal.t('external link opens in a new window / tab'),
@@ -26,7 +28,7 @@
       });
 
       // Internal links with data-ext-url - turn them into external links.
-      $("#main-content a[data-ext-type^='External']", context).once('elink').each(function() {
+      $("#main-content a[data-ext-type^='External']", context).once('elink').each(function () {
         $(this).attr('href', $(this).attr('data-ext-url'));
       });
 
