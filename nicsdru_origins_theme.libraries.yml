@@ -1,38 +1,6 @@
 # These libraries provide common css styling shared across all nics Drupal sites
 global-styling:
   version: 1.x
-  css:
-    # The SMACSS category, "base", is loaded before other categories. Drupal 8
-    # loads stylesheets based on the SMACSS ordering of:
-    # base, layout, component, state, theme
-    base:
-      # css/1_base/fonts.css: { minified: true }
-      css/1_base/root.css: { minified: true }
-      css/1_base/html5.css: { minified: true }
-      css/1_base/links.css: { minified: true }
-      css/1_base/headings.css: { minified: true }
-      css/1_base/text.css: { minified: true }
-      css/1_base/grouping.css: { minified: true }
-      css/1_base/embedded.css: { minified: true }
-      css/1_base/forms.css: { minified: true }
-      css/3_components/form/form.css: { minified: true }
-      css/1_base/tables.css: { minified: true }
-    # The SMACSS category, "layout", is loaded after "base" styles.
-    layout:
-      css/2_layouts/header.css: { weight: -100, minified: true }
-      css/2_layouts/layouts.css: { weight: -100, minified: true }
-    # The SMACSS category, "component", is loaded after "base and layout" styles.
-    component:
-      css/3_components/navigation/nav-menu.css: { minified: true }
-      css/3_components/navigation/main-menu.css: { minified: true }
-      css/3_components/navigation/breadcrumb.css: { minified: true }
-      css/3_components/navigation/sub-menus.css: { minified: true }
-      css/3_components/navigation/book.css: { minified: true }
-      css/3_components/layout/cards.css: { minified: true }
-      css/3_components/block/search-form.css: { minified: true }
-      css/3_components/form/buttons.css: { minified: true }
-      css/3_components/content/icons-messages.css: { minified: true }
-      css/3_components/content/lists.css: { minified: true }
   js:
     js/ext-win-script.js: { minified: true }
     js/empty-tags-script.js: { minified: true }
@@ -41,14 +9,13 @@ global-styling:
     - core/jquery
     - core/jquery.once
 
-
 # This library provides styling for common admin interface components - the library is only loaded for
 # authenticated users and on the user login form - @see nicsdru_origins_theme.theme for processing functions
 authenticated-styles:
   version: VERSION
   css:
     theme:
-      css/3_components/drupal-admin.css: { minified: true, weight: -5 }
+      css/drupal-admin.css: { minified: true, weight: -5 }
 
 # Provide a custom modernizer script
 override-modernizr:
