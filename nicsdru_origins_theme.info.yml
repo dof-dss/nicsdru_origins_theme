@@ -6,7 +6,6 @@ core: 8.x
 
 libraries:
   - nicsdru_origins_theme/global-styling
-  - nicsdru_origins_theme/nics-layout-library
 
 libraries-override:
   core/modernizr: nicsdru_origins_theme/override-modernizr
