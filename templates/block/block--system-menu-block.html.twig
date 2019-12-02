@@ -47,4 +47,13 @@
   {%- block content -%}
     {{- content -}}
   {% endblock %}
+
+  {# Social links. #}
+  {% if social_links %}
+  <aside class="social-media-links">
+    <ul class="links">
+      {{ social_links }}
+    </ul>
+  </aside>
+  {% endif %}
 </nav>
