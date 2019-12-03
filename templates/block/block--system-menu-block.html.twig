@@ -20,6 +20,8 @@
  *   displayed in front of the main title tag that appears in the template.
  * - title_suffix: Additional output populated by modules, intended to be
  *   displayed after the main title tag that appears in the template.
+ * - social_links: Fetched from the theme settings; list of link elements
+ *   to provide links to social networks for the site.
  *
  * Headings should be used on navigation menus that consistently appear on
  * multiple pages. When this menu block's label is configured to not be
@@ -52,7 +54,9 @@
   {% if social_links %}
   <aside class="social-media-links">
     <ul class="links">
-      {{ social_links }}
+      {% for link in social_links %}
+        <li>{{ link }}</li>
+      {% endfor %}
     </ul>
   </aside>
   {% endif %}

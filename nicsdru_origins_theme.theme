@@ -37,6 +37,12 @@ function nicsdru_origins_theme_preprocess(&$variables) {
   $variables['#cache']['contexts'][] = 'url.path.is_front';
 }
 
+function nicsdru_origins_theme_preprocess_region(&$variables) {
+  if ($variables['region'] == 'footer') {
+    $variables['social_links'] = _nicsdru_origins_social_links();
+  }
+}
+
 /**
  * Implements hook_page_attachments_alter().
  */
@@ -87,6 +93,13 @@ function nicsdru_origins_theme_preprocess_page(array &$variables) {
   $variables['main_content_attr'] = new Attribute($variables['main_content_attr']);
   $variables['sidebar_first_attr'] = new Attribute($variables['sidebar_first_attr']);
   $variables['sidebar_second_attr'] = new Attribute($variables['sidebar_second_attr']);
+
+  // Social links for footer.
+  if (empty($variables['page']['footer'])) {
+    // Set some key variables for correct template mapping if something else hasn't already, eg: a block.
+    $variables['page']['footer']['#region'] = 'footer';
+    $variables['page']['footer']['#theme_wrappers'][] = 'region';
+  }
 }
 
 /**
@@ -106,38 +119,10 @@ function nicsdru_origins_theme_theme_suggestions_node_alter(array &$suggestions,
  */
 function nicsdru_origins_theme_preprocess_block(array &$variables) {
   if ($variables['plugin_id'] == 'system_menu_block:main') {
-    $platforms = [
-      'twitter' => t('Twitter'),
-      'facebook' => t('Facebook'),
-      'youtube' => t('YouTube'),
-      'rss' => t('RSS'),
-    ];
-    $links = [];
+    $social_links = _nicsdru_origins_social_links();
 
-    // Fetch links from the theme settings and use as part of render elements.
-    foreach ($platforms as $id => $label) {
-      $platform_url = theme_get_setting("social_links_$id", 'nicsdru_origins_theme');
-
-      if (empty($platform_url)) {
-        // Skip any blank values.
-        continue;
-      }
-
-      // Check for any internal paths.
-      if (preg_match('/^http/', $platform_url) == FALSE) {
-        // Strip leading / if present.
-        $platform_url = ltrim($platform_url, '/');
-        $platform_url = 'internal:/' . $platform_url;
-      }
-
-      $links[$id] = Link::fromTextAndUrl($label,
-        Url::fromUri($platform_url, [
-          'attributes' => ['title' => $label]
-        ]))->toRenderable();
-    }
-
-    if (!empty($links)) {
-      $variables['social_links'] = $links;
+    if (!empty($social_links)) {
+      $variables['social_links'] = $social_links;
     }
   }
 }
@@ -240,8 +225,7 @@ function nicsdru_origins_theme_form_system_theme_settings_alter(&$form, FormStat
     return;
   }
 
-  // Add a theme settings group to gather social media link URLs for
-  // presentation in the site header/footer regions.
+  // Add a theme settings group to gather social media link URLs.
   $form['social_links'] = [
     '#type' => 'details',
     '#title' => t('Social media links'),
@@ -272,4 +256,43 @@ function nicsdru_origins_theme_form_system_theme_settings_alter(&$form, FormStat
     '#default_value' => theme_get_setting('social_links_rss'),
     '#placeholder' => 'Enter a URL, such as https://example.com/rss.xml',
   ];
+}
+
+/**
+ * Utility function to return theme config as array of Link elements.
+ *
+ * @return array
+ */
+function _nicsdru_origins_social_links() {
+  $platforms = [
+    'twitter' => t('Twitter'),
+    'facebook' => t('Facebook'),
+    'youtube' => t('YouTube'),
+    'rss' => t('RSS'),
+  ];
+  $social_links = [];
+
+  // Fetch links from the theme settings and use as part of render elements.
+  foreach ($platforms as $id => $label) {
+    $platform_url = theme_get_setting("social_links_$id", 'nicsdru_origins_theme');
+
+    if (empty($platform_url)) {
+      // Skip any blank values.
+      continue;
+    }
+
+    // Check for any internal paths.
+    if (preg_match('/^http/', $platform_url) == FALSE) {
+      // Strip leading / if present.
+      $platform_url = ltrim($platform_url, '/');
+      $platform_url = 'internal:/' . $platform_url;
+    }
+
+    $social_links[$id] = Link::fromTextAndUrl($label,
+      Url::fromUri($platform_url, [
+        'attributes' => ['title' => $label]
+      ]))->toRenderable();
+  }
+
+  return $social_links;
 }
