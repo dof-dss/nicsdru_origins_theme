@@ -37,6 +37,9 @@ function nicsdru_origins_theme_preprocess(&$variables) {
   $variables['#cache']['contexts'][] = 'url.path.is_front';
 }
 
+/**
+ * Implements hook_preprocess_region().
+ */
 function nicsdru_origins_theme_preprocess_region(&$variables) {
   if ($variables['region'] == 'footer') {
     $variables['social_links'] = _nicsdru_origins_social_links();
@@ -262,6 +265,7 @@ function nicsdru_origins_theme_form_system_theme_settings_alter(&$form, FormStat
  * Utility function to return theme config as array of Link elements.
  *
  * @return array
+ *   List of social media provider links.
  */
 function _nicsdru_origins_social_links() {
   $platforms = [
