@@ -45,19 +45,24 @@
   <label class="visually-hidden" for="menu-toggle" onclick="">Click me to toggle menu</label>
   <input class="toggler" type="checkbox" id="menu-toggle" role="button">
   <div class="hamburger"><div></div></div>
-  {# Menu. #}
-  {%- block content -%}
-    {{- content -}}
-  {% endblock %}
 
-  {# Social links. #}
-  {% if social_links %}
-  <aside class="social-media-links">
-    <ul class="links">
-      {% for link in social_links %}
-        <li>{{ link }}</li>
-      {% endfor %}
-    </ul>
-  </aside>
-  {% endif %}
+  {# Wrapping div required to allow us to set a max-width on child elements while retaining
+     the background colour full-width on the parent element. #}
+  <div class="menu-wrapper">
+    {# Menu. #}
+    {%- block content -%}
+      {{- content -}}
+    {% endblock %}
+
+    {# Social links. #}
+    {% if social_links %}
+    <aside class="social-media-links">
+      <ul class="links">
+        {% for link in social_links %}
+          <li>{{ link }}</li>
+        {% endfor %}
+      </ul>
+    </aside>
+    {% endif %}
+  </div>
 </nav>
