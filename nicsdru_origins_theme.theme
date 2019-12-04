@@ -176,6 +176,13 @@ function nicsdru_origins_theme_preprocess_views_view(&$variables) {
   if ($variables['id'] === 'search') {
     $variables['exposed']['#attributes']['class'][] = Html::cleanCssIdentifier('search-form');
     $variables['exposed']['#attributes']['class'][] = Html::cleanCssIdentifier('search-form--site');
+    // If a label for the search input is not defined in the view, set default label text.
+    $search_label =& $variables['exposed']['#info']['filter-search_api_fulltext']['label'];
+    if (isset($search_label) && empty($search_label)) {
+      $search_label = t("Search this site");
+    }
+    // The label should be visually hidden.
+    $variables['exposed']['query']['#title_display'] = 'invisible';
   }
 }
 
