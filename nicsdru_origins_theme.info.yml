@@ -8,7 +8,9 @@ libraries:
   - nicsdru_origins_theme/global-styling
 
 libraries-override:
-  core/modernizr: nicsdru_origins_theme/override-modernizr
+  core/modernizr:
+    js:
+      assets/vendor/modernizr/modernizr.min.js: js/modernizr.min.js
   system/base:
     css:
       component:

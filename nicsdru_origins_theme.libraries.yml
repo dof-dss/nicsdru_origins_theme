@@ -8,6 +8,7 @@ global-styling:
     - core/drupal
     - core/jquery
     - core/jquery.once
+    - core/modernizr
 
 # This library provides styling for common admin interface components - the library is only loaded for
 # authenticated users and on the user login form - @see nicsdru_origins_theme.theme for processing functions
@@ -18,7 +19,7 @@ authenticated-styles:
       css/drupal-admin.css: { minified: true, weight: -5 }
 
 # Provide a custom modernizer script
-override-modernizr:
+nics-modernizr:
   # Block the page from being loaded until Modernizr is initialized.
   header: true
   remote: https://github.com/Modernizr/Modernizr
@@ -29,6 +30,8 @@ override-modernizr:
   version: "v3.6.0"
   js:
     js/modernizr.min.js: { preprocess: 0, weight: -21, minified: true }
+  dependencies:
+    - core/modernizr
 
 toggle-list:
   version: VERSION
@@ -37,6 +40,18 @@ toggle-list:
       css/3_components/navigation/toggle-list.css: { minified: true }
   js:
     js/toggle-btn-script.js: { minified: true }
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/jquery.once
+
+origins-facets:
+  version: VERSION
+  css:
+    component:
+      css/3_components/content/search-facets.css: { minified: true }
+  js:
+    js/search-facets-script.js: { minified: true }
   dependencies:
     - core/drupal
     - core/jquery
