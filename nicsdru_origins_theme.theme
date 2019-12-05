@@ -242,6 +242,13 @@ function nicsdru_origins_theme_form_user_login_form_alter(&$form, FormStateInter
 }
 
 /**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function nicsdru_origins_theme_form_user_pass_alter(&$form, FormStateInterface $form_state, $form_id = NULL) {
+  $form['#attached']['library'][] = 'nicsdru_origins_theme/authenticated-styles';
+}
+
+/**
  * Implements hook_form_system_theme_settings_alter().
  */
 function nicsdru_origins_theme_form_system_theme_settings_alter(&$form, FormStateInterface &$form_state, $form_id = NULL) {
