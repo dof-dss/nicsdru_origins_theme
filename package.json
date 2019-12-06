@@ -54,6 +54,7 @@
     "//": "mkdir -p js && uglifyjs src/js/*.js -o js/scripts.js",
     "js-compile": "npm-run-all --parallel js-compile-*",
     "js-compile-modernizr": "modernizr -uc config/modernizr-config.json -d js/modernizr.min.js",
+    "js-compile-autocomplete-lib": "mkdir -p js && uglifyjs src/js/autocomplete.js -o js/autocomplete.js",
     "js-compile-toggle-lib": "mkdir -p js && uglifyjs src/js/toggle-btn-script.js -o js/toggle-btn-script.js",
     "js-compile-extwin-lib": "mkdir -p js && uglifyjs src/js/ext-win-script.js -o js/ext-win-script.js",
     "js-compile-search-facets-lib": "mkdir -p js && uglifyjs src/js/search-facets-script.js -o js/search-facets-script.js",

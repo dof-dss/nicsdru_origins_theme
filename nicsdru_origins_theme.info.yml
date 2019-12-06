@@ -1,5 +1,6 @@
 name: NICS Origins
 type: theme
+base theme: stable
 description: 'Base theme for Drupal 8 sites'
 package: NICS
 core: 8.x
@@ -15,8 +16,11 @@ libraries-override:
     css:
       component:
         css/components/sticky-header.module.css: false
+        css/components/autocomplete-loading.module.css: css/3_components/form/autocomplete-loading.css
 
-base theme: stable
+libraries-extend:
+  core/drupal.autocomplete:
+    - nicsdru_origins_theme/autocomplete
 
 regions:
   header: 'Header'

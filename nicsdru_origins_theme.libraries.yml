@@ -33,6 +33,12 @@ nics-modernizr:
   dependencies:
     - core/modernizr
 
+# Extend the core functionality for auto-complete
+autocomplete:
+  version: VERSION
+  js:
+    js/autocomplete.js: { minified: true }
+
 toggle-list:
   version: VERSION
   css:
