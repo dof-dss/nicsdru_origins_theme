@@ -1,0 +1,67 @@
+/**
+ * @file
+ * Visual styles for animated throbber.
+ *
+ * @see autocomplete.js
+ */
+@import '../../init';
+
+// Autocomplete
+//
+// Drupal core provides components and functionality for auto complete forms. The default behaviour for an
+// autocomplete form is to add a visual indicator on the form which 'spins' when autocomplete function executes.
+// There are some accessibility issues with the core functionality in that there is no indication for screen reader
+// users that something is happening, therefore in the `input.html.twig` and autocomplete library with the origins theme
+// there is code to address this. The modifications in origins in essence wraps the input in a `<div>` and places a empty
+// `<div>` after the input element. The inner div is targeted with javascript which extends the core autocomplete
+// functionality with some additional code to politely inform a screen reader user that something is happening.
+// Finally this inner div is styled to render a visual indicator ('a spinning element') that some loading event is in
+// progress - this is done completely with css and positioned relative to the end of the input element.
+//
+// The 'spinning element' is achieved by setting a border colour to an element and using css animation to rotate the
+// the element continually. The effect works by utilising multiple values for the border color. There needs to be at
+// least 2 colors for this to work, however here we use four. The colours are set as a variable, therefore can be
+// changed by setting the vairable `$autocomplete-spinner-colour` to a different set of colors.
+//
+// Style guide: components.forms.autocomplete
+
+$autocomplete-spinner-colour: #0c1e63 #0a7ad0 #cee4f6 #fff !default;
+
+.origins-autocomplete {
+  position: relative;
+  max-width: 100%;
+}
+
+.autocomplete-indicator {
+  display: none;
+
+  .ui-autocomplete-loading + & {
+    @include adjust-font-size-to(8px);
+    border: 3px solid;
+    border-color: $autocomplete-spinner-colour;
+    border-radius: 50%;
+    display: block;
+    height: 1.6rem;
+    line-height: 1.6rem;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    width: 1.6rem;
+    z-index: 999;
+    animation: spinner .5s linear infinite;
+
+    [dir='rtl'] & {
+      left: 1rem;
+    }
+  }
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

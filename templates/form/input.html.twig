@@ -1,0 +1,25 @@
+{#
+/**
+ * @file
+ * Theme override for an 'input' #type form element.
+ *
+ * Available variables:
+ * - attributes: A list of HTML attributes for the input element.
+ * - children: Optional additional rendered elements.
+ *
+ * @see template_preprocess_input()
+ * @TODO review the need for this template when work around search api autocomplete has been done
+ */
+#}
+{% spaceless %}
+  {% if autocomplete_message %}
+    {% set attributes = attributes.setAttribute('data-autocomplete-msg', autocomplete_message) %}
+    <div class="origins-autocomplete" role="presentation">
+      <input{{ attributes }}/>
+      <div class="autocomplete-indicator" aria-live="polite" role="status"></div>
+    </div>
+    {{ children }}
+  {% else %}
+    <input{{ attributes }}/>{{ children }}
+  {% endif %}
+{% endspaceless %}

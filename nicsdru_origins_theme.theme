@@ -176,6 +176,28 @@ function nicsdru_origins_theme_preprocess_views_view(&$variables) {
  * Implements template_preprocess_input().
  */
 function nicsdru_origins_theme_preprocess_input(&$variables) {
+  // Set up configurable autocomplete message.
+  $type_html = $variables['attributes']['type'];
+  $text_types_html = [
+    'text',
+    'email',
+    'tel',
+    'number',
+    'search',
+    'password',
+    'date',
+    'time',
+    'file',
+    'color',
+    'datetime-local',
+    'url',
+    'month',
+    'week',
+  ];
+
+  if (in_array($type_html, $text_types_html) && !empty($variables['element']['#autocomplete_route_name'])) {
+      $variables['autocomplete_message'] = t('Checking…');
+  }
   // Set the type attribute to 'search' for search form input elements.
   if ($variables['element']['#type'] == 'search_api_autocomplete') {
     $variables['element']['#attributes']['type'] = 'search';
