@@ -196,7 +196,7 @@ function nicsdru_origins_theme_preprocess_input(&$variables) {
   ];
 
   if (in_array($type_html, $text_types_html) && !empty($variables['element']['#autocomplete_route_name'])) {
-      $variables['autocomplete_message'] = t('Checking…');
+    $variables['autocomplete_message'] = t('Checking…');
   }
   // Set the type attribute to 'search' for search form input elements.
   if ($variables['element']['#type'] == 'search_api_autocomplete') {
