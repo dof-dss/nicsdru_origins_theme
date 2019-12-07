@@ -17,6 +17,10 @@ libraries-override:
       component:
         css/components/sticky-header.module.css: false
         css/components/autocomplete-loading.module.css: css/3_components/form/autocomplete-loading.css
+  search_api_autocomplete/search_api_autocomplete:
+    css:
+      theme:
+        css/search_api_autocomplete.css: css/3_components/form/search_api_autocomplete.css
 
 libraries-extend:
   core/drupal.autocomplete:
