@@ -34,7 +34,7 @@
  */
 #}
 {% set heading_id = attributes.id ~ '-menu'|clean_id %}
-<nav class="menu clearfix" aria-labelledby="{{ heading_id }}"{{ attributes|without('role') }}>
+<div class="footer-main" aria-labelledby="{{ heading_id }}"{{ attributes|without('role') }}>
   {# Label. If not displayed, we still provide it for screen readers. #}
   {%- if not configuration.label_display -%}
     {%- set title_attributes = title_attributes.addClass('visually-hidden') -%}
@@ -43,21 +43,17 @@
   <h2{{ title_attributes.setAttribute('id', heading_id) }}>{{ configuration.label }}</h2>
   {{- title_suffix }}
 
-  {# Wrapping div required to allow us to set a max-width on child elements while retaining
-     the background colour full-width on the parent element. #}
-  <div class="menu-wrapper">
-    {# Menu. #}
-    {%- block content -%}
-      {{- content -}}
-    {% endblock %}
+  {# Main footer menu. #}
+  {%- block content -%}
+    {{- content -}}
+  {% endblock %}
 
-    {# Social links. #}
-    {% if social_links %}
-    <ul class="social-media-links">
-      {% for link in social_links %}
-        <li>{{ link }}</li>
-      {% endfor %}
-    </ul>
-    {% endif %}
-  </div>
-</nav>
+  {# Social links. #}
+  {% if social_links %}
+  <ul class="nav-social">
+    {% for link in social_links %}
+      <li>{{ link }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</div>
