@@ -25,7 +25,7 @@
 //
 // Style guide: components.forms.autocomplete
 
-$autocomplete-spinner-colour: #0c1e63 #0a7ad0 #cee4f6 #fff !default;
+$autocomplete-spinner-colour: #000 #333 #666 #ccc !default;
 
 .origins-autocomplete {
   position: relative;
@@ -37,18 +37,18 @@ $autocomplete-spinner-colour: #0c1e63 #0a7ad0 #cee4f6 #fff !default;
 
   .ui-autocomplete-loading + & {
     @include adjust-font-size-to(8px);
-    border: 3px solid;
+    border: 4px dotted;
     border-color: $autocomplete-spinner-colour;
     border-radius: 50%;
     display: block;
-    height: 1.6rem;
-    line-height: 1.6rem;
+    height: 2.4rem;
+    line-height: 2.4rem;
     position: absolute;
     right: 1rem;
     top: 1rem;
-    width: 1.6rem;
+    width: 2.4rem;
     z-index: 999;
-    animation: spinner .5s linear infinite;
+    animation: spinner .6s linear infinite;
 
     [dir='rtl'] & {
       left: 1rem;

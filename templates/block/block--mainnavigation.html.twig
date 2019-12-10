@@ -48,7 +48,7 @@
 
   {# Wrapping div required to allow us to set a max-width on child elements while retaining
      the background colour full-width on the parent element. #}
-  <div class="menu-wrapper">
+  <div class="nav-main">
     {# Menu. #}
     {%- block content -%}
       {{- content -}}
@@ -56,7 +56,7 @@
 
     {# Social links. #}
     {% if social_links %}
-    <aside class="social-media-links">
+    <aside class="nav-social">
       <ul class="links">
         {% for link in social_links %}
           <li>{{ link }}</li>
