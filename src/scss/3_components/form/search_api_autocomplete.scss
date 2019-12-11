@@ -11,7 +11,7 @@
 
 .search-api-autocomplete-search {
   border: 0 !important;
-  box-shadow: 0 .8rem .9rem rgba(0,0,0,0.125);
+  box-shadow: 0 .8rem 2rem rgba(0,0,0,0.25);
   padding: .6rem;
   margin-top: -.1rem;
 
@@ -19,7 +19,7 @@
     display: block;
     content: 'Try one of these pages ...';
     font-size: 1.5rem;
-    color: #4d4d4d;
+    color: $charcoal;
     padding: .9rem .3rem;
   }
 
@@ -32,15 +32,11 @@
 
   .ui-menu-item-wrapper.ui-state-active a {
     background: #333;
-    color: #f0f0f0;
+    color: #fff;
   }
 
   .ui-menu-item {
     list-style-image: none;
-  }
-
-  .ui-menu-item:hover {
-    background: #f0f0f0;
   }
 
   .ui-menu-item a {
@@ -50,12 +46,6 @@
     text-decoration: none;
     position: relative;
     padding: .8rem .3rem .8rem 1.6rem;
-    &:focus,
-    &.ui-state-active {
-      outline: 1px solid #333;
-      background: #333;
-      color: #f0f0f0;
-    }
     &::before {
       /* create a little arrow using css */
       content: ' ';
@@ -66,10 +56,17 @@
       width: .8rem;
       height: .8rem;
       overflow: hidden;
-      border: .1rem solid #bcbcbc;
+      border: .1rem solid;
       border-left: 0;
       border-bottom: 0;
       transform: rotate(45deg);
+    }
+    &:hover,
+    &:focus,
+    &.ui-state-active {
+      outline: 1px solid $ash-grey;
+      background: $ash-grey;
+      color: #fff;
     }
   }
 
