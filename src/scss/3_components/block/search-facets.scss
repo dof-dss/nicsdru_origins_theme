@@ -1,0 +1,129 @@
+/*
+ * @file
+ * Provides styling for search facets.
+ */
+@import '../../init';
+
+// Search facets
+//
+// A search facet is a list of contextual links used to scope (filter) search results.
+//
+// Style guide: components.search-facets
+
+$facet-btn-color: #333 !default;
+$facet-btn-focus: #404040 !default;
+$facet-btn-focus-outline: $link !default;
+$facet-btn-active: #262626 !default;
+// Use the sass lightness function to determine whether to use a light / dark text color in the facet btn.
+$facet-text-color: null;
+@if(lightness($facet-btn-color) < 50) {
+  $facet-text-color: #fff;
+}
+@else {
+  $facet-text-color: $text;
+}
+
+.facet {
+  &--btn {
+    background-color: $facet-btn-color;
+    border: $facet-btn-color 1px solid;
+    display: block;
+    line-height: 4rem;
+    min-height: 4rem;
+    min-width: 100px;
+    padding: 0 .6rem;
+    text-align: left;
+    vertical-align: middle;
+    width: 100%;
+
+    @include breakpoint($phab, $no-query: true) {
+      min-width: 120px;
+      //padding: 1.2rem 2.4rem;
+    }
+
+    &:link,
+    &:visited {
+      color: $facet-text-color;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: $facet-btn-focus;
+      border-color: $facet-btn-focus;
+      text-decoration: none;
+    }
+
+    &:focus {
+      outline: 3px dotted $facet-btn-focus-outline;
+    }
+
+    &:active {
+      background-color: $facet-btn-active;
+      border-color: $facet-btn-active;
+    }
+
+    .ico-arrow-down {
+      fill: $facet-text-color;
+      float: right;
+      height: 2rem;
+      margin: 1rem;
+      width: 2rem;
+      transition: transform .4s ease;
+    }
+
+    &.active .ico-arrow-down {
+      transform: rotate(270deg);
+    }
+  }
+
+  &--dropdown-links {
+    margin-top: 2.1rem;
+  }
+
+  &--title {
+    margin: 0;
+  }
+
+  &-list__links {
+    margin: .1rem 0 .6rem;
+  }
+
+  &-item {
+    margin: 0;
+
+    a {
+      @include adjust-font-size-to(18px, 4.5);
+      border: 0;
+      display: inline-block;
+      outline: 0;
+      padding: .6rem;
+      text-decoration: underline;
+      width: 100%;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    &__status {
+      @include adjust-font-size-to(18px, 3);
+      background-color: #666;
+      color: #fff;
+      display: inline-block;
+      font-family: sans-serif;
+      font-weight: bold;
+      height: 1.8rem;
+      margin-right: .3rem;
+      padding: 0;
+      position: relative;
+      text-align: center;
+      top: -2px;
+      vertical-align: middle;
+      width: 1.8rem;
+
+      &:hover {
+        background-color: darkorange;
+      }
+    }
+  }
+}
