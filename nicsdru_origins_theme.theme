@@ -152,6 +152,8 @@ function nicsdru_origins_theme_theme_suggestions_views_view_alter(array &$sugges
  * Implements hook_preprocess_views_view().
  */
 function nicsdru_origins_theme_preprocess_views_view(&$variables) {
+  $variables['attributes']['role'] = 'presentation';
+
   if ($variables['id'] === 'search') {
     $variables['exposed']['#attributes']['class'][] = Html::cleanCssIdentifier('search-form');
     $variables['exposed']['#attributes']['class'][] = Html::cleanCssIdentifier('search-form--site');
