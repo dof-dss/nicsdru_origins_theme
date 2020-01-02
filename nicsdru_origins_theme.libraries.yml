@@ -55,7 +55,7 @@ origins-facets:
   version: VERSION
   css:
     component:
-      css/3_components/content/search-facets.css: { minified: true }
+      css/3_components/block/search-facets.css: { minified: true }
   js:
     js/search-facets-script.js: { minified: true }
   dependencies:
