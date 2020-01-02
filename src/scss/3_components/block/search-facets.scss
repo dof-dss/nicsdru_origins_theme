@@ -91,7 +91,8 @@ $facet-text-color: null;
   &-item {
     margin: 0;
 
-    a {
+    a,
+    &--link {
       @include adjust-font-size-to(18px, 4.5);
       border: 0;
       display: inline-block;
