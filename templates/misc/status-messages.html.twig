@@ -19,27 +19,33 @@
  *   - class: HTML classes.
  */
 #}
-<div class="container status-msg" data-drupal-messages>
-{% for type, messages in message_list %}
-  <div role="contentinfo" aria-label="{{ status_headings[type] }}"{{ attributes|without('role', 'aria-label') }}>
-    {% if type == 'error' %}
+<div data-drupal-messages class="container">
+  {% for type, messages in message_list %}
+    {%
+      set classes = [
+      'messages',
+      'messages--' ~ type,
+    ]
+    %}
+    <div role="contentinfo" aria-label="{{ status_headings[type] }}"{{ attributes.addClass(classes)|without('role', 'aria-label') }}>
+      {% if type == 'error' %}
       <div role="alert">
-    {% endif %}
-      {% if status_headings[type] %}
-        <h2 class="visually-hidden">{{ status_headings[type] }}</h2>
-      {% endif %}
-      {% if messages|length > 1 %}
-        <ul>
-          {% for message in messages %}
-            <li>{{ message }}</li>
-          {% endfor %}
-        </ul>
-      {% else %}
-        {{ messages|first }}
-      {% endif %}
-    {% if type == 'error' %}
+        {% endif %}
+        {% if status_headings[type] %}
+          <h2 class="visually-hidden">{{ status_headings[type] }}</h2>
+        {% endif %}
+        {% if messages|length > 1 %}
+          <ul class="messages__list">
+            {% for message in messages %}
+              <li class="messages__item">{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <div class="messages__item">{{ messages|first }}</div>
+        {% endif %}
+        {% if type == 'error' %}
       </div>
-    {% endif %}
-  </div>
-{% endfor %}
+      {% endif %}
+    </div>
+  {% endfor %}
 </div>
