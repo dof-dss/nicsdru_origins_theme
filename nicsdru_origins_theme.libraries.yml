@@ -1,6 +1,9 @@
 # These libraries provide common css styling shared across all nics Drupal sites
 global-styling:
   version: 1.x
+  css:
+    theme:
+      css/3_components/navigation/pager.css: { minified: true }
   js:
     js/ext-win-script.js: { minified: true }
     js/empty-tags-script.js: { minified: true }
