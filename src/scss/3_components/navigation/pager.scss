@@ -1,0 +1,40 @@
+/*
+ * @file
+ * Provides the styling for pager controls.
+ */
+@import '../../init';
+
+nav.pager {
+  clear: both;
+  padding: 0;
+  margin: 1.2rem 0 2.4rem;
+  text-align: center;
+
+  li {
+    display: inline-block;
+    list-style-type: none;
+  }
+
+  a {
+    font-size: 1.5rem;
+  }
+
+  // Baseline styles for pager elements.
+  .pager__item,
+  .pager-item,
+  .pager-first,
+  .pager-previous,
+  .pager-next,
+  .pager-last,
+  .pager-ellipsis,
+  .is-active {
+    display: inline-block;
+    padding: 0 .3334em;
+  }
+
+  /* The current page's list item. */
+  .pager__item.is-active {
+    font-weight: bold;
+  }
+
+}
