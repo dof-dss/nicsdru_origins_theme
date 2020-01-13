@@ -1,11 +1,16 @@
 {
     "name": "dof-dss/nicsdru_origins_theme",
     "type": "drupal-custom-theme",
-    "description": "Drupal 8 theme",
+    "description": "Drupal 8 base theme",
     "keywords": ["Drupal", "theme"],
     "license": "GPL-2.0+",
     "homepage": "https://github.com/dof-dss/nicsdru_origins_theme",
     "minimum-stability": "dev",
+    "require": {
+        "php": ">=7.0",
+        "composer/installers": "^1.6",
+        "drupal/core": ">=8.7"
+    },
     "authors": [
         {
             "name": "David Corbett",
