@@ -1,21 +1,30 @@
 name: NICS Origins
 type: theme
+base theme: stable
 description: 'Base theme for Drupal 8 sites'
 package: NICS
 core: 8.x
 
 libraries:
   - nicsdru_origins_theme/global-styling
-  - nicsdru_origins_theme/nics-layout-library
 
 libraries-override:
-  core/modernizr: nicsdru_origins_theme/override-modernizr
+  core/modernizr:
+    js:
+      assets/vendor/modernizr/modernizr.min.js: js/modernizr.min.js
   system/base:
     css:
       component:
         css/components/sticky-header.module.css: false
+        css/components/autocomplete-loading.module.css: css/3_components/form/autocomplete-loading.css
+  search_api_autocomplete/search_api_autocomplete:
+    css:
+      theme:
+        css/search_api_autocomplete.css: css/3_components/form/search_api_autocomplete.css
 
-base theme: stable
+libraries-extend:
+  core/drupal.autocomplete:
+    - nicsdru_origins_theme/autocomplete
 
 regions:
   header: 'Header'

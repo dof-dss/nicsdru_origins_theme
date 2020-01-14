@@ -23,24 +23,37 @@
  * @see template_preprocess_html()
  */
 #}
+{%
+  set html_classes = [
+  'no-js',
+  ]
+%}
+{%
+  set body_classes = [
+  logged_in ? 'user-logged-in',
+  not root_path ? 'path-frontpage' : 'path-' ~ root_path|clean_class,
+  node_type ? 'page-node-type-' ~ node_type|clean_class,
+  db_offline ? 'db-offline',
+]
+%}
 <!DOCTYPE html>
-<html{{ html_attributes }}>
+<html{{ html_attributes.addClass(html_classes) }}>
   <head>
-    <head-placeholder token="{{ placeholder_token|raw }}">
     <title>{{ head_title|safe_join(' | ') }}</title>
+    <head-placeholder token="{{ placeholder_token|raw }}">
+    {%- include active_theme_path() ~ '/templates/block/favicon.html' ignore missing -%}
     <css-placeholder token="{{ placeholder_token|raw }}">
     <js-placeholder token="{{ placeholder_token|raw }}">
   </head>
-  <body{{ attributes }}>
+  <body{{ attributes.addClass(body_classes) }}>
+  {% include active_theme_path() ~ '/images/icons.svg' ignore missing %}
     {#
       Keyboard navigation/accessibility link to main content section in
       page.html.twig.
     #}
-    <nav aria-label="Skip links">
-      <a href="#main-content" class="visually-hidden focusable">
+    <a href="#main-content" class="skip-link visually-hidden focusable">
         {{- 'Skip to main content'|t -}}
-      </a>
-    </nav>
+    </a>
 
     {{- page_top -}}
     {{- page -}}

@@ -2,7 +2,7 @@
  * Drupal tabs - tabbed menu's
  * =====================================================*/
 
-@import '../init';
+@import 'init';
 
 /* Basic positioning styles shared by primary and secondary tabs. */
 %tabs {
@@ -185,5 +185,31 @@ a.tabs-secondary--tab-link.is-active {
     font-size: unset;
     margin: 0;
     padding: 0;
+  }
+}
+
+.path-user {
+  .form-item {
+    margin: 1em 0;
+  }
+}
+
+.user-login-form {
+  input[type='submit'] {
+    @include adjust-font-size-to(16px, 4);
+    background-color: $button;
+    border: 1px solid $button;
+    color: #fff;
+    margin-bottom: 2.7rem;
+    min-width: 100px;
+    padding: .6rem .9rem;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+
+    @include breakpoint($phab) {
+      @include adjust-font-size-to(18px, 4.5);
+      min-width: 120px;
+    }
   }
 }

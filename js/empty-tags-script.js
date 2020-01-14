@@ -1,0 +1,1 @@
+(function($){Drupal.behaviors.nicsdruOriginsRemoveEmptyTags={attach:function attach(context){$("p",context).once("emptyTags").filter(function(){return $.trim($(this).html().replace(/&nbsp;/g,""))===""}).remove()}}})(jQuery);
