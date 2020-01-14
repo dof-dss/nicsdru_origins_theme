@@ -1,7 +1,6 @@
 /*
  * @file
- * Provides a script for adding a button and toggling items in a unordered list.
- * @see documentation in src/scss/3_components/navigation/toggle-list.scss
+ * Provides a script for .
  */
 /* eslint-disable */
 (function($, Drupal) {
@@ -11,8 +10,17 @@
       $('.facet--dropdown-links .facet--title', context).once('facetDropdown').each(function (index, widget) {
         var $widget = $(widget);
         var $widgetLinks = $widget.nextAll('.facets-widget-links');
+        var $facetId = $widgetLinks.attr('id');
+        var $wrapper = $('<a />', {
+          'class'         : 'facet--btn',
+          'href'          : '#',
+          'role'          : 'button',
+          'aria-expanded' : 'false',
+          'aria-controls' : $facetId,
+        });
         $widget.append('<svg aria-hidden="true" class="ico ico-arrow-down"><use xlink:href="#arrow"></use></svg>');
-        $widget.wrapInner("<a class='facet--btn' href='#' role='button' aria-expanded='false'></a>");
+        $widget.wrapInner($wrapper);
+
         $widgetLinks.toggle();
 
         var $widgetBtn = $widget.find('a.facet--btn');

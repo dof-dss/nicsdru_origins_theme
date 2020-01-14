@@ -8,6 +8,9 @@
     "type": "git",
     "url": "https://github.com/dof-dss/nicsdru_origins_theme"
   },
+  "files": [
+    "src/scss/"
+  ],
   "devDependencies": {
     "autoprefixer": "^9.7.3",
     "breakpoint-sass": "^2.7.1",
@@ -55,9 +58,10 @@
     "js-compile": "npm-run-all --parallel js-compile-*",
     "js-compile-modernizr": "modernizr -uc config/modernizr-config.json -d js/modernizr.min.js",
     "js-compile-autocomplete-lib": "mkdir -p js && uglifyjs src/js/autocomplete.js -o js/autocomplete.js",
-    "js-compile-toggle-lib": "mkdir -p js && uglifyjs src/js/toggle-btn-script.js -o js/toggle-btn-script.js",
+    "js-compile-empty-tags-lib": "mkdir -p js && uglifyjs src/js/empty-tags-script.js -o js/empty-tags-script.js",
     "js-compile-extwin-lib": "mkdir -p js && uglifyjs src/js/ext-win-script.js -o js/ext-win-script.js",
     "js-compile-search-facets-lib": "mkdir -p js && uglifyjs src/js/search-facets-script.js -o js/search-facets-script.js",
+    "js-compile-toggle-lib": "mkdir -p js && uglifyjs src/js/toggle-btn-script.js -o js/toggle-btn-script.js",
     "––––––– CSS SCRIPTS": "–––––––––––––",
     "css": "npm-run-all --sequential scss-dev css-post",
     "css-lint": "sass-lint -c $npm_package_config_sasslintConfig $npm_package_config_scssfile -v -q",
