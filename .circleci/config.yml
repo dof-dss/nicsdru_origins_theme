@@ -4,70 +4,155 @@
 version: 2
 
 jobs:
-  # Code linting.
+  install:
+    docker:
+      - image: circleci/node:lts
+    steps:
+      - checkout
+      - restore_cache:
+          key: node_modules-{{ checksum "package.json" }}
+      - run:
+          name: Fetch dependencies
+          command: npm install
+      - save_cache:
+          key: node_modules-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - ./
+  # Code static analysis.
   lint:
     docker:
-      - image: circleci/node:latest
+      - image: circleci/node:lts
     steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - node_modules-{{ checksum "package.json" }}
+      - attach_workspace:
+          at: ./
       - run:
-          name: Fetch dependencies
-          command: npm install
-      - save_cache:
-          key: node_modules-{{ checksum "package.json" }}
-          paths:
-            - node_modules
-      - run:
-          name: Lint all code
+          name: Lint all frontend code
           command: |
             npm run lint
-
-  build-assets:
+  # Build front-end assets.
+  build_assets:
     docker:
-      - image: circleci/node:latest
+      - image: circleci/node:lts
+    steps:
+      - attach_workspace:
+          at: ./
+      - run:
+          name: Fetch dependencies
+          command: npm run build
+  # Static analysis of any PHP/Drupal code.
+  phpcs:
+    docker:
+      - image: circleci/php:7.2.20-apache-browsers
+    steps:
+      - run:
+          name: Add OS extensions
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y libpng-dev
+            sudo docker-php-ext-install gd
+      - restore_cache:
+          key: global-composer-{{ checksum "/home/circleci/.composer/composer.lock" }}
+      - run:
+          name: Add hirak/prestissimo for faster composer downloads
+          command: composer global require hirak/prestissimo
+      - save_cache:
+          key: global-composer-{{ checksum "/home/circleci/.composer/composer.lock" }}
+          paths:
+            - /home/circleci/project/.composer/cache
+      - attach_workspace:
+          at: ./
+      - restore_cache:
+          key: composer-{{ checksum "composer.lock" }}
+      - run:
+          name: Fetch phpcs and dependencies
+          command: |
+            composer require drupal/coder --no-interaction --optimize-autoloader
+      - save_cache:
+          key: composer-{{ checksum "composer.lock" }}
+          paths:
+            - vendor
+      - run:
+          name: Move vendor directory out the way.
+          command: mv vendor ../
+      - run:
+          name: Fetch phpcs convenience script
+          command: |
+            cd /home/circleci
+            curl https://raw.githubusercontent.com/dof-dss/nidirect-drupal/development/phpcs.sh -o /home/circleci/phpcs.sh
+            # Enable ignore variable.
+            sed -i -e "s/\#IGNORE/IGNORE/" phpcs.sh
+            # Add unwanted paths to this ignore variable.
+            sed -i -e "s/web\/themes\/custom\/nicsdru_origins_theme\/node_modules/project\/node_modules/" phpcs.sh
+            # Make the file executable.
+            chmod +x /home/circleci/phpcs.sh
+      - run:
+          name: PHPCS static analysis
+          command: /home/circleci/phpcs.sh /home/circleci "/home/circleci/project"
+
+  #===== DEBUG ======
+  debug_frontend:
+    docker:
+      - image: circleci/node:lts
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - node_modules-{{ checksum "package.json" }}
       - run:
           name: Fetch dependencies
           command: npm install
-      - save_cache:
-          key: node_modules-{{ checksum "package.json" }}
-          paths:
-            - node_modules
       - run:
-          name: Compile SCSS and JS assets
+          name: Lint all frontend code
+          command: |
+            npm run lint
+      - run:
+          name: Fetch dependencies
           command: npm run build
 
-  phpcs:
+  debug_backend:
     docker:
       - image: circleci/php:7.2.20-apache-browsers
     steps:
       - checkout
       - run:
+          name: Add OS and PHP extensions required by any PHP libraries
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y libpng-dev
+            sudo docker-php-ext-install gd
+            composer global require hirak/prestissimo
+      - run:
           name: Fetch phpcs and dependencies
           command: |
-            composer require drupal/coder --no-interaction --optimize-autoloader
+            composer require drupal/coder --no-interaction
             # Move vendor directory up a level as we don't want to code-check all of that.
             mv vendor ../
       - run:
           name: Fetch phpcs convenience script
           command: |
-            curl https://raw.githubusercontent.com/dof-dss/nidirect-drupal/master/phpcs.sh -o /home/circleci/project/phpcs.sh
-            chmod +x /home/circleci/project/phpcs.sh
+            cd /home/circleci
+            curl https://raw.githubusercontent.com/dof-dss/nidirect-drupal/development/phpcs.sh -o /home/circleci/phpcs.sh
+            # Enable ignore variable.
+            sed -i -e "s/\#IGNORE/IGNORE/" phpcs.sh
+            # Add unwanted paths to this ignore variable.
+            sed -i -e "s/web\/themes\/custom\/nicsdru_origins_theme\/node_modules/project\/node_modules/" phpcs.sh
+            # Make the file executable.
+            chmod +x /home/circleci/phpcs.sh
+            cat /home/circleci/phpcs.sh
       - run:
           name: PHPCS static analysis
-          command: /home/circleci/project/phpcs.sh /home/circleci "/home/circleci/project"
+          command: /home/circleci/phpcs.sh /home/circleci "/home/circleci/project/"
 
 workflows:
   version: 2
-  lint-build:
+  build-static-analysis:
     jobs:
-      - lint
-      - build-assets
+      - install
+      - lint:
+          requires:
+            - install
+      - build_assets:
+          requires:
+            - install
       - phpcs
