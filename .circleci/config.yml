@@ -10,12 +10,12 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: {{ .Branch }--node_modules-{{ checksum "package.json" }}
+          key: {{ .Branch }}--node_modules-{{ checksum "package.json" }}
       - run:
           name: Fetch dependencies
           command: npm install
       - save_cache:
-          key: {{ .Branch }--node_modules-{{ checksum "package.json" }}
+          key: {{ .Branch }}--node_modules-{{ checksum "package.json" }}
           paths:
             - node_modules
       - persist_to_workspace:
