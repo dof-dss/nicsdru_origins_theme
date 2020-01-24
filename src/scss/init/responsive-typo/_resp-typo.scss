@@ -1,4 +1,4 @@
-// responsive-typo-map()
+// responsive-typo-map($map, [$breakpoints])
 //
 // A mixin to make responsive typography much more manageable.
 // @see https://www.smashingmagazine.com/2015/06/responsive-typography-with-sass-maps/
@@ -10,11 +10,30 @@
 // and a third is margin values. Finally the mixin integrates with compass vertical typography mixins to output values
 // in appropriate rhythm units.
 //
+// Usage:
+// ```scss
+// $map: (null: (16px, 1.25), sml: (18px, 1.5));
+// h1 {
+//   @include responsive-typo-map($map);
+// }
+// ```
+// will generate:
+// ```css
+// h1 { font-size: 1.6rem; line-height: 1.25; }
+// @media screen and (min-width: 300px) {
+//   h1 { font-size: 1.8rem; line-height: 1.5; }
+// }
+// ```
+//
+// $map - a sass map where the key for the entry correlates to a value in the $breakpoints mapping.
+// $breakpoints - a sass map of responsive breakpoint values for a given key from the $map value. This is an optional
+// parameter which if missing will default to using a variable $grid-breakpoints if declared.
+//
 // Style guide: init.mixins.responsive-typo-map
 @mixin responsive-typo-map($fs-map, $fs-breakpoints: $grid-breakpoints) {
   @each $fs-breakpoint, $fs-font-size in $fs-map {
     @if $fs-breakpoint == null {
-      @include rtp-map-attributes($fs-font-size);
+      @include _rtp-map-attributes($fs-font-size);
     }
     @else {
       // If $fs-font-size is a key that exists in
@@ -23,17 +42,17 @@
         $fs-breakpoint: map-get($fs-breakpoints, $fs-breakpoint);
       }
       @media screen and (min-width: $fs-breakpoint) {
-        @include rtp-map-attributes($fs-font-size);
+        @include _rtp-map-attributes($fs-font-size);
       }
     }
   }
 }
 
-// Utility function for mixin creating font-size, line height and margins
-@mixin rtp-map-attributes($fs-font-size) {
+// Private utility mixin for creating font-size, line height and margins
+@mixin _rtp-map-attributes($fs-font-size) {
   // If $fs-font-size is a list, include
   // both font-size, line-height and margins
-  @if type-of($fs-font-size) == "list" {
+  @if type-of($fs-font-size) == 'list' {
     @if (nth($fs-font-size, 1) != null) {
       @include adjust-font-size-to(nth($fs-font-size, 1));
     }

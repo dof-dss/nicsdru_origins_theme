@@ -1,31 +1,27 @@
 // @private Default font-size for all browsers
-$browser-default-font-size: 16px;
+$_browser-default-font-size: 16px;
 
 // Base font size in pixels, if not already defined.
 // Should be the same as the font-size of the html element.
 $base-font-size: 16px !default;
 
 // Whether to output fallback values in px when outputting rems.
-$rem-with-px-fallback: true !default;
+$rem-with-px-fallback: false !default;
 
-
+// convert-length($length, $to-unit	[$from-context], [$to-context]
+//
 // Convert any CSS <length> or <percentage> value to any another.
 //
-// @param $length
-//   A css <length> or <percentage> value
+// $length - A css <length> or <percentage> value
+// $to-unit - String matching a css unit keyword, e.g. 'em', '%', etc.
+// $from-context - Optional: When converting from relative units, the absolute length (in px) to which $length refers
+// (e.g. for `$length`s in em units, would normally be the font-size of the current element).
+// $to-context - Optional: For converting to relative units, the absolute length in px to which the output value will
+// refer. Defaults to the same as `$from-context`, since it is rarely needed.
 //
-// @param $to-unit
-//   String matching a css unit keyword, e.g. 'em', '%', etc.
+// Weight: -3
 //
-// @param $from-context
-//   When converting from relative units, the absolute length (in px) to
-//   which $length refers (e.g. for $lengths in em units, would normally be the
-//   font-size of the current element).
-//
-// @param $to-context
-//   For converting to relative units, the absolute length in px to which the
-//   output value will refer. Defaults to the same as $from-context, since it is
-//   rarely needed.
+// Style guide: init.libraries.compass.convert-length
 @function convert-length(
 	$length,
 	$to-unit,
@@ -107,7 +103,7 @@ $rem-with-px-fallback: true !default;
 
 
 // @private Get the px/rem versions of a value.
-@function rem-fallback-values($value) {
+@function _rem-fallback-values($value) {
   $_return: (
     px: $value,
     rem: $value,
@@ -130,7 +126,7 @@ $rem-with-px-fallback: true !default;
 }
 
 // @private Get the px/rem versions of a list (or nested lists).
-@function list-convert-rems($value) {
+@function _list-convert-rems($value) {
   $_empty: (
     px: (),
     rem: (),
@@ -141,7 +137,7 @@ $rem-with-px-fallback: true !default;
   @if type-of($value) == list {
     $_sep: list-separator($value);
     @each $sub in $value {
-      $_this: list-convert-rems($sub);
+      $_this: _list-convert-rems($sub);
       $_return: (
         px: append(map-get($_return, px), map-get($_this, px), $_sep),
         rem: append(map-get($_return, rem), map-get($_this, rem), $_sep),
@@ -149,30 +145,29 @@ $rem-with-px-fallback: true !default;
     }
   }
 	@else {
-    $_this: rem-fallback-values($value);
+    $_this: _rem-fallback-values($value);
     $_return: map-merge($_return, $_this);
   }
 
   @return $_return;
 }
 
-
-// Output a given style rule containing rem values along with an (optional)
-// fallback rule for older browsers (with rem values converted to px).
+// rem($property, $values, [$use-px-fallback])
 //
-// @param $property
-//   The css property name.
+// Output a given style rule containing rem values along with an (optional) fallback rule for older browsers (with rem
+// values converted to px).
 //
-// @param $values
-//   The value or list of values for the property.
+// $property - The css property name.
+// $values - The value or list of values for the property.
+// $use-px-fallback - Optional: [ true | false ]
 //
-// @param $use-px-fallback
-//   [ true | false ]
+// Weight: -2
 //
+// Style guide: init.libraries.compass.rem
 @mixin rem($property, $values, $use-px-fallback: $rem-with-px-fallback) {
 
   // get converted values.
-  $values: list-convert-rems($values);
+  $values: _list-convert-rems($values);
   $px-values: map-get($values, px);
   $values: map-get($values, rem);
 

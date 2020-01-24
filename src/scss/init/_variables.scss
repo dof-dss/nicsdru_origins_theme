@@ -1,41 +1,64 @@
 // Variables
 //
-// Set variables for this site. These can be overridden in the scss code later.
+// Variables are values assigned to a name that begins with $, which can then be referred to that name instead of the
+// value itself. Despite their simplicity, they're one of the most useful tools Sass brings to the table. Variables
+// make it possible to reduce repetition, do complex math, configure libraries, and much more.
 //
-// Weight: -9
+// Weight: -10
 //
 // Style guide: init.variables
 
-/* Vertical rhythm presets =========================================== */
-// The font size set on the root html element.
+// Vertical rhythm variables
+//
+// Set some values that contribute to the compass modules for compiling values that create a consist vertical rhythm.
+//
+// $base-font-size - The font size set on the root html element.
+// $base-line-height - The base line height determines the basic unit of vertical rhythm.
+// $rhythm-unit - The length unit in which to output vertical rhythm values. Supported values: px, em, rem.
+// $rem-with-px-fallback - Whether to output fallback values in px when using rem as the rhythm-unit.
+// $round-to-nearest-half-line - Round the line height to the nearest half line height instead of the nearest integral
+// line height.
+//
+// Weight: -7
+//
+// Style guide: init.variables.vertical-rhythm
 $base-font-size: 10px;
-
-// The base line height determines the basic unit of vertical rhythm.
 $base-line-height: 6px;
-
-// The length unit in which to output vertical rhythm values.
-// Supported values: px, em, rem.
 $rhythm-unit: 'rem';
-
-// Whether to output fallback values in px when using rem as the rhythm-unit.
 $rem-with-px-fallback: false;
-
-// Round the line height to the nearest half line height instead of the nearest integral line height.
 $round-to-nearest-half-line: true;
 
-/* Set the base images folder */
-// The relative path from the build directory, css/, to
-// the source directory, images/
-$image-url-path-to-source: '../' !default;
-// The relative path from the root sass directory to where your components usually lie.
-$image-url-subdirectory: 'images' !default;
+// Layout variables
+//
+// Set some values for helping with constructing layouts.
+//
+// $grid-gap - a default value for the gap between grid items.
+// $total-columns - a default value to be used for defining the number of columns when compiling a grid framework.
+// $max-grid-width - sets the maximum value the content area can expand to, on larger devices, the content container is
+// centered on the page.
+//
+// Weight: -7
+//
+// Style guide: init.variables.layout
+$grid-gap: 20px !default;
+$total-columns: 12 !default;
+$max-grid-width: 940px !default;
 
-/* Layout ============================================================ */
-$max-grid-width: 940px;
-$grid-gap: 20px;
-$total-columns: 12;
-
-/* Breakpoints ======================================================== */
+// Breakpoint variables
+//
+// Set some values for where responsive changes occur - the values are set for use with `min-width` media queries.
+//
+// $mob - a mobile device view in landscape.
+// $phab - a tablet sized device being viewed portrait;
+// $tab - a tablet sized device being viewed landscape;
+// $lap - a larger device with a smaller screen such as a laptop;
+// $desk - a full sized screen, able to accommodate the largest sizes currently available;
+// $max-grid-width - sets the maximum value the content area can expand to, on larger devices, the content container is
+// centered on the page.
+//
+// Weight: -7
+//
+// Style guide: init.variables.breakpoints
 $mob: 480px;
 $phab: 600px;
 $tab: 768px;

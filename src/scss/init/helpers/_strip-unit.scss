@@ -1,10 +1,15 @@
-/// Remove the unit of a length
-/// @param {Number} $number - Number to remove unit from
-/// @return {Number} - Unitless number
-@function strip-unit($number) {
-  @if type-of($number) == 'number' and not unitless($number) {
-    @return $number / ($number * 0 + 1);
+// strip-unit($value)
+//
+// Simple helper function to remove unit from a number type value.
+// @return {number} - unitless number.
+//
+// $value -  A variable or value to remove units from.
+//
+// Style guide: init.functions.strip-unit
+@function strip-unit($_value) {
+  @if type-of($_value) == 'number' and not unitless($_value) {
+    @return $_value / ($_value * 0 + 1);
   }
 
-  @return $number;
+  @return $_value;
 }
