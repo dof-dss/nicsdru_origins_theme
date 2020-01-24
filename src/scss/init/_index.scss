@@ -1,0 +1,60 @@
+// Initialization partial
+//
+// To make it easier to use all variables and mixins in any sass file in this project, each .scss file has a
+// `@import 'init';` declaration. The init/_index.scss file is in charge of importing all the other partials needed for
+// the project.
+//
+// The initialization partial is organized in this way:
+// - First we set any shared sass variables.
+// - Next we import third party sass modules / libraries.
+// - Last we define our custom functions and mixins for this project.
+//
+// Weight: 10
+//
+// Style guide: init
+
+// The following Sass functions/mixins are required to generate some variables' values, so we load them first.
+@import '../../../node_modules/breakpoint-sass/stylesheets/breakpoint';
+@import '../../../node_modules/chroma-sass/sass/chroma/functions';
+
+@import 'colors';
+@import 'variables';
+@import 'typography';
+
+// 3rd party libraries
+//
+// The following sass modules are shared with all .scss files:
+// - [Breakpoint](http://breakpoint-sass.com/)
+// - [Chroma-sass](http://johnalbin.github.io/chroma/)
+// - [Compass vertical rhythm](http://compass-style.org/)
+// For compass we we only load vertical rhythm support
+// Note that this is loaded in standalone files contained within this project that are developed for node sass further
+// information can be found @see https://github.com/Igosuki/compass-mixins
+//
+// Weight: -8
+//
+// Style guide: init.libraries
+
+// Add Chroma to manage colors.
+@import '../../../node_modules/chroma-sass/sass/chroma';
+@import '../../../node_modules/chroma-sass/sass/chroma/kss';
+@import 'compass-vr/compass';
+
+// Functions
+//
+// Custom functions used on this site.
+//
+// Weight: -6
+//
+// Style guide: init.functions
+@import 'helpers/headings';
+
+// Mixins
+//
+// Custom mixins used on this site.
+//
+// Weight: -4
+//
+// Style guide: init.mixins
+@import 'visually-hidden/visually-hidden';
+@import 'responsive-typo/resp-typo';
