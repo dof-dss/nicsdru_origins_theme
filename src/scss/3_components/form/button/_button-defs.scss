@@ -60,7 +60,8 @@
   }
 
   &:focus {
-    outline: 1px dotted $charcoal;
+    outline: 3px solid $charcoal;
+    outline-offset: -2px;
   }
 }
 
