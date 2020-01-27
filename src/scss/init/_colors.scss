@@ -2,14 +2,19 @@
 
 // Colors
 //
-// Use the `color()` function to add colors to CSS properties. To learn more,
-// [read the Chroma documentation](http://johnalbin.github.io/chroma/).
+// The `color()` function can be used to add colors to CSS properties. To learn more,
+// [read the Chroma documentation](http://johnalbin.github.io/chroma/). When using a IDE for writing code, declaring a
+// function will not make the options for the function available, therefore using the `color()` function becomes more
+// difficult as the developer must remember the available values and type them in full etc, therefore for each color
+// value, there is an equivalent variable with the same name - the variable should be set using chroma's `color()`
+// function to retain the capabilities of the sass module. Declarations in scss code for color variables should
+// be declared using the $variable method.
 //
-// Markup: ../kss-templates/chroma.twig
+// Markup: chroma.twig
 //
-// Weight: -8
+// Weight: -9
 //
-// Style guide: init.colors
+// Style guide: init.variables.colors
 
 // Define the default color scheme's color names.
 $chroma: define-default-color-scheme('branding', 'The site\'s main colors. Can be used to define colors in other color schemes.');

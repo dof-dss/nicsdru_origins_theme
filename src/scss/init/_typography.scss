@@ -4,12 +4,26 @@
 // used by mixins like adjust-font-size-to().
 // These variable and mixins are documented in [Compass](http://compass-style.org/reference/compass/typography/vertical_rhythm/).
 // We also use a custom mixin responsive-typo-map() to make responsive typography much more manageable using sass maps.
-// We import Google fonts in the head of the document and set the base family to be
-// 'Open Sans', sans-serif
+// We import Google fonts in the head of the document and set the base family to be 'Lato' 'Open Sans', sans-serif
+//
+// $body-text - defines a responsive typography map for standard body text in the document.
+// $breadcrumb-text - defines a responsive typography map for text in the document breadcrumb.
+// $normal-text - defines a responsive typography map for standard paragraph text in the document.
+// $h1-text - defines a responsive typography map for normal heading 1 text in the document.
+// $h2-text - defines a responsive typography map for normal heading 2 text in the document.
+// $h3-text - defines a responsive typography map for normal heading 3 text in the document.
+// $h4-text - defines a responsive typography map for normal heading 4 text in the document.
+// $h5-text - defines a responsive typography map for normal heading 5 text in the document.
+// $h6-text - defines a responsive typography map for normal heading 6 text in the document.
+// $btn-standard - defines a responsive typography map for text in a regular button.
+// $btn-medium - defines a responsive typography map for text in a medium sized button.
+// $btn-large - defines a responsive typography map for text in large buttons.
+//
+// Weight: -5
 //
 // Style guide: init.variables.typography
 // The default font family.
-$base-font-family: 'Lato', 'Open Sans', sans-serif;
+$base-font-family: 'Open Sans', sans-serif;
 $font-monospace:   'Courier New', 'DejaVu Sans Mono', monospace, sans-serif;;
 
 // The font sizes for h1-h6.
