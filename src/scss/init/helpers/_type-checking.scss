@@ -1,0 +1,138 @@
+// Type checking
+//
+// A collection of functions for advanced type checking of scss values. This collection of functions is for testing if
+// the value of a variable is of a certain type. For instance, is 13rem a relative length? TRUE!
+//
+// This is likely most useful for advanced mixin creation to make the code more fault tolerant.
+//
+// @author Hugo Giraudel
+// @see <https://css-tricks.com/snippets/sass/advanced-type-checking/>
+//
+// Style guide: init.functions.type-checking
+
+// is-number($value)
+//
+// Uses the built in sass module type-of function to test if the value is of type number. Note numbers in Sass have two
+// components: the number itself, and its units. For example, in 16px the number is 16 and the unit is px.
+// Numbers can have no units, and they can have complex units. [View the documentation for more information about sass
+// numbers](https://sass-lang.com/documentation).
+//
+// $value - A variable or value to check.
+//
+// Style guide: init.functions.type-checking.is-number
+@function is-number($_value) {
+  @return type-of($_value) == 'number';
+}
+
+// is-time($value)
+//
+// Tests if a value is a number and looks for a unit of 'ms' or 's' in the submitted value.
+//
+// $value - A variable or value to check.
+//
+// Style guide: init.functions.type-checking.is-time
+@function is-time($_value) {
+  @return is-number($_value) and index('ms' 's', unit($_value)) != null;
+}
+
+// is-angle($value)
+//
+// Tests if a value is a number and looks for a unit of 'deg', 'rad', 'grad' or 'turn' in the submitted value.
+//
+// $value - A variable or value to check.
+//
+// Style guide: init.functions.type-checking.is-angle
+@function is-angle($_value) {
+  @return is-number($_value) and index('deg' 'rad' 'grad' 'turn', unit($_value)) != null;
+}
+
+// is-frequency($value)
+//
+// Tests if a value is a number and looks for a unit of 'Hz' or 'kHz' in the submitted value.
+//
+// $value - A variable or value to check.
+//
+// Style guide: init.functions.type-checking.is-frequency
+@function is-frequency($_value) {
+  @return is-number($_value) and index('Hz' 'kHz', unit($_value)) != null;
+}
+
+// is-integer($value)
+//
+// Tests if a value is a number when rounded, equals itself.
+//
+// $value - A variable or value to check.
+//
+// Style guide: init.functions.type-checking.is-integer
+@function is-integer($_value) {
+  @return is-number($_value) and round($_value) == $_value;
+}
+
+// is-relative-length($value)
+//
+// Tests if a value is a number and looks for a unit of 'em', 'ex', 'ch', 'rem', 'vw', 'vh', 'vmin' or 'vmax'
+// in the submitted value.
+//
+// $value - A variable or value to check.
+//
+// Style guide: init.functions.type-checking.is-relative-length
+@function is-relative-length($_value) {
+  @return is-number($_value) and index('em' 'ex' 'ch' 'rem' 'vw' 'vh' 'vmin' 'vmax', unit($_value)) != null;
+}
+
+// is-absolute-length($value)
+//
+// Tests if a value is a number and looks for a unit of 'cm', 'mm', 'in', 'px', 'pt' or 'pc' in the submitted value.
+//
+// $value - A variable or value to check.
+//
+// Style guide: init.functions.type-checking.is-absolute-length
+@function is-absolute-length($_value) {
+  @return is-number($_value) and index('cm' 'mm' 'in' 'px' 'pt' 'pc', unit($_value)) != null;
+}
+
+// is-percentage($value)
+//
+// Tests if a value is a number and looks for a unit of '%' in the submitted value.
+//
+// $value - A variable or value to check.
+//
+// Style guide: init.functions.type-checking.is-percentage
+@function is-percentage($_value) {
+  @return is-number($_value) and unit($_value) == '%';
+}
+
+// is-length($value)
+//
+// Tests if a value is a number and looks for a unit of 'em', 'ex', 'ch', 'rem', 'vw', 'vh', 'vmin', 'vmax','cm', 'mm',
+// 'in', 'px', 'pt' or 'pc' in the submitted value.
+//
+// $value - A variable or value to check.
+//
+// Style guide: init.functions.type-checking.is-length
+@function is-length($_value) {
+  @return is-relative-length($_value) or is-absolute-length($_value);
+}
+
+// is-resolution($value)
+//
+// Tests if a value is a number and looks for a unit of 'dpi', 'dpcm' or 'dppx' in the submitted value.
+//
+// $value - A variable or value to check.
+//
+// Style guide: init.functions.type-checking.is-resolution
+@function is-resolution($_value) {
+  @return is-number($_value) and index('dpi' 'dpcm' 'dppx', unit($_value)) != null;
+}
+
+// is-position($value)
+//
+// Tests if a value is a length or a percentage value or has a unit of 'top', 'right', 'bottom', 'left' or 'center'
+// in the submitted value.
+//
+// $value - A variable or value to check.
+//
+// Style guide: init.functions.type-checking.is-position
+@function is-position($_value) {
+  @return is-length($_value) or is-percentage($_value) or index('top' 'right' 'bottom' 'left' 'center', $_value) != null;
+}

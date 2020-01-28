@@ -1,2 +1,27 @@
-// ported with help from https://github.com/Igosuki/compass-mixins
+// Compass
+//
+// Compass is an open-source CSS Authoring Framework, built on Ruby sass. The project is no longer actively maintained.
+// However the parts of the framework which were most useful and were heavily incorporated in sass by NICS in the past
+// have been ported for the newer js and c/c++ sass compilers. In these files we incorporate the functions and mixins
+// which formed the vertical rhythm module of the compass framework and make them available to the project.
+// code based on work at https://github.com/Igosuki/compass-mixins
+//
+// The vertical rhythm module contained herein can be imported using `@import 'compass/typography/vertical_rhythm'`.
+// There are a number of configurable variables which can be overridden in the init section of the sass files
+//
+// $base-font-size - The default font size for all text in pixel, default value 10px.
+// $base-line-height - The distance between text baselines (vertical rhythm) in pixels, default value 6px.
+// $rhythm-unit - The length unit in which to output rhythm values, default value 'rem'. Supported values: px, em, rem.
+// Percent units can't be used since they make calculating padding and margins impractical, and percentage borders are
+// not valid or supported in css.
+// $rem-with-px-fallback - Whether to output fallback values in px when using rem as the rhythm-unit, default value false
+// $default-rhythm-border-width - Default values for rhythm borders properties. Supports style alone eg. solid or list
+// of style and color eg. solid #aaa; default value 1px.
+// $default-rhythm-border-style - default value solid.
+// $round-to-nearest-half-line - Allows the `adjust-font-size-to` mixin and the `lines-for-font-size` function to round
+// the line height to the nearest half line height instead of the nearest integral line height to avoid large spacing
+// between lines, default value false.
+// $min-line-padding - Ensure there is at least this many pixels of vertical padding above and below the text, default value 2px.
+//
+// Style guide: init.libraries.compass
 @import 'vertical_rhythm';

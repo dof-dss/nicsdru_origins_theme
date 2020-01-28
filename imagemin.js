@@ -1,34 +1,29 @@
-const imagemin = require('imagemin');
-const PNGImages = 'src/images/**/*.png';
-const JPEGImages = 'src/images/**/*.{jpg,jpeg,JPG,JPEG}';
-const GIFImages = 'src/images/**/*.gif';
-const output = 'images';
+const imagemin = require("imagemin");
+const PNGImages = "src/images/**/*.png";
+const JPEGImages = "src/images/**/*.{jpg,jpeg,JPG,JPEG}";
+const GIFImages = "src/images/**/*.gif";
+const output = "images";
 
-const imageminJpegtran = require('imagemin-jpegtran');
-const imageminJpegoptim = require('imagemin-jpegoptim');
-const imageminOptipng = require('imagemin-optipng');
-const imageminPngcrush = require('imagemin-pngcrush');
-const imageminPngout = require('imagemin-pngout');
-const imageminZopfli = require('imagemin-zopfli');
-const imageminGifsicle = require('imagemin-gifsicle');
-
-imagemin([JPEGImages], output, {use: [imageminJpegtran()]}).then(() => {
-  console.log('Images optimized');
-});
+const imageminJpegtran = require("imagemin-jpegtran");
+const imageminJpegoptim = require("imagemin-jpegoptim");
+const imageminOptipng = require("imagemin-optipng");
+const imageminPngcrush = require("imagemin-pngcrush");
+const imageminPngout = require("imagemin-pngout");
+const imageminZopfli = require("imagemin-zopfli");
+const imageminGifsicle = require("imagemin-gifsicle");
 
 const optimiseJPEGImages = () =>
-  imagemin([JPEGImages], output, {
+  imagemin([JPEGImages], {
+    destination: output,
     plugins: [
       imageminJpegoptim(),
       imageminJpegtran(),
     ]
   });
 
-optimiseJPEGImages()
-  .catch(error => console.log(error));
-
 const optimisePNGImages = () =>
-  imagemin([PNGImages], output, {
+  imagemin([PNGImages], {
+    destination: output,
     plugins: [
       imageminOptipng(),
       imageminPngcrush({
@@ -39,15 +34,19 @@ const optimisePNGImages = () =>
     ]
   });
 
-optimisePNGImages()
-  .catch(error => console.log(error));
-
 const optimiseGIFImages = () =>
-  imagemin([GIFImages], output, {
+  imagemin([GIFImages], {
+    destination: output,
     plugins: [
       imageminGifsicle(),
     ]
   });
 
-optimiseJPEGImages()
-  .catch(error => console.log(error));
+(async () => {
+  const files = await optimisePNGImages()
+    .then(() => optimiseJPEGImages())
+    .then(() => optimiseGIFImages())
+    .catch(error => console.log(error));
+
+  console.log(files);
+})();

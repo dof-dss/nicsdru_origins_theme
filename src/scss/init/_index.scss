@@ -14,12 +14,12 @@
 // Style guide: init
 
 // The following Sass functions/mixins are required to generate some variables' values, so we load them first.
-@import '../../node_modules/breakpoint-sass/stylesheets/breakpoint';
-@import '../../node_modules/chroma-sass/sass/chroma/functions';
+@import '../../../node_modules/breakpoint-sass/stylesheets/breakpoint';
+@import '../../../node_modules/chroma-sass/sass/chroma/functions';
 
-@import 'init/colors';
-@import 'init/variables';
-@import 'init/typography';
+@import 'colors';
+@import 'variables';
+@import 'typography';
 
 // 3rd party libraries
 //
@@ -36,9 +36,9 @@
 // Style guide: init.libraries
 
 // Add Chroma to manage colors.
-@import '../../node_modules/chroma-sass/sass/chroma';
-@import '../../node_modules/chroma-sass/sass/chroma/kss';
-@import 'init/compass-vr/compass';
+@import '../../../node_modules/chroma-sass/sass/chroma';
+@import '../../../node_modules/chroma-sass/sass/chroma/kss';
+@import 'compass-vr/compass';
 
 // Functions
 //
@@ -47,7 +47,7 @@
 // Weight: -6
 //
 // Style guide: init.functions
-@import 'init/helpers/headings';
+@import 'helpers/headings';
 
 // Mixins
 //
@@ -56,5 +56,5 @@
 // Weight: -4
 //
 // Style guide: init.mixins
-@import 'init/visually-hidden/visually-hidden';
-@import 'init/responsive-typo/resp-typo';
+@import 'visually-hidden/visually-hidden';
+@import 'responsive-typo/resp-typo';
