@@ -65,7 +65,13 @@
       {{- page.sidebar_first -}}
     </div>
   {%- endif -%}
-  {{- page.content -}}
+  {% if content_content_attr is not empty %}
+  <div{{ content_content_attr }}>
+    {{- page.content -}}
+  </div>
+  {% else %}
+    {{- page.content -}}
+  {% endif %}
   {%- if page.sidebar_second -%}
     <aside{{ sidebar_second_attr }}>
       {{- page.sidebar_second -}}
