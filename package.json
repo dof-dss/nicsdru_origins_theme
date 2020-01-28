@@ -1,6 +1,6 @@
 {
   "name": "nicsdru_origins_theme",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A package of utilities used to theme our site",
   "main": "index.js",
   "license": "GPL-2.0-or-later",
