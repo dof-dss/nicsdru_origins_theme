@@ -79,7 +79,7 @@ function nicsdru_origins_theme_preprocess_page(array &$variables) {
     'class' => ['layout-sidebar-first'],
     'id' => ['first_sidebar']
   ];
-  $variables['content_content_attr'] = [];
+  $variables['content_wrapper_attr'] = [];
   $variables['sidebar_second_attr'] = [
     'class' => ['layout-sidebar-second'],
     'id' => ['second_sidebar']

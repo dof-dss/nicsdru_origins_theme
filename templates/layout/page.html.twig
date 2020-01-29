@@ -66,7 +66,7 @@
     </div>
   {%- endif -%}
   {% if content_content_attr is not empty %}
-  <div{{ content_content_attr }}>
+  <div{{ content_wrapper_attr }}>
     {{- page.content -}}
   </div>
   {% else %}
