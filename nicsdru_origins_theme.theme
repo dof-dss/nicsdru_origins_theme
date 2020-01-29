@@ -79,6 +79,7 @@ function nicsdru_origins_theme_preprocess_page(array &$variables) {
     'class' => ['layout-sidebar-first'],
     'id' => ['first_sidebar']
   ];
+  $variables['content_wrapper_attr'] = [];
   $variables['sidebar_second_attr'] = [
     'class' => ['layout-sidebar-second'],
     'id' => ['second_sidebar']
@@ -87,6 +88,7 @@ function nicsdru_origins_theme_preprocess_page(array &$variables) {
   // Declare region attributes.
   $variables['main_content_attr'] = new Attribute($variables['main_content_attr']);
   $variables['sidebar_first_attr'] = new Attribute($variables['sidebar_first_attr']);
+  $variables['content_wrapper_attr'] = new Attribute($variables['content_wrapper_attr']);
   $variables['sidebar_second_attr'] = new Attribute($variables['sidebar_second_attr']);
 
   // Social links for footer.
