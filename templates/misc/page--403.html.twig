@@ -65,7 +65,17 @@
 {{- page.help -}}
 {{- page.top_banner -}}
 <main{{ main_content_attr }}>{# @see skiplink in html.html.twig  which targets the ID for this element #}
-  {{- page.content -}}
+  <h1>Page not found</h1>
+  <p><strong>Sorry, we can't find the page you're looking for.</strong></p>
+  <p>If you have typed the URL directly into the address bar in your browser please check it's right.
+    If you got here following a link from another website, that link may no longer be correct.</p>
+  <h2>Here are some options</h2>
+  <p>If you're having trouble finding the information you want, try <a href="/search">Search</a> or the following pages:</p>
+  <ul>
+    <li><a href="/">Home page</a></li>
+    <li><a href="/sitemap">Sitemap</a></li>
+    <li><a href="/contacts">Contacts</a></li>
+  </ul>
 </main>
 {%- if page.bottom_banner -%}
   {{- page.bottom_banner -}}
