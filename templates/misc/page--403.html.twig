@@ -1,10 +1,17 @@
 {#
 /**
  * @file
- * Theme override to display a single page.
+ * Theme override to show an HTTP 403 access denied response.
+ *
+ * These responses are usually covered by page.tpl.php in Core with a system callback to
+ * generate the content for the message. To customise the message, you can either preprocess
+ * or override the controller for it, or remove the `page.content` variable in this template
+ * and replace with any text you like.
+ *
+ * See nidirect_errorpages.module for suggesteed template candidates.
  *
  * The doctype, html, head and body tags are not in this template. Instead they
- * can be found in the html.html.twig template in this directory.
+ * can be found in the html.html.twig template.
  *
  * Available variables:
  *
@@ -39,7 +46,6 @@
  * - page.sidebar_second: Items for the second sidebar.
  * - page.bottom_banner: Items for the bottom banner region.
  * - page.footer: Items for the footer region.
- * - page.breadcrumb: Items for the breadcrumb region.
  *
  * Attributes:
  * - main_content_attr: HTML attributes for the main containing element.
@@ -55,31 +61,24 @@
 </header>
 {{- page.primary_menu -}}
 {{- page.secondary_menu -}}
-{{- page.breadcrumb -}}
 {{- page.highlighted -}}
 {{- page.help -}}
 {{- page.top_banner -}}
 <main{{ main_content_attr }}>{# @see skiplink in html.html.twig  which targets the ID for this element #}
-  {%- if page.sidebar_first -%}
-    <div{{ sidebar_first_attr }}>
-      {{- page.sidebar_first -}}
-    </div>
-  {%- endif -%}
-  {% if content_wrapper_attr is not empty %}
-  <div{{ content_wrapper_attr }}>
-    {{- page.content -}}
-  </div>
-  {% else %}
-    {{- page.content -}}
-  {% endif %}
-  {%- if page.sidebar_second -%}
-    <aside{{ sidebar_second_attr }}>
-      {{- page.sidebar_second -}}
-    </aside>
-  {%- endif -%}
+  <h1>Page not found</h1>
+  <p><strong>Sorry, we can't find the page you're looking for.</strong></p>
+  <p>If you have typed the URL directly into the address bar in your browser please check it's right.
+    If you got here following a link from another website, that link may no longer be correct.</p>
+  <h2>Here are some options</h2>
+  <p>If you're having trouble finding the information you want, try <a href="/search">Search</a> or the following pages:</p>
+  <ul>
+    <li><a href="/">Home page</a></li>
+    <li><a href="/sitemap">Sitemap</a></li>
+    <li><a href="/contacts">Contacts</a></li>
+  </ul>
 </main>
 {%- if page.bottom_banner -%}
-{{- page.bottom_banner -}}
+  {{- page.bottom_banner -}}
 {% endif %}
 {%- if page.footer -%}
   <footer id="footer" class="footer">
