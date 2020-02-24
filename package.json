@@ -63,6 +63,7 @@
     "js-compile-extwin-lib": "mkdir -p js && uglifyjs src/js/ext-win-script.js -o js/ext-win-script.js",
     "js-compile-search-facets-lib": "mkdir -p js && uglifyjs src/js/search-facets-script.js -o js/search-facets-script.js",
     "js-compile-toggle-lib": "mkdir -p js && uglifyjs src/js/toggle-btn-script.js -o js/toggle-btn-script.js",
+    "js-compile-table-xscroll": "mkdir -p js && uglifyjs src/js/table-xscroll.js -o js/table-xscroll.js",
     "––––––– CSS SCRIPTS": "–––––––––––––",
     "css": "npm-run-all --sequential scss-dev css-post",
     "css-lint": "sass-lint -c $npm_package_config_sasslintConfig $npm_package_config_scssfile -v -q",
