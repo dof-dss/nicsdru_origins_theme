@@ -2,6 +2,8 @@
 global-styling:
   version: 1.x
   css:
+    base:
+      css/1_base/normalize.css: { minified: true, weight: -100 }
     theme:
       css/3_components/navigation/pager.css: { minified: true }
       css/3_components/content/tables.css: { minified: true }
