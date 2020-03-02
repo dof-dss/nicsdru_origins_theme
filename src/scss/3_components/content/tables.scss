@@ -1,0 +1,15 @@
+/*
+ * @file
+ * Provides the styling for table components.
+ */
+@import '../../init';
+
+.table-fixed-width {
+  table-layout: fixed;
+}
+
+// wrapper to enable scrolling on overflowing tables
+.x-scroll {
+  width: 100%;
+  overflow-x: auto;
+}
