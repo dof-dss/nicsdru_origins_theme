@@ -213,3 +213,57 @@ a.tabs-secondary--tab-link.is-active {
     }
   }
 }
+
+/* =====================================================
+ * Diff - revision comparison
+ * =====================================================*/
+
+.diff-header,
+.diff-controls {
+  width: 100%;
+  background-color: #f5f5f5;
+  padding: 12px 18px 3px;
+
+  & > * {
+    font-size: 14px !important;
+  }
+}
+
+.diff-header {
+  grid-row: 1;
+  grid-column: 1 / span 2;
+  margin-top: 1.5em;
+  .diff-revision {
+    order: 1;
+  }
+  .diff-navigation {
+    order: 2;
+  }
+}
+
+.diff-header > * {
+  width: 50%;
+}
+
+.diff-controls {
+  grid-row: 2;
+  grid-column: 1 / span 2;
+  margin-top: -28px;
+  margin-bottom: -28px;
+}
+
+.diff-header label,
+.diff-controls label {
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.diff-responsive-table-wrapper {
+  grid-row: 3;
+  grid-column: 1;
+}
+
+.ga-aside {
+  grid-row: 3 !important;
+  grid-column: 2 !important;
+}
