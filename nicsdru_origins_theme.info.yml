@@ -21,6 +21,10 @@ libraries-override:
     css:
       theme:
         css/search_api_autocomplete.css: css/3_components/form/search_api_autocomplete.css
+  diff/diff.general:
+    css:
+      theme:
+        css/diff.general.css: false;
 
 libraries-extend:
   core/drupal.autocomplete:
