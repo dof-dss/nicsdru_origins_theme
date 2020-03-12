@@ -387,11 +387,17 @@ function _nicsdru_origins_social_links() {
  * Implements hook_preprocess_media().
  */
 function nicsdru_origins_theme_preprocess_media(&$variables) {
-  $file = &$variables['content']['field_media_file'][0]['#file'];
-  // TODO: switch icon based on file type.
-  $variables['file_icon_url'] = '/sites/default/files/styles/thumbnail/public/media-icons/generic/generic.png';
-  $variables['file_size'] = format_size($file->getSize(), \Drupal::languageManager()->getCurrentLanguage()->getId());
-  $variables['file_type'] = strtoupper(preg_replace('/^application\/(\w+)$/', '\1', $file->getMimeType()));
-  $variables['file_url'] = $file->url();
-  $variables['media_langcode'] = $variables['media']->language()->getId();
+  if (empty($variables['media']) || $variables['media']->bundle() != 'document') {
+    return;
+  }
+
+  if (!empty($variables['content']['field_media_file'])) {
+    $file = &$variables['content']['field_media_file'][0]['#file'];
+    // TODO: switch icon based on file type.
+    $variables['file_icon_url'] = '/sites/default/files/styles/thumbnail/public/media-icons/generic/generic.png';
+    $variables['file_size'] = format_size($file->getSize(), \Drupal::languageManager()->getCurrentLanguage()->getId());
+    $variables['file_type'] = strtoupper(preg_replace('/^application\/(\w+)$/', '\1', $file->getMimeType()));
+    $variables['file_url'] = $file->url();
+    $variables['media_langcode'] = $variables['media']->language()->getId();
+  }
 }
