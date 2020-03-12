@@ -1,0 +1,251 @@
+/*
+ * @file
+ * Provides the styling for content revision comparisons.
+ */
+@import 'init';
+
+@include breakpoint($tab) {
+  .diff-header {
+    grid-row: 1;
+    grid-column: 1;
+  }
+
+  .diff-controls {
+    grid-row: 1;
+    grid-column: 2;
+  }
+
+  .diff-responsive-table-wrapper {
+    grid-row: 2;
+    grid-column: 1;
+
+    & + .ga-aside {
+      grid-row: 2;
+      grid-column: 2;
+    }
+  }
+}
+
+.diff-header,
+.diff-controls {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 50px;
+  margin-top: 1.5em;
+
+  label {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 9px;
+  }
+
+  & * {
+    font-size: 14px;
+  }
+
+}
+
+.diff-header {
+  display: flex;
+  flex-flow: wrap;
+}
+
+.diff-revision {
+  order: 1;
+}
+
+.diff-navigation {
+  // Disable diff nav for now - it's confusing!
+  display: none;
+  // Do not delete CSS below - may use again
+  /*
+  order: 2;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  label {
+    display: none;
+  }
+  */
+}
+
+.diff-navigation__link {
+  margin-bottom: 1em;
+  &.prev-link {
+    order: 1;
+    a:before {
+      content: '';
+      border: .6rem solid transparent;
+      border-right-color: $charcoal;
+      display: inline-block;
+      vertical-align: baseline;
+      position: relative;
+      left: -.6rem;
+      top: .1rem;
+    }
+  }
+  &.next-link {
+    order: 2;
+    a:after {
+      content: '';
+      border: .6rem solid transparent;
+      border-left-color: $charcoal;
+      display: inline-block;
+      vertical-align: baseline;
+      position: relative;
+      right: -.6rem;
+      top: .1rem;
+    }
+  }
+}
+
+.diff-revision__items {
+  padding-left: 1em;
+}
+
+.diff-revision__items-group {
+  display: list-item;
+  list-style: decimal;
+}
+
+.diff-revision__item {
+  display: inline-block;
+  padding-right: .5em;
+
+  &:last-child {
+    padding-right: 0;
+  }
+
+  &-date {
+    white-space: nowrap;
+  }
+}
+
+.diff-controls {
+  display: block;
+}
+
+.diff-controls__item {
+  position: absolute;
+  top: 0;
+  width: 49%;
+  padding-right: 0;
+
+  &:first-child {
+    left: 0;
+  }
+
+  &:last-child {
+    right: 0;
+  }
+}
+
+.diff-responsive-table-wrapper {
+
+  // Make first h2 > a look like h1 (cause it is the h1!).
+  h2:first-child a {
+    @include responsive-typo-map($h1-text);
+    color: color(headings);
+    text-decoration: none;
+  }
+
+  // Diff inserts should not be underlined.
+  ins {
+    text-decoration: none;
+  }
+
+  // Fix issue where diff inserts prevent lists being tight to preceding P
+  p + ins + ol,
+  p + ins + ul {
+    margin-top: -1.2rem;
+  }
+
+  // Fix issue where diff inserts before a P nested in a list cause unwanted newlines.
+  li > ins + p,
+  li > del + p {
+    display: inline;
+  }
+
+  // Diff output for fields.
+  // Simple bold inline label and value with light grey background.
+  // Usually displayed at the bottom of the diff content.
+
+  .field-collection {
+    width: 100%;
+    clear: both;
+    margin: 2em 0;
+  }
+
+  .field {
+    background-color: #f5f5f5;
+    margin: .5em 0;
+    padding: 12px .5em;
+  }
+
+  .field--label-inline {
+
+    & > div {
+      margin: 0;
+    }
+
+    .field__label,
+    .field__item,
+    .field__items {
+      display: inline-block;
+      width: 45%;
+      min-width: 260px;
+      vertical-align: top;
+    }
+  }
+
+  .field__label {
+    font-weight: bold;
+    padding-right: 1em;
+  }
+}
+
+// Diff output for images
+.diffimg {
+  position: relative;
+  display: block;
+  margin-bottom: 3px;
+  background-color: unset;
+}
+
+del.diffimg {
+
+  & > img {
+    border: 3px solid #fcc;
+  }
+
+  &:after {
+    position: absolute;
+    display: block;
+    content: 'Deleted';
+    top: 3px;
+    left: 3px;
+    z-index: 1;
+    background-color: rgba(#fcc, .5);
+    padding: .5em;
+  }
+}
+
+ins.diffimg {
+
+  & > img {
+    border: 3px solid #cfc;
+  }
+
+  &:after {
+    position: absolute;
+    display: block;
+    content: 'Inserted';
+    top: 3px;
+    left: 3px;
+    z-index: 1;
+    background-color: rgba(#cfc, .5);
+    padding: .5em;
+  }
+}
