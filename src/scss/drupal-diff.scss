@@ -207,17 +207,22 @@
 }
 
 // Diff output for images
+.diffmod.photo,
 .diffimg {
   position: relative;
   display: block;
-  margin-bottom: 3px;
   background-color: unset;
+  & del,
+  & ins {
+    background-color: unset;
+  }
 }
 
+.diffmod.photo > del:last-child,
 del.diffimg {
 
   & > img {
-    border: 3px solid #fcc;
+    border: 5px solid #fcc;
   }
 
   &:after {
@@ -227,15 +232,16 @@ del.diffimg {
     top: 3px;
     left: 3px;
     z-index: 1;
-    background-color: rgba(#fcc, .5);
+    background-color: rgba(#fcc, .9);
     padding: .5em;
   }
 }
 
+.diffmod.photo > ins:last-child,
 ins.diffimg {
 
   & > img {
-    border: 3px solid #cfc;
+    border: 5px solid #cfc;
   }
 
   &:after {
@@ -245,7 +251,7 @@ ins.diffimg {
     top: 3px;
     left: 3px;
     z-index: 1;
-    background-color: rgba(#cfc, .5);
+    background-color: rgba(#cfc, .9);
     padding: .5em;
   }
 }
