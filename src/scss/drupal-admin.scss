@@ -290,11 +290,22 @@ a.tabs-secondary--tab-link.is-active {
  * Visual styles for the moderation sidebar.
  */
 
+.moderation-sidebar-container {
+  position: relative;
+  left: -5px;
+  width: calc(100% + 10px);
+  padding-bottom: 0 !important;
+}
+
+.moderation-sidebar-info {
+  margin: .5rem 0 1rem !important;
+}
+
 .moderation-sidebar-info p {
   font-family: unset !important;
   font-size: 14px;
   line-height: 1.5;
-  margin: .5em 0 !important;
+  margin: 0 !important;
 
   a:focus {
     outline: none;
@@ -307,8 +318,9 @@ a.tabs-secondary--tab-link.is-active {
   justify-content: space-between;
 
   .moderation-sidebar-quick-transition-form {
-    order: 0;
+    order: 1;
     width: 100%;
+    margin: 1rem 0 !important;
     display: flex;
     flex-flow: column nowrap;
 
@@ -318,9 +330,21 @@ a.tabs-secondary--tab-link.is-active {
 
     & > .moderation-sidebar-link.button {
       order: 0;
+      border-radius: 2px;
 
       &--danger {
         order: 1;
+      }
+    }
+
+    .form-item-revision-log-toggle {
+      margin: 0 !important;
+
+      input[type='checkbox'],
+      input[type='checkbox'] + label {
+        min-height: unset;
+        line-height: 1;
+        vertical-align: top;
       }
     }
   }
@@ -330,10 +354,18 @@ a.tabs-secondary--tab-link.is-active {
     display: inline-block !important;
     width: 48.5%;
     word-spacing: -1px;
+    border-radius: 0;
+
+    // Make edit button a call to action and make it the first button
     &[href*='/edit'] {
       background-color: green !important;
-      width: 100%;
       order: 0;
+    }
+
+    // Make the delete button last
+    &[href*='/delete'] {
+      order: 3;
+      margin: 0 auto !important;
     }
   }
 }
