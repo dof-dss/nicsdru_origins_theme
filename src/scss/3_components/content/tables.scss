@@ -12,4 +12,10 @@
 .x-scroll {
   width: 100%;
   overflow-x: auto;
+
+  // Add margins to the wrapper and remove from the child table
+  margin: 1em 0 2em;
+  table {
+    margin: 0;
+  }
 }
