@@ -8,6 +8,18 @@ core: 8.x
 libraries:
   - nicsdru_origins_theme/global-styling
 
+ckeditor_stylesheets:
+  - css/1_base/root.css
+  - css/1_base/html5.css
+  - css/1_base/headings.css
+  - css/1_base/grouping.css
+  - css/1_base/links.css
+  - css/1_base/tables.css
+  - css/1_base/text.css
+  - css/3_components/content/icons-messages.css
+  - css/3_components/content/lists.css
+  - css/3_components/content/tables.css
+
 libraries-override:
   core/modernizr:
     js:
