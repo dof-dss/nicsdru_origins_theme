@@ -41,6 +41,8 @@ libraries-override:
 libraries-extend:
   core/drupal.autocomplete:
     - nicsdru_origins_theme/autocomplete
+  core/drupal.ajax:
+    - nicsdru_origins_theme/throbber
 
 regions:
   header: 'Header'
