@@ -357,8 +357,11 @@ a.tabs-secondary--tab-link.is-active {
     }
 
     .form-item-revision-log-toggle {
-      order: 0;
-      margin: 0 !important;
+      order: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 5px auto !important;
 
       input[type='checkbox'],
       input[type='checkbox'] + label {
@@ -366,6 +369,14 @@ a.tabs-secondary--tab-link.is-active {
         line-height: 1;
         vertical-align: top;
       }
+
+      label.option {
+        margin-left: .5em !important;
+      }
+    }
+
+    .form-item-revision-log {
+      order: 1;
     }
   }
 
