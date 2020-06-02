@@ -325,19 +325,39 @@ a.tabs-secondary--tab-link.is-active {
     flex-flow: column nowrap;
 
     & > * {
-      order: 2;
+      order: 0;
     }
 
     & > .moderation-sidebar-link.button {
       order: 0;
       border-radius: 2px;
+      font-size: 13px !important;
+      width: 48.5%;
 
       &--danger {
-        order: 1;
+        order: 2;
+        width: 60% !important;
+        margin: .5em auto !important;
+      }
+    }
+
+    // Buttons to be used with caution
+    #publish.button,
+    #quick_publish.button,
+    #unpublish.button,
+    #archive.button,
+    #restore.button {
+      order: 1;
+      width: 60% !important;
+      background-color: color(hc-orange);
+      margin: .5em auto !important;
+      &:hover {
+        background-color: lighten(color(hc-orange), 5%);
       }
     }
 
     .form-item-revision-log-toggle {
+      order: 0;
       margin: 0 !important;
 
       input[type='checkbox'],
@@ -353,19 +373,23 @@ a.tabs-secondary--tab-link.is-active {
     order: 1;
     display: inline-block !important;
     width: 48.5%;
+    font-size: 13px !important;
     word-spacing: -1px;
     border-radius: 0;
 
-    // Make edit button a call to action and make it the first button
+    // Make edit button a call to action and make it the first button.
     &[href*='/edit'] {
-      background-color: green !important;
+      background-color: color(hc-green) !important;
       order: 0;
     }
 
-    // Make the delete button last
-    &[href*='/delete'] {
+    // Make the delete button last and keep it a bit separate from other buttons.
+    &[href*='/delete'],
+    .button--danger {
       order: 3;
-      margin: 0 auto !important;
+      align-self: flex-end;
+      width: 60%;
+      margin: .5em auto !important;
     }
   }
 }
