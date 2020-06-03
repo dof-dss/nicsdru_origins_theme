@@ -287,7 +287,32 @@ a.tabs-secondary--tab-link.is-active {
 }
 
 /**
- * Visual styles for the moderation sidebar.
+ * Off canvas dialogue.
+ *
+ * Changes here for sidebar moderation widget - but may affect other off canvas dialogue widgets (here be dragons).
+ */
+
+.ui-dialog-off-canvas.ui-dialog-position-side {
+  .ui-dialog-titlebar {
+    padding: 10px;
+    .ui-dialog-title {
+      max-width: 240px;
+      font-size: 14px;
+      line-height: 1.3;
+    }
+    .ui-dialog-titlebar-close {
+      top: 14px;
+      right: 4px;
+    }
+  }
+}
+
+
+/**
+ * Moderation sidebar.
+ *
+ * We are overriding styles from core and the moderation sidebar widget module.
+ * Liberal use of !important is required.
  */
 
 .moderation-sidebar-container {
@@ -298,14 +323,18 @@ a.tabs-secondary--tab-link.is-active {
 }
 
 .moderation-sidebar-info {
-  margin: .5rem 0 1rem !important;
+  margin: 1.2rem 0 !important;
 }
 
 .moderation-sidebar-info p {
   font-family: unset !important;
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: 12px !important;
+  line-height: 1.3334;
   margin: 0 !important;
+
+  > * {
+    font-size: 12px !important;
+  }
 
   a:focus {
     outline: none;
@@ -320,25 +349,49 @@ a.tabs-secondary--tab-link.is-active {
   .moderation-sidebar-quick-transition-form {
     order: 1;
     width: 100%;
-    margin: 1rem 0 !important;
+    margin: .8rem 0 !important;
     display: flex;
     flex-flow: column nowrap;
 
     & > * {
-      order: 2;
+      order: 0;
     }
 
     & > .moderation-sidebar-link.button {
       order: 0;
       border-radius: 2px;
+      font-size: 13px !important;
+      width: 48.5%;
+      margin-bottom: .8rem !important;
 
       &--danger {
-        order: 1;
+        order: 2;
+        width: 60% !important;
+        margin: .4rem auto !important;
+      }
+    }
+
+    // Buttons to be used with caution
+    #publish.button,
+    #quick_publish.button,
+    #unpublish.button,
+    #archive.button,
+    #restore.button {
+      order: 1;
+      width: 60% !important;
+      background-color: color(hc-orange);
+      margin: .4rem auto !important;
+      &:hover {
+        background-color: lighten(color(hc-orange), 5%);
       }
     }
 
     .form-item-revision-log-toggle {
-      margin: 0 !important;
+      order: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: .8rem auto !important;
 
       input[type='checkbox'],
       input[type='checkbox'] + label {
@@ -346,6 +399,15 @@ a.tabs-secondary--tab-link.is-active {
         line-height: 1;
         vertical-align: top;
       }
+
+      label.option {
+        margin-left: .8rem !important;
+      }
+    }
+
+    .form-item-revision-log {
+      order: 1;
+      margin: 0 !important;
     }
   }
 
@@ -353,19 +415,25 @@ a.tabs-secondary--tab-link.is-active {
     order: 1;
     display: inline-block !important;
     width: 48.5%;
+    font-size: 13px !important;
     word-spacing: -1px;
     border-radius: 0;
+    margin-bottom: .8rem !important;
 
-    // Make edit button a call to action and make it the first button
+    // Make edit button a call to action and make it the first button.
     &[href*='/edit'] {
-      background-color: green !important;
+      background-color: color(hc-green) !important;
+      font-weight: bold !important;
       order: 0;
     }
 
-    // Make the delete button last
-    &[href*='/delete'] {
+    // Make the delete button last and keep it a bit separate from other buttons.
+    &[href*='/delete'],
+    .button--danger {
       order: 3;
-      margin: 0 auto !important;
+      align-self: flex-end;
+      width: 60%;
+      margin: .8rem auto !important;
     }
   }
 }
