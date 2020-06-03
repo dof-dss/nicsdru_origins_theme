@@ -6,20 +6,6 @@
  */
 @import '../../init';
 
-// Throbber
-//
-// JS - fullscreen:
-// $('body').after(Drupal.theme.ajaxProgressIndicatorFullscreen())
-// $('body').remove(".ajax-progress-fullscreen")
-//
-// JS - inline:
-// $('body').after(Drupal.theme.ajaxProgressThrobber())
-// $('body').remove(".ajax-progress-inline")
-//
-// Styling for throbber adapted from https://tobiasahlin.com/spinkit/
-//
-// Style guide: components.forms.throbber
-
 .ajax-spinner {
 
   > div {
