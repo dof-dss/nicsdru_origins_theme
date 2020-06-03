@@ -82,3 +82,12 @@ origins-facets:
     - core/jquery
     - core/jquery.once
 
+moderation-sidebar:
+  version: VERSION
+  js:
+    js/moderation-sidebar.js: { minified: true }
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/jquery.once
+

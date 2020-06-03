@@ -43,6 +43,8 @@ libraries-extend:
     - nicsdru_origins_theme/autocomplete
   core/drupal.ajax:
     - nicsdru_origins_theme/throbber
+  moderation_sidebar/main:
+    - nicsdru_origins_theme/moderation-sidebar
 
 regions:
   header: 'Header'
