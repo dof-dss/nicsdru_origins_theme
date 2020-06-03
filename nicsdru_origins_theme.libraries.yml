@@ -47,6 +47,17 @@ autocomplete:
   js:
     js/autocomplete.js: { minified: true }
 
+# Extend the core functionality for ajax progress indicators (throbbers)
+throbber:
+  js:
+    js/throbber.js: {}
+  css:
+    component:
+      css/3_components/form/throbber.css: { minified: true }
+  dependencies:
+    - core/jquery
+    - core/drupal
+
 toggle-list:
   version: VERSION
   css:
@@ -66,6 +77,15 @@ origins-facets:
       css/3_components/block/search-facets.css: { minified: true }
   js:
     js/search-facets-script.js: { minified: true }
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/jquery.once
+
+moderation-sidebar:
+  version: VERSION
+  js:
+    js/moderation-sidebar.js: { minified: true }
   dependencies:
     - core/drupal
     - core/jquery
