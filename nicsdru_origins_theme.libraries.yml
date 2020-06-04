@@ -4,6 +4,9 @@ global-styling:
   css:
     base:
       css/1_base/normalize.css: { minified: true, weight: -100 }
+    # The SMACSS category, "component", is loaded after "base and layout" styles.
+    component:
+      css/3_components/field/file-link.css: { minified: true }
     theme:
       css/3_components/navigation/pager.css: { minified: true }
       css/3_components/content/tables.css: { minified: true }

@@ -31,13 +31,23 @@
  * @ingroup themeable
  */
 #}
-<div{{ attributes }}>
-  <a href="{{ file_url }}" lang="{{ media_langcode }}">
-    <img class="file-icon" alt="File icon" src="{{ file_icon_url }}" />
+{% set media_attributes = create_attribute() %}
+{% set media_attributes = media_attributes.setAttribute('lang', media_langcode) %}
+{% set file_classes = [
+  'file-link',
+  'file--ico',
+  'file--ico__' ~ file_type|lower,
+]
+%}
+{% set media_attributes = media_attributes.addClass(file_classes) %}
+{% if file_url %}
+  <a{{ media_attributes }} href="{{ file_url }}">
     {{ media.label }}
     <span class="meta">{{ file_type }} ({{ file_size }})</span>
   </a>
+{% else %}
+  {{ media.label }}
+{% endif %}
 
-  {{ content | without('name', 'field_media_file') }}
-  {{ title_suffix.contextual_links }}
-</div>
+{{ content | without('name', 'field_media_file') }}
+{{ title_suffix.contextual_links }}
