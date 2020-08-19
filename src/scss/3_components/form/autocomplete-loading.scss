@@ -25,7 +25,7 @@
 //
 // Style guide: components.forms.autocomplete
 
-$autocomplete-spinner-colour: #000 #333 #666 #ccc !default;
+$autocomplete-spinner-colour: #444 #ddd #ddd #ddd !default;
 
 .origins-autocomplete {
   position: relative;
@@ -36,22 +36,28 @@ $autocomplete-spinner-colour: #000 #333 #666 #ccc !default;
   display: none;
 
   .ui-autocomplete-loading + & {
-    @include adjust-font-size-to(8px);
-    border: 4px dotted;
-    border-color: $autocomplete-spinner-colour;
-    border-radius: 50%;
     display: block;
-    height: 2.4rem;
-    line-height: 2.4rem;
     position: absolute;
     right: 1rem;
-    top: 1rem;
+    top: 50%;
     width: 2.4rem;
-    z-index: 999;
-    animation: spinner .6s linear infinite;
+    height: 2.4rem;
+    transform: translateY(-50%);
 
     [dir='rtl'] & {
       left: 1rem;
+    }
+
+    &::after {
+      content: ' ';
+      display: block;
+      border: 2px solid;
+      border-color: $autocomplete-spinner-colour;
+      border-radius: 50%;
+      width: 2.4rem;
+      height: 2.4rem;
+      z-index: 999;
+      animation: spinner .6s linear infinite;
     }
   }
 }
