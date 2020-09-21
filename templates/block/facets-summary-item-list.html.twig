@@ -1,0 +1,47 @@
+{#
+/**
+ * @file
+ * Default theme implementation for a facets summary item list.
+ *
+ * Available variables:
+ * - items: A list of items. Each item contains:
+ *   - attributes: HTML attributes to be applied to each list item.
+ *   - value: The content of the list element.
+ * - title: The title of the list.
+ * - list_type: The tag for list element ("ul" or "ol").
+ * - wrapper_attributes: HTML attributes to be applied to the list wrapper.
+ * - attributes: HTML attributes to be applied to the list.
+ * - empty: A message to display when there are no items. Allowed value is a
+ *   string or render array.
+ * - context: A list of contextual data associated with the list. May contain:
+ *   - list_style: The custom list style.
+ *
+ * @see facets_summary_preprocess_facets_summary_item_list()
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+  set classes = [
+    'facet-summary__list',
+    'list--inline',
+    'list--no-bullet',
+    context.list_style ? 'item-list__' ~ context.list_style,
+  ]
+%}
+{% set attributes = attributes.addClass(classes).setAttribute('aria-describedby', 'facet-summary-label') %}
+{% if items or empty %}
+  {%- if title is not empty -%}
+    <h3>{{ title }}</h3>
+  {%- endif -%}
+  {%- if items -%}
+    <{{ list_type }}{{ attributes }}>
+      {%- for item in items -%}
+        {%- set facet_name = item.value['#title']['#facet'].name -%}
+        <li{{ item.attributes }}><span aria-label="Selected filter" class="facet-item__label">{{ facet_name|t }}</span>{{ item.value }}</li>
+      {%- endfor -%}
+    </{{ list_type }}>
+  {%- else -%}
+    {{- empty -}}
+  {%- endif -%}
+{%- endif %}
