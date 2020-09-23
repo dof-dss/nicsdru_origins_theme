@@ -24,8 +24,7 @@
  * @ingroup themeable
  */
 #}
-{% set facet_label = 'Filter results by @value'|t({'@value': facet.label|lower}) %}
-<div id="facet_{{ facet.id }}" class="facets-widget-{{- facet.widget.type -}}" tabindex="-1" role="group" aria-label="{{ facet_label }}">
+<div id="facet_{{ facet.id }}" class="facets-widget-{{- facet.widget.type -}}" tabindex="-1" role="group">
   {% if facet.widget.type %}
     {% set list_classes  = [
       'facet-list__' ~ facet.widget.type,

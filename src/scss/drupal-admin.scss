@@ -437,3 +437,42 @@ a.tabs-secondary--tab-link.is-active {
     }
   }
 }
+
+/**
+ * Faux contextual link
+ *
+ * Class for custom edit links to make them look like Drupal's contextual trigger icon (pencil)
+ */
+
+.faux-contextual-trigger {
+  display: block;
+  position: relative;
+  right: 6px;
+  float: right;
+  overflow: hidden;
+  margin: 0;
+  padding: 0 2px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  background-attachment: scroll;
+  /* Override the .focusable height: auto */
+  width: 26px !important;
+  /* Override the .focusable height: auto */
+  height: 26px !important;
+  text-indent: -9999px;
+  background-image: url('/core/misc/icons/bebebe/pencil.svg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 16px 16px;
+
+  &:hover {
+    background-image: url('/core/misc/icons/787878/pencil.svg');
+  }
+
+  &:focus {
+    outline: none;
+    background-image: url('/core/misc/icons/5181c6/pencil.svg');
+  }
+}
+
