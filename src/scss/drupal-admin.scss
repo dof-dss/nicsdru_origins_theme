@@ -188,13 +188,16 @@ a.tabs-secondary--tab-link.is-active {
   }
 }
 
-.path-user {
+.user-login-form {
+
   .form-item {
+    margin: .5em 0;
+  }
+
+  .form-actions {
     margin: 1em 0;
   }
-}
 
-.user-login-form {
   input[type='submit'] {
     @include adjust-font-size-to(16px, 4);
     background-color: $button;
