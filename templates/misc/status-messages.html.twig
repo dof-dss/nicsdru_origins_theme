@@ -37,11 +37,11 @@
         {% if messages|length > 1 %}
           <ul class="messages__list">
             {% for message in messages %}
-              <li class="messages__item">{{ message }}</li>
+              <li class="messages__item">{{ message | raw }}</li>
             {% endfor %}
           </ul>
         {% else %}
-          <div class="messages__item">{{ messages|first }}</div>
+          <div class="messages__item">{{ messages | first | raw }}</div>
         {% endif %}
         {% if type == 'error' %}
       </div>
