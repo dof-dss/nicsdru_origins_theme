@@ -119,9 +119,17 @@ $facet-text-color: null;
       padding: .4rem .6rem;
       margin: .6rem 0;
       text-decoration: none;
+      border: 0;
+      background-color: transparent;
+      box-shadow: none;
+      color: $link;
 
       .facet-item__value {
         text-decoration: underline;
+      }
+
+      &:visited {
+        color: $link;
       }
     }
 
@@ -173,6 +181,15 @@ $facet-text-color: null;
   &-summary-item--facet a {
     background-color: #cee4f6;
     color: #333;
+
+    &:visited {
+      color: #333;
+    }
+
+    &:focus {
+      outline: 3px solid #333;
+      outline-offset: -1px;
+    }
 
     .facet-item__value {
       text-decoration: none;
