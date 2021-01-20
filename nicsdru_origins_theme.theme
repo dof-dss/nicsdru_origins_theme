@@ -419,7 +419,8 @@ function nicsdru_origins_theme_preprocess_media(&$variables) {
       $file_mimetype = $file->getMimeType();
       if (array_key_exists($file->getMimeType(), $pretty_mimes)) {
         $variables['file_type'] = $pretty_mimes[$file_mimetype];
-      } else {
+      }
+      else {
         $variables['file_type'] = strtoupper(preg_replace('/^application\/(\w+)$/', '\1', $file_mimetype));
       }
     }
