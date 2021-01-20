@@ -393,11 +393,10 @@ function nicsdru_origins_theme_preprocess_media(&$variables) {
 
   if (!empty($variables['content']['field_media_file'])) {
     // Map file mimetypes to user friendly document types.
-    $file_mimetypes_pretty = [
+    $pretty_mimes = [
       'application/pdf' => 'Adobe PDF',
       'application/msword' => 'Microsoft Word',
       'application/vnd.openxmlformats-officedocument.wordprocessingml.document' => 'Microsoft Word',
-      'application/msword' => 'Microsoft Word Template',
       'application/vnd.ms-excel' => 'Microsoft Excel',
       'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' => 'Microsoft Excel',
       'application/vnd.ms-excel.sheet.macroEnabled.12' => 'Microsoft Excel (macros enabled)',
@@ -415,13 +414,14 @@ function nicsdru_origins_theme_preprocess_media(&$variables) {
 
     if (!empty($file)) {
       $variables['file_size'] = format_size($file->getSize(), \Drupal::languageManager()->getCurrentLanguage()->getId());
-      if (array_key_exists($file->getMimeType(), $file_mimetypes_pretty)) {
-        $variables['file_type'] = $file_mimetypes_pretty[$file->getMimeType()];
-      } else {
-        $variables['file_type'] = strtoupper(preg_replace('/^application\/(\w+)$/', '\1', $file->getMimeType()));
-      }
       $variables['file_url'] = $file->url();
       $variables['file_extension'] = pathinfo($file->url(), PATHINFO_EXTENSION);
+      $file_mimetype = $file->getMimeType();
+      if (array_key_exists($file->getMimeType(), $pretty_mimes)) {
+        $variables['file_type'] = $pretty_mimes[$file_mimetype];
+      } else {
+        $variables['file_type'] = strtoupper(preg_replace('/^application\/(\w+)$/', '\1', $file_mimetype));
+      }
     }
     $variables['media_langcode'] = $variables['media']->language()->getId();
   }
