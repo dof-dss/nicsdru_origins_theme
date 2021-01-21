@@ -36,7 +36,7 @@
 {% set file_classes = [
   'file-link',
   'file--ico',
-  'file--ico__' ~ file_type|lower,
+  'file--ico__' ~ file_extension|lower,
 ]
 %}
 {% set media_attributes = media_attributes.addClass(file_classes) %}
