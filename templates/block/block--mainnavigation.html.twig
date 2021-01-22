@@ -56,13 +56,12 @@
 
     {# Social links. #}
     {% if social_links %}
-    <aside class="nav-social">
-      <ul class="links">
+      <ul class="nav-social list--no-bullet">
         {% for link in social_links %}
           <li>{{ link }}</li>
         {% endfor %}
       </ul>
-    </aside>
+    </div>
     {% endif %}
   </div>
 </nav>
