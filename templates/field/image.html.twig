@@ -10,4 +10,4 @@
  * @see template_preprocess_image()
  */
 #}
-<img{{ attributes|without('alt') }} alt="{{ alt }}" />
+<img{{ attributes|without('alt')|without('caption') }} alt="{{ alt }}" />
