@@ -13,7 +13,7 @@
 $facet-btn-color: #333 !default;
 $facet-btn-hover: #111 !default;
 $facet-btn-focus-outline: #949494 !default;
-$facet-btn-active: #262626 !default;
+$facet-btn-active: #111 !default;
 // Use the sass lightness function to determine whether to use a light / dark text color in the facet btn.
 $facet-text-color: null;
 @if(lightness($facet-btn-color) < 50) {
@@ -58,13 +58,15 @@ $facet-text-color: null;
     &:focus {
       outline: 3px solid $facet-btn-focus-outline;
       outline-offset: -2px;
-      background-color: $facet-btn-color;
+      background-color: $facet-btn-hover;
       border-bottom-width: 2px;
     }
 
-    &:active {
+    &:active,
+    &.active {
       background-color: $facet-btn-active;
       border-color: $facet-btn-active;
+      text-decoration: none;
     }
 
     .ico-arrow-down {
@@ -125,7 +127,11 @@ $facet-text-color: null;
       color: $link;
 
       .facet-item__value {
-        text-decoration: underline;
+        text-decoration: 1px underline;
+      }
+
+      .facet-item__status {
+        flex-shrink: 0;
       }
 
       &:visited {
@@ -144,6 +150,7 @@ $facet-text-color: null;
 
     &__count {
       text-decoration: none;
+      white-space: nowrap;
     }
 
     &__status {
