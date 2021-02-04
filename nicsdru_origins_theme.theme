@@ -10,6 +10,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Link;
 use Drupal\Core\Url;
 use Drupal\Component\Utility\Html;
+use Drupal\file\FileInterface;
 
 /**
  * Implements hook_preprocess().
@@ -233,6 +234,22 @@ function nicsdru_origins_theme_preprocess_input(&$variables) {
 }
 
 /**
+ * Implements template_preprocess_file_link().
+ */
+function nicsdru_origins_theme_preprocess_file_link(array &$variables) {
+  if (!$variables['file'] instanceof FileInterface) {
+    return;
+  }
+
+  $file_extension = pathinfo($variables['file']->getFilename(), PATHINFO_EXTENSION);
+  $variables['attributes']->addClass([
+    'file-link',
+    'file--ico',
+    'file--ico__' . $file_extension
+  ]);
+}
+
+/**
  * Implements hook_preprocess_form().
  */
 function nicsdru_origins_theme_preprocess_form(array &$variables) {
@@ -393,22 +410,7 @@ function nicsdru_origins_theme_preprocess_media(&$variables) {
 
   if (!empty($variables['content']['field_media_file'])) {
     // Map file mimetypes to user friendly document types.
-    $pretty_mimes = [
-      'application/pdf' => 'Adobe PDF',
-      'application/msword' => 'Microsoft Word',
-      'application/vnd.openxmlformats-officedocument.wordprocessingml.document' => 'Microsoft Word',
-      'application/vnd.ms-excel' => 'Microsoft Excel',
-      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' => 'Microsoft Excel',
-      'application/vnd.ms-excel.sheet.macroEnabled.12' => 'Microsoft Excel (macros enabled)',
-      'application/vnd.ms-powerpoint' => 'Microsoft Powerpoint',
-      'application/vnd.openxmlformats-officedocument.presentationml.presentation' => 'Microsoft Powerpoint',
-      'application/vnd.oasis.opendocument.text' => 'OpenDocument text',
-      'application/vnd.oasis.opendocument.spreadsheet' => 'OpenDocument spreadsheet',
-      'application/vnd.oasis.opendocument.presentation' => 'OpenDocument presentation',
-      'application/zip' => 'ZIP archive',
-      'text/csv' => 'Comma-separated values',
-      'text/html' => 'HTML (HyperText Markup Language)',
-    ];
+    $pretty_mimes = \Drupal::service('origins_media.pretty_mime_types')->getMimeTypes();
 
     $file = &$variables['content']['field_media_file'][0]['#file'];
 
