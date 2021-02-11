@@ -27,7 +27,6 @@ authenticated-styles:
   css:
     theme:
       css/drupal-admin.css: { minified: true, weight: -5 }
-      css/drupal-diff.css: { minified: true, weight: -6 }
 
 # Provide a custom modernizer script
 nics-modernizr:
@@ -93,4 +92,3 @@ moderation-sidebar:
     - core/drupal
     - core/jquery
     - core/jquery.once
-

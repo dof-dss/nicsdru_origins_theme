@@ -36,7 +36,7 @@ libraries-override:
   diff/diff.general:
     css:
       theme:
-        css/diff.general.css: false
+        css/diff.general.css: css/drupal-diff.css
 
 libraries-extend:
   core/drupal.autocomplete:
