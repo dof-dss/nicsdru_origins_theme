@@ -93,6 +93,26 @@ $facet-text-color: null;
 
   &-list__links {
     margin: .1rem 0 .6rem;
+
+    // applied to nested list items.
+    .facet-item ul {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+
+      .facet-item {
+        position: relative;
+        padding: 0 0 0 1.2rem;
+        margin: 0;
+
+        &::before {
+          content: '-';
+          position: absolute;
+          left: .5em;
+          top: .5em;
+        }
+      }
+    }
   }
 
   &-item,
@@ -182,6 +202,10 @@ $facet-text-color: null;
         transform: rotate(130deg);
       }
     }
+  }
+
+  &-item a.is-active {
+    margin-left: 4px;
   }
 
   &-item a.is-active,
