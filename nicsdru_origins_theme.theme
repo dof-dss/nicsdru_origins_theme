@@ -10,6 +10,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Link;
 use Drupal\Core\Url;
 use Drupal\Component\Utility\Html;
+use Drupal\file\FileInterface;
 
 /**
  * Implements hook_preprocess().
@@ -233,6 +234,22 @@ function nicsdru_origins_theme_preprocess_input(&$variables) {
 }
 
 /**
+ * Implements template_preprocess_file_link().
+ */
+function nicsdru_origins_theme_preprocess_file_link(array &$variables) {
+  if (!$variables['file'] instanceof FileInterface) {
+    return;
+  }
+
+  $file_extension = pathinfo($variables['file']->getFilename(), PATHINFO_EXTENSION);
+  $variables['attributes']->addClass([
+    'file-link',
+    'file--ico',
+    'file--ico__' . $file_extension
+  ]);
+}
+
+/**
  * Implements hook_preprocess_form().
  */
 function nicsdru_origins_theme_preprocess_form(array &$variables) {
@@ -392,13 +409,22 @@ function nicsdru_origins_theme_preprocess_media(&$variables) {
   }
 
   if (!empty($variables['content']['field_media_file'])) {
+    // Map file mimetypes to user friendly document types.
+    $pretty_mimes = \Drupal::service('origins_media.pretty_mime_types')->getMimeTypes();
+
     $file = &$variables['content']['field_media_file'][0]['#file'];
-    // TODO: switch icon based on file type.
-    $variables['file_icon_url'] = '/sites/default/files/styles/thumbnail/public/media-icons/generic/generic.png';
+
     if (!empty($file)) {
       $variables['file_size'] = format_size($file->getSize(), \Drupal::languageManager()->getCurrentLanguage()->getId());
-      $variables['file_type'] = strtoupper(preg_replace('/^application\/(\w+)$/', '\1', $file->getMimeType()));
       $variables['file_url'] = $file->url();
+      $variables['file_extension'] = pathinfo($file->url(), PATHINFO_EXTENSION);
+      $file_mimetype = $file->getMimeType();
+      if (array_key_exists($file->getMimeType(), $pretty_mimes)) {
+        $variables['file_type'] = $pretty_mimes[$file_mimetype];
+      }
+      else {
+        $variables['file_type'] = strtoupper(preg_replace('/^application\/(\w+)$/', '\1', $file_mimetype));
+      }
     }
     $variables['media_langcode'] = $variables['media']->language()->getId();
   }
