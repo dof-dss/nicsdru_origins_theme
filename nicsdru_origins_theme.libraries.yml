@@ -92,3 +92,8 @@ moderation-sidebar:
     - core/drupal
     - core/jquery
     - core/jquery.once
+
+media_library_styles:
+  css:
+    theme:
+      css/3_components/field/file-link.css: { minified: true }
