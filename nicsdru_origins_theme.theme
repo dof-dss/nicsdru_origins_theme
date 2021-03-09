@@ -436,5 +436,3 @@ function nicsdru_origins_theme_preprocess_media(&$variables) {
     $variables['media_langcode'] = $variables['media']->language()->getId();
   }
 }
-
-
