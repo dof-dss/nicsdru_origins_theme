@@ -479,3 +479,18 @@ a.tabs-secondary--tab-link.is-active {
   }
 }
 
+.messages {
+  // Overrides to messages to make more compact when logged in.
+  background-size: 25px 25px;
+  background-position: .9rem .9rem;
+  padding: .9rem .9rem .9rem 4.8rem;
+  margin: .5em 0;
+
+  &:first-child {
+    margin-top: 1.5em;
+  }
+
+  &__item {
+    @include adjust-font-size-to(16px, 4);
+  }
+}
