@@ -157,6 +157,16 @@ $facet-text-color: null;
       &:visited {
         color: $link;
       }
+
+      &:focus {
+        background-color: $link;
+        color: #fff;
+        outline: 0;
+
+        > * {
+          text-decoration: none;
+        }
+      }
     }
 
     &-summary-item--facet a {
@@ -169,8 +179,10 @@ $facet-text-color: null;
     }
 
     &__count {
+      display: inline-block;
       text-decoration: none;
       white-space: nowrap;
+      padding-right: .4rem;
     }
 
     &__status {
@@ -220,6 +232,7 @@ $facet-text-color: null;
     &:focus {
       outline: 3px solid #333;
       outline-offset: -1px;
+      background-color: #cee4f6;
     }
 
     .facet-item__value {
@@ -255,6 +268,46 @@ $facet-text-color: null;
       padding: 0;
       display: flex;
       flex-flow: row wrap;
+    }
+  }
+}
+
+.facets-soft-limit-link {
+  display: inline-block;
+  @include adjust-font-size-to(16px, 4);
+  padding: .4rem 4rem .4rem .8rem;
+  position: relative;
+
+  &:focus {
+    outline: 0;
+    background-color: $link;
+    color: #fff;
+    text-decoration: none;
+  }
+
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: .4rem;
+    right: .4rem;
+    width: 2.4rem;
+    height: 2.4rem;
+    border: 1px solid $charcoal;
+    background: #fff url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2025%2015%22%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%20.st0%7Bfill%3A%23333333%3Bfill-rule%3Aevenodd%3Bclip-rule%3Aevenodd%3B%7D%20%3C%2Fstyle%3E%3Cpath%20class%3D%22st0%22%20d%3D%22M12.5%200L0%2012l3%203%209.5-10L22%2015l3-3L12.5%200z%22%2F%3E%3C%2Fsvg%3E%0A") no-repeat scroll center center/12px auto;
+    transform: rotate(180deg);
+  }
+
+  &:hover::after,
+  &:focus::after {
+    border-color: #fff;
+    background: $link url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2025%2015%22%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%20.st0%7Bfill%3A%23ffffff%3Bfill-rule%3Aevenodd%3Bclip-rule%3Aevenodd%3B%7D%20%3C%2Fstyle%3E%3Cpath%20class%3D%22st0%22%20d%3D%22M12.5%200L0%2012l3%203%209.5-10L22%2015l3-3L12.5%200z%22%2F%3E%3C%2Fsvg%3E%0A") no-repeat scroll center center/12px auto;
+  }
+
+  &.open {
+
+    &::after {
+      transform: rotate(0deg);
     }
   }
 }
