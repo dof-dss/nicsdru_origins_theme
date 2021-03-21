@@ -6,6 +6,9 @@
  */
 @import '../../init';
 
+// <div class="ajax-spinner">
+//
+
 .ajax-spinner {
 
   > div {
@@ -48,7 +51,7 @@
       font-size: 1em;
       line-height: 1em;
       color: $charcoal;
-      margin-right: 3px;
+      margin: 0 3px;
     }
   }
 
