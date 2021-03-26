@@ -53,73 +53,109 @@
   }
 }
 
-.file--ico {
+@mixin file-icons($scale: 1, $margin: 0) {
+  $icon-scale: $scale;
+  $icon-row: 0;
+  $icon-width: 35px * $icon-scale;
+  $icon-height: 50px * $icon-scale;
+  $icon-margin: $margin;
+  $icons: resolve('nigov-file-icons.svg');
+  $icon-size-x: 785px * $icon-scale;
+  $icon-size-y: 105px * $icon-scale;
+  $icon-column-size: 75px * $icon-scale;
+  $icon-row-size: 55px * $icon-scale;
 
   &::before {
     content: '';
     display: inline-block;
-    width: 35px;
-    height: 50px;
-    background: resolve('nigov-file-icons.svg') -750px 0 / auto no-repeat;
+    width: $icon-width;
+    height: $icon-height;
+    margin: $icon-margin;
+    background: transparent $icons no-repeat;
+    background-position-x: -($icon-column-size * 10);
+    background-position-y: -($icon-row-size * $icon-row);
+    background-size: $icon-size-x $icon-size-y;
   }
 
   &__word::before,
   &__doc::before,
   &__docx::before,
   &__dot::before {
-    background-position-x: 0;
+    background-position-x: -($icon-column-size * 0);
   }
 
   &__pdf::before {
-    background-position-x: -75px;
+    background-position-x: -($icon-column-size * 1);
   }
 
   &__excel::before,
   &__xls::before,
   &__xlsx::before,
   &__xlsm::before {
-    background-position-x: -150px;
+    background-position-x: -($icon-column-size * 2);
   }
 
   &__powerpoint::before,
   &__ppt::before,
   &__pptx::before,
   &__pptm::before {
-    background-position-x: -225px;
+    background-position-x: -($icon-column-size * 3);
   }
 
   &__opendocument-text::before,
   &__odt::before {
-    background-position-x: -300px;
+    background-position-x: -($icon-column-size * 4);
   }
 
   &__opendocument-spreadsheet::before,
   &__ods::before {
-    background-position-x: -375px;
+    background-position-x: -($icon-column-size * 5);
   }
 
   &__opendocument-presentation::before,
   &__odp::before {
-    background-position-x: -450px;
+    background-position-x: -($icon-column-size * 6);
   }
 
   &__csv::before {
-    background-position-x: -525px;
+    background-position-x: -($icon-column-size * 7);
   }
 
   &__zip::before {
-    background-position-x: -600px;
+    background-position-x: -($icon-column-size * 8);
   }
 
   &__html::before {
-    background-position-x: -675px;
+    background-position-x: -($icon-column-size * 9);
   }
 }
 
-.file--media-library-preview {
-  text-align: center;
-  background-color: #ebebeb;
-  padding: 5px;
+.file--ico {
+  @include file-icons(1);
 }
+
+.media-library-views-form {
+
+  .file--media-library-preview {
+    text-align: center;
+  }
+
+  .media-library-item--grid {
+
+    .file--media-library-preview {
+      background-color: #ebebeb;
+      padding: 5px;
+    }
+
+    .file--ico {
+      @include file-icons(2, 35px 0);
+    }
+
+    .media-library-item__status {
+      top: 
+    }
+  }
+}
+
 
 
