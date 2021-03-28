@@ -63,6 +63,27 @@ function nicsdru_origins_theme_page_attachments_alter(array &$page) {
     }
   }
 
+  // Disable Google Analytics tracking is option is set.
+  if (theme_get_setting('ga_tracking_disabled')) {
+
+    $ga_account = \Drupal::config('google_analytics.settings')->get('account');
+
+    if ($ga_account) {
+      $page['#attached']['html_head'][] = [
+        [
+          '#tag' => 'script',
+          '#attributes' => [
+            'type' => 'text/javascript',
+          ],
+          '#value' => "window['ga-disable-" . $ga_account . "'] = true;",
+        ],
+        'ga_tracking_options',
+      ];
+    }
+
+
+  }
+
   return $page;
 }
 
