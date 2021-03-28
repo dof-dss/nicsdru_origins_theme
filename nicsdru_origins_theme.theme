@@ -358,6 +358,29 @@ function nicsdru_origins_theme_form_system_theme_settings_alter(&$form, FormStat
     '#default_value' => theme_get_setting('social_links_rss'),
     '#placeholder' => 'Enter a URL, such as https://example.com/rss.xml',
   ];
+
+  // Settings to disable Google Analytics tracking.
+  if (\Drupal::moduleHandler()->moduleExists('google_analytics')) {
+
+    $ga_account = \Drupal::config('google_analytics.settings')->get('account');
+
+    if (!empty($ga_account)) {
+
+      $form['ga_tracking_options'] = [
+        '#type' => 'details',
+        '#title' => t('Google Analytics tracking'),
+        '#open' => TRUE,
+      ];
+
+      $form['ga_tracking_options']['ga_tracking_disabled'] = [
+        '#type' => 'checkbox',
+        '#title' => t('Disable all tracking'),
+        '#default_value' => theme_get_setting('ga_tracking_disabled'),
+      ];
+    }
+
+  }
+
 }
 
 /**
