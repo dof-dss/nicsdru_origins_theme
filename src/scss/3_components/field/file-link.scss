@@ -142,6 +142,17 @@
 
   .media-library-item--grid {
 
+    .field--name-thumbnail {
+      background-color: #000;
+
+      img {
+        height: 110px;
+        object-fit: contain;
+        object-position: center center;
+        margin: 35px 0;
+      }
+    }
+
     .file--media-library-preview {
       background-color: #ebebeb;
       padding: 5px;
@@ -152,8 +163,28 @@
     }
 
     .media-library-item__status {
-      top: 
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      padding: 0 5px;
+      color: red;
+      background: rgba(255, 255, 255, .85);
+      box-shadow: 0px 3px 9px -3px rgba(0, 0, 0, .3);
+      font-size: 15px;
+      font-style: normal;
+      font-weight: bold;
+      width: auto;
+      height: auto;
+      box-sizing: border-box;
+      line-height: 25px;
+      text-align: center;
+      transform: translateX(-50%) translateY(-100%);
+      text-transform: uppercase;
     }
+  }
+
+  .views-field-thumbnail__target-id {
+    text-align: center;
   }
 }
 
