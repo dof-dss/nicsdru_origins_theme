@@ -69,6 +69,13 @@ function nicsdru_origins_theme_page_attachments_alter(array &$page) {
     $ga_account = \Drupal::config('google_analytics.settings')->get('account');
 
     if ($ga_account) {
+      if (theme_get_setting('ga_tracking_disabled_eu')) {
+        $script = "if(document.cookie.valueOf('cookie-agreed') != 'cookie-agreed=2') {
+          window['ga-disable-" . $ga_account . "'] = true; console.log('block')}";
+      }
+      else {
+        $script = "window['ga-disable-" . $ga_account . "'] = true;";
+      }
 
       array_unshift($page['#attached']['html_head'] , [
         [
@@ -76,7 +83,7 @@ function nicsdru_origins_theme_page_attachments_alter(array &$page) {
           '#attributes' => [
             'type' => 'text/javascript',
           ],
-          '#value' => "window['ga-disable-" . $ga_account . "'] = true;",
+          '#value' => $script,
         ],
         'ga_tracking_options',
       ]);
