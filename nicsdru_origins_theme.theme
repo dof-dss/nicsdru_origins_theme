@@ -63,7 +63,9 @@ function nicsdru_origins_theme_page_attachments_alter(array &$page) {
     }
   }
 
-  // Disable Google Analytics tracking is option is set.
+  // Disable Google Analytics tracking if option is set in the theme, an
+  // analytics ID is present and optionally if the EU Cookie Compliance module
+  // is installed and options set in the theme.
   if (theme_get_setting('ga_tracking_disabled')) {
     // Fetch the account id from the Google Analytics module config.
     $ga_account = \Drupal::config('google_analytics.settings')->get('account');
@@ -88,9 +90,7 @@ function nicsdru_origins_theme_page_attachments_alter(array &$page) {
       array_unshift($page['#attached']['html_head'], [
         [
           '#tag' => 'script',
-          '#attributes' => [
-            'type' => 'text/javascript',
-          ],
+          '#attributes' => ['type' => 'text/javascript'],
           '#value' => $script,
         ],
         'ga_tracking_options',
