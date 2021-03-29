@@ -65,19 +65,27 @@ function nicsdru_origins_theme_page_attachments_alter(array &$page) {
 
   // Disable Google Analytics tracking is option is set.
   if (theme_get_setting('ga_tracking_disabled')) {
-
+    // Fetch the account id from the Google Analytics module config.
     $ga_account = \Drupal::config('google_analytics.settings')->get('account');
 
+    // If Google Analytics tracking option is set in theme and EU Cookie
+    // Compliance cookie is set to anything other than 2 (agree) then disable
+    // analytics.
+    // See https://developers.google.com/analytics/devguides/collection/analyticsjs/user-opt-out.
     if ($ga_account) {
       if (theme_get_setting('ga_tracking_disabled_eu')) {
         $script = "if(document.cookie.valueOf('cookie-agreed') != 'cookie-agreed=2') {
           window['ga-disable-" . $ga_account . "'] = true; console.log('block')}";
       }
       else {
+        // By default block Google Analytics.
         $script = "window['ga-disable-" . $ga_account . "'] = true;";
       }
 
-      array_unshift($page['#attached']['html_head'] , [
+      // The 'ga-disable' call must come before the Google Analytics is
+      // initialised, using array_unshift to add the script to the first part
+      // of the HTML head.
+      array_unshift($page['#attached']['html_head'], [
         [
           '#tag' => 'script',
           '#attributes' => [
