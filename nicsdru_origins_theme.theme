@@ -63,6 +63,41 @@ function nicsdru_origins_theme_page_attachments_alter(array &$page) {
     }
   }
 
+  // Disable Google Analytics tracking if option is set in the theme, an
+  // analytics ID is present and optionally if the EU Cookie Compliance module
+  // is installed and options set in the theme.
+  if (theme_get_setting('ga_tracking_disabled')) {
+    // Fetch the account id from the Google Analytics module config.
+    $ga_account = \Drupal::config('google_analytics.settings')->get('account');
+
+    // If Google Analytics tracking option is set in theme and EU Cookie
+    // Compliance cookie is set to anything other than 2 (agree) then disable
+    // analytics.
+    // See https://developers.google.com/analytics/devguides/collection/analyticsjs/user-opt-out.
+    if ($ga_account) {
+      if (theme_get_setting('ga_tracking_disabled_eu')) {
+        $script = "if(document.cookie.valueOf('cookie-agreed') != 'cookie-agreed=2') {
+          window['ga-disable-" . $ga_account . "'] = true; console.log('block')}";
+      }
+      else {
+        // By default block Google Analytics.
+        $script = "window['ga-disable-" . $ga_account . "'] = true;";
+      }
+
+      // The 'ga-disable' call must come before the Google Analytics is
+      // initialised, using array_unshift to add the script to the first part
+      // of the HTML head.
+      array_unshift($page['#attached']['html_head'], [
+        [
+          '#tag' => 'script',
+          '#attributes' => ['type' => 'text/javascript'],
+          '#value' => $script,
+        ],
+        'ga_tracking_options',
+      ]);
+    }
+  }
+
   return $page;
 }
 
@@ -358,6 +393,41 @@ function nicsdru_origins_theme_form_system_theme_settings_alter(&$form, FormStat
     '#default_value' => theme_get_setting('social_links_rss'),
     '#placeholder' => 'Enter a URL, such as https://example.com/rss.xml',
   ];
+
+  // Settings to disable Google Analytics tracking.
+  if (\Drupal::moduleHandler()->moduleExists('google_analytics')) {
+
+    $ga_account = \Drupal::config('google_analytics.settings')->get('account');
+
+    if (!empty($ga_account)) {
+
+      $form['ga_tracking_options'] = [
+        '#type' => 'details',
+        '#title' => t('Google Analytics tracking'),
+        '#open' => TRUE,
+      ];
+
+      $form['ga_tracking_options']['ga_tracking_disabled'] = [
+        '#type' => 'checkbox',
+        '#title' => t('Disable Google Analytics tracking'),
+        '#default_value' => theme_get_setting('ga_tracking_disabled'),
+      ];
+
+      $form['ga_tracking_options']['ga_tracking_disabled_eu'] = [
+        '#type' => 'checkbox',
+        '#title' => t('Only disable if EU Cookie Compliance consent is not given'),
+        '#default_value' => theme_get_setting('ga_tracking_disabled_eu'),
+      ];
+
+      // Prevent the setting of the EU Cookie Compliance option if that module
+      // is not installed.
+      if (\Drupal::moduleHandler()->moduleExists('eu_cookie_compliance') === FALSE) {
+        $form['ga_tracking_options']['ga_tracking_disabled_eu']['#disabled'] = TRUE;
+        $form['ga_tracking_options']['ga_tracking_disabled_eu']['#default_value'] = FALSE;
+        $form['ga_tracking_options']['ga_tracking_disabled_eu']['#title'] .= t(' (EU Cookie Compliance module is NOT installed)');
+      }
+    }
+  }
 }
 
 /**
