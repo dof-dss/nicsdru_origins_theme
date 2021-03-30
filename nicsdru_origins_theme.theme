@@ -413,7 +413,6 @@ function nicsdru_origins_theme_form_system_theme_settings_alter(&$form, FormStat
         '#default_value' => theme_get_setting('ga_tracking_disabled'),
       ];
 
-
       $form['ga_tracking_options']['ga_tracking_disabled_eu'] = [
         '#type' => 'checkbox',
         '#title' => t('Only disable if EU Cookie Compliance consent is not given'),
@@ -429,7 +428,6 @@ function nicsdru_origins_theme_form_system_theme_settings_alter(&$form, FormStat
       }
     }
   }
-
 }
 
 /**
