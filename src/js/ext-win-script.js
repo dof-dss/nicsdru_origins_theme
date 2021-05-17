@@ -12,20 +12,28 @@
   Drupal.behaviors.nicsdruOriginsExtWin = {
     attach: function attach (context) {
       var $extLinkText = Drupal.t('external link opens in a new window / tab'),
-        $intLinkText = Drupal.t('opens in a new window / tab');
+          $intLinkText = Drupal.t('opens in a new window / tab');
+      var $extLinkMarkup = '<span class="visually-hidden">(' + $extLinkText + ')</span><svg aria-hidden="true" class="ico ico-elink"><title>' + $extLinkText + '</title><use xlink:href="#elink"></use></svg>';
 
-      // External links - add identifiers.
-      $("#main-content a[href*='http://'], #main-content a[href*='https://'], #main-content a[href^='//']", context)
+      $("#main-content a[href^='http'], #main-content a[href^='//']", context)
+        .filter(function () {
+          return this.hostname && this.hostname !== location.hostname;
+        })
+        .not('a.no-ext-icon, .social-links a')
         .once('elink').each(function () {
-        $(this).not('a.no-ext-icon, a:has(img), .social-links a')
-          .filter(function () {
-            return this.hostname && this.hostname !== location.hostname;
-          })
-          .append('<span class="visually-hidden">(' + $extLinkText + ')</span><svg aria-hidden="true" class="ico ico-elink"><title>' + $extLinkText + '</title><use xlink:href="#elink"></use></svg>')
-          .attr('title', $extLinkText)
-          .attr('target', '_blank')
-          .attr('rel', 'noopener noreferrer');
-      });
+          // Set attributes.
+          $(this)
+            .attr('target', '_blank')
+            .attr('rel', 'noopener noreferrer');
+
+          // Add the icon.
+          // If the link is a card, append the icon to the .card__title.
+          if ($(this).find('.card__title').length) {
+            $(this).find('.card__title').append($extLinkMarkup);
+          } else {
+            $(this).append($extLinkMarkup);
+          }
+        });
 
       // Internal links with data-ext-url - turn them into external links.
       $("#main-content a[data-ext-type^='External']", context).once('elink').each(function () {
