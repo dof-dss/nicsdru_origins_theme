@@ -15,29 +15,35 @@
        */
       // eslint-disable-next-line one-var,no-var
       $('.toggle-list', context).once('toggleBtn').each(function () {
-        var $relatedArtList = $(this).children('ul'),
-          maxRel = parseInt($(this).attr('data-toggle-length'), 10 || 7),
-          relTotal = $relatedArtList.children('li').length,
-          available = relTotal - maxRel,
-          relToggleText = Drupal.t('Show @num more', {'@num': available});
+        let maxItems = parseInt($(this).attr('data-toggle-length'), 10);
+        if (isNaN(maxItems)) maxItems = 7;
 
-        if (relTotal > maxRel) {
-          $relatedArtList.attr({ id: 'toggle-menu', 'aria-live': 'polite' });
+        let $toggleList = $(this).find('ul'),
+            itemCount = $toggleList.children('li').length,
+            toggleItemCount = itemCount - maxItems,
+            toggleBtnText = Drupal.t('Show @num more', {'@num': toggleItemCount}),
+            $toggle = $(
+              '<a href="#" id="more-toggle" class="toggle-list__toggle" role="button" aria-pressed="false" aria-controls="toggle-menu">' +
+                toggleBtnText +
+                '<svg aria-hidden="true" class="ico ico-arrow-down"><use xlink:href="#arrow"></use></svg>' +
+              '</a>'
+            );
 
-          $relatedArtList.children('li:nth-child(n+' + (maxRelated + 1) + ')').toggle();
-
-          $relatedArtList.after('<a href="#" id="related-toggle" class="toggle-btn" role="button" aria-pressed="false" aria-controls="toggle-menu">' + relToggleText + '<svg aria-hidden="true" class="ico ico-arrow-down"><use xlink:href="#arrow"></use></svg></a>');
-
-          $('#related-toggle').click(function() {
-            $relatedArtList
+        $toggle.click(function(event) {
+          event.preventDefault();
+          $toggleList
             // eslint-disable-next-line
-              .children('li:nth-child(n+' + (maxRelated + 1) + ')')
-              .toggle('slow');
-            $(this)
-              .attr('aria-pressed', 'true')
-              .hide();
-            return false;
-          });
+            .children('li:nth-child(n+' + (maxItems + 1) + ')')
+            .toggle('slow');
+          $(this)
+            .attr('aria-pressed', 'true')
+            .hide();
+        });
+
+        if (itemCount > maxItems) {
+          $toggleList.attr({ id: 'toggle-menu', 'aria-live': 'polite' });
+          $toggleList.children('li:nth-child(n+' + (maxItems + 1) + ')').toggle();
+          $toggleList.after($toggle);
         }
       });
     },
