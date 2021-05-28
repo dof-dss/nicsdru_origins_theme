@@ -15,7 +15,6 @@
        */
       // eslint-disable-next-line one-var,no-var
       $('.toggle-list', context).once('toggleBtn').each(function () {
-
         let maxItems = parseInt($(this).attr('data-toggle-length'), 10);
         if (isNaN(maxItems)) maxItems = 7;
 
@@ -36,9 +35,7 @@
             // eslint-disable-next-line
             .children('li:nth-child(n+' + (maxItems + 1) + ')')
             .toggle('slow');
-          $(this)
-            .attr('aria-pressed', 'true')
-            .hide();
+          $(this).attr('aria-pressed', 'true');
         });
 
         if (itemCount > maxItems) {
