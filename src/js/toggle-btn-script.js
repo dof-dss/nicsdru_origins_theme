@@ -35,7 +35,9 @@
             // eslint-disable-next-line
             .children('li:nth-child(n+' + (maxItems + 1) + ')')
             .toggle('slow');
-          $(this).attr('aria-pressed', 'true');
+          $(this)
+            .attr('aria-pressed', 'true')
+            .hide();
         });
 
         if (itemCount > maxItems) {
