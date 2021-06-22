@@ -77,7 +77,7 @@ function nicsdru_origins_theme_page_attachments_alter(array &$page) {
     if ($ga_account) {
       if (theme_get_setting('ga_tracking_disabled_eu')) {
         $script = "if(document.cookie.valueOf('cookie-agreed') != 'cookie-agreed=2') {
-          window['ga-disable-" . $ga_account . "'] = true; console.log('block')}";
+          window['ga-disable-" . $ga_account . "'] = true;}";
       }
       else {
         // By default block Google Analytics.
