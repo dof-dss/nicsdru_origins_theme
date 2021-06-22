@@ -419,14 +419,18 @@ function nicsdru_origins_theme_form_system_theme_settings_alter(&$form, FormStat
         '#default_value' => theme_get_setting('ga_tracking_disabled_eu'),
       ];
 
-      $form['ga_tracking_options']['help'] = [
+      $form['ga_tracking_options']['help_introduction'] = [
+        '#markup' => '<hr><h3>Recommended settings</h3>',
+      ];
+
+      $form['ga_tracking_options']['help_table'] = [
         '#type' => 'table',
-        '#caption' => t('Recommended settings'),
         '#header' => [t('Setting'), t('Production environment'), t('Development environment'),],
         '#rows' => [
           [t('Disable Google Analytics tracking'), t('Checked'), t('Checked')],
           [t('Only disable if EU Cookie Compliance consent is not given'), t('Checked'), t('Unchecked')]
         ],
+        '#attributes' => ['style' => ['width: 50%']]
       ];
 
       // Prevent the setting of the EU Cookie Compliance option if that module
