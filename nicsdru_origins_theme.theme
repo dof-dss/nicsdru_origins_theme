@@ -418,13 +418,26 @@ function nicsdru_origins_theme_form_system_theme_settings_alter(&$form, FormStat
         '#title' => t('Disable tracking for'),
         '#options' => [0 => t('Everyone'), 1 => t('People who have declined cookies')],
         '#default_value' => theme_get_setting('ga_tracking_disabled_eu'),
+        '#attributes' => ['class' => ['container-inline']],
+        '#states' => [
+          'visible' => [
+            ':input[name="ga_tracking_disabled"]' => ['checked' => TRUE],
+          ],
+        ],
       ];
 
-      $form['ga_tracking_options']['help_introduction'] = [
-        '#markup' => '<hr><h3>Recommended settings</h3>',
+      $form['ga_tracking_options']['help'] = [
+        '#type' => 'details',
+        '#title' => t('Recommended settings'),
+        '#open' => TRUE,
+        '#states' => [
+          'visible' => [
+            ':input[name="ga_tracking_disabled"]' => ['checked' => TRUE],
+          ],
+        ],
       ];
 
-      $form['ga_tracking_options']['help_table'] = [
+      $form['ga_tracking_options']['help']['table'] = [
         '#type' => 'table',
         '#header' => [t('Setting'), t('Production environment'), t('Development environment'),],
         '#rows' => [
