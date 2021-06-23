@@ -70,17 +70,23 @@ function nicsdru_origins_theme_page_attachments_alter(array &$page) {
     // Fetch the account id from the Google Analytics module config.
     $ga_account = \Drupal::config('google_analytics.settings')->get('account');
 
-    // If Google Analytics tracking option is set in theme and EU Cookie
-    // Compliance cookie is set to anything other than 2 (agree) then disable
-    // analytics.
+    // If Google Analytics tracking option is set in theme process for
+    // opt-out/disable tracking.
     // See https://developers.google.com/analytics/devguides/collection/analyticsjs/user-opt-out.
     if ($ga_account) {
       if (theme_get_setting('ga_tracking_disabled_eu')) {
-        $script = "if(document.cookie.valueOf('cookie-agreed') != 'cookie-agreed=2') {
-          window['ga-disable-" . $ga_account . "'] = true; console.log('block')}";
+        // First check if the cookie-agreed key has been set, if it hasn't then
+        // disable tracking. If the cookie-agreed key has been set to anything
+        // apart from the 'agree to cookies' value, disable tracking.
+        $script = "var cookie_index = document.cookie.indexOf('cookie-agreed=')
+          if (cookie_index === -1) {
+            window['ga-disable-" . $ga_account . "'] = true;
+          } else if (document.cookie.substring(cookie_index + 14, cookie_index + 15) != '2') {
+            window['ga-disable-" . $ga_account . "'] = true;
+        }";
       }
       else {
-        // By default block Google Analytics.
+        // By default disable tracking (the 'disable for everyone' option).
         $script = "window['ga-disable-" . $ga_account . "'] = true;";
       }
 
@@ -414,17 +420,57 @@ function nicsdru_origins_theme_form_system_theme_settings_alter(&$form, FormStat
       ];
 
       $form['ga_tracking_options']['ga_tracking_disabled_eu'] = [
-        '#type' => 'checkbox',
-        '#title' => t('Only disable if EU Cookie Compliance consent is not given'),
-        '#default_value' => theme_get_setting('ga_tracking_disabled_eu'),
+        '#type' => 'radios',
+        '#title' => t('Disable tracking for'),
+        '#options' => [
+          0 => t('Everyone'),
+          1 => t('People who have declined cookies'),
+        ],
+        '#default_value' => theme_get_setting('ga_tracking_disabled_eu') ?? 0,
+        '#attributes' => ['class' => ['container-inline']],
+        '#states' => [
+          'visible' => [
+            ':input[name="ga_tracking_disabled"]' => ['checked' => TRUE],
+          ],
+        ],
       ];
 
-      // Prevent the setting of the EU Cookie Compliance option if that module
-      // is not installed.
+      $form['ga_tracking_options']['help'] = [
+        '#type' => 'details',
+        '#title' => t('Recommended settings'),
+        '#open' => TRUE,
+        '#states' => [
+          'visible' => [
+            ':input[name="ga_tracking_disabled"]' => ['checked' => TRUE],
+          ],
+        ],
+      ];
+
+      $form['ga_tracking_options']['help']['table'] = [
+        '#type' => 'table',
+        '#header' => [
+          t('Setting'),
+          t('Production environment'),
+          t('Development environment'),
+        ],
+        '#rows' => [
+          [
+            t('Disable tracking for'),
+            t('People who have declined cookies'),
+            t('Everyone'),
+          ],
+        ],
+        '#attributes' => [
+          'style' => ['width: 50%'],
+        ],
+      ];
+
+      // Prevent the setting of the 'Disable tracking for' option if the
+      // EU Cookie Compliance module is not installed.
       if (\Drupal::moduleHandler()->moduleExists('eu_cookie_compliance') === FALSE) {
         $form['ga_tracking_options']['ga_tracking_disabled_eu']['#disabled'] = TRUE;
         $form['ga_tracking_options']['ga_tracking_disabled_eu']['#default_value'] = FALSE;
-        $form['ga_tracking_options']['ga_tracking_disabled_eu']['#title'] .= t(' (EU Cookie Compliance module is NOT installed)');
+        $form['ga_tracking_options']['ga_tracking_disabled_eu']['#description'] = t('(NOTICE: Install and configure EU Cookie Compliance module to enable this feature)');
       }
     }
   }
