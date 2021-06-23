@@ -306,9 +306,19 @@ a.tabs-secondary--tab-link.is-active {
     .ui-dialog-titlebar-close {
       width: 30px;
       height: 30px;
+      background-color: transparent;
+      border: 0;
+      margin: 0;
+      padding: 0;
       top: 50%;
       transform: translateY(-50%);
       right: 4px;
+
+      &:focus,
+      &:hover {
+        border: 0;
+        outline: 2px solid #f6f6f6;
+      }
     }
   }
 }
