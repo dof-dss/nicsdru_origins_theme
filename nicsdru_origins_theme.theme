@@ -459,11 +459,12 @@ function nicsdru_origins_theme_form_system_theme_settings_alter(&$form, FormStat
         ],
       ];
 
-      // Prevent the setting of the EU Cookie Compliance option if that module
-      // is not installed.
+      // Prevent the setting of the 'Disable tracking for' option if the
+      // EU Cookie Compliance module is not installed.
       if (\Drupal::moduleHandler()->moduleExists('eu_cookie_compliance') === FALSE) {
         $form['ga_tracking_options']['ga_tracking_disabled_eu']['#disabled'] = TRUE;
         $form['ga_tracking_options']['ga_tracking_disabled_eu']['#default_value'] = FALSE;
+        $form['ga_tracking_options']['ga_tracking_disabled_eu']['#description'] = t('(NOTICE: Install and configure EU Cookie Compliance module to enable this feature)');
       }
     }
   }
