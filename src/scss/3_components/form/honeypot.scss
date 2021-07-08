@@ -1,0 +1,25 @@
+/*
+ * @file
+ * Provides the styling for honeypot component.
+ */
+
+// Honeypots
+//
+// The site incorporates a number of different techniques to prevent automated submission of forms, trying to insure that
+// the user is legitimate and not for instance a bot. A common way of doing this is by providing an additional input
+// which a legitimate human user will know to ignore whereas an automated response will try and fill and take appropriate
+// action as a result. To help ensure that a bot will actually popular this 'honeypot' we want to visually hide the
+// given form elements, but we also want to use a unique class for this purpose in order to lessen the likelihood of
+// detection of the trap. To this end the `.for-pooh-bear` class replicates the `.visually-hidden` rule which is a
+// Drupal core rule. We also use js to prevent accessibility issues for users with assistive technologies to prevent the
+// form element from being tabbed into.
+//
+// Style guide: components.honeypots
+.for-pooh-bear {
+  position: absolute !important;
+  overflow: hidden;
+  clip: rect(1px,1px,1px,1px);
+  width: 1px;
+  height: 1px;
+  word-wrap: normal;
+}
