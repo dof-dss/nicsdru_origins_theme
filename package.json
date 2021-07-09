@@ -69,6 +69,7 @@
     "js-compile-toggle-lib": "mkdir -p js && uglifyjs src/js/toggle-btn-script.js -o js/toggle-btn-script.js",
     "js-compile-table-xscroll": "mkdir -p js && uglifyjs src/js/table-xscroll.js -o js/table-xscroll.js",
     "js-compile-moderation-sidebar-lib": "mkdir -p js && uglifyjs src/js/moderation-sidebar.js -o js/moderation-sidebar.js",
+    "js-compile-honeypot": "mkdir -p js && uglifyjs src/js/honeypot.js -o js/honeypot.js",
     "––––––– CSS SCRIPTS": "–––––––––––––",
     "css": "npm-run-all --sequential scss-dev css-post",
     "css-lint": "sass-lint -c $npm_package_config_sasslintConfig $npm_package_config_scssfile -v -q",

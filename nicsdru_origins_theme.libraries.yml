@@ -7,6 +7,7 @@ global-styling:
     # The SMACSS category, "component", is loaded after "base and layout" styles.
     component:
       css/3_components/field/file-link.css: { minified: true }
+      css/3_components/form/honeypot.css: { minified: true }
     theme:
       css/3_components/navigation/pager.css: { minified: true }
       css/3_components/content/tables.css: { minified: true }
@@ -14,6 +15,7 @@ global-styling:
     js/ext-win-script.js: { minified: true }
     js/empty-tags-script.js: { minified: true }
     js/table-xscroll.js: { minified: true }
+    js/honeypot.js: { minified: true }
   dependencies:
     - core/drupal
     - core/jquery
