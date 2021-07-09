@@ -1,0 +1,1 @@
+(function($,Drupal){Drupal.behaviors.nicsdruOriginsHoneypot={attach:function attach(context){var $nodewebform=$(".webform-submission-form");$(".for-pooh-bear",$nodewebform).find("input, select, textarea").attr("tabindex","-1").prop("disabled",true)}}})(jQuery,Drupal);
