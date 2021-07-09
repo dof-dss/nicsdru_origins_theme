@@ -9,17 +9,13 @@
 (function ($, Drupal) {
   Drupal.behaviors.nicsdruOriginsHoneypot = {
     attach: function attach (context) {
-      var $nodewebform = $('.webform-submission-form');
-
       // Honey pot elements for bots
       // Remove from tab order and disable
-      $('.for-pooh-bear', $nodewebform)
-        .find('input, select, textarea')
-        .attr("tabindex", "-1")
-        .click(function() {
-          $(this).attr('placeholder', 'Do not provide any extra comments - please leave blank');
-          $(this).attr('title', 'Do not provide any extra comments - please leave blank');
-        });
+      $('.webform-submission-form .for-pooh-bear', context).once('honeyPot').each(function () {
+        $(this).find('input, select, textarea')
+          .attr("tabindex", "-1")
+          .prop("disabled", true);
+      });
     }
   };
 })(jQuery, Drupal);
