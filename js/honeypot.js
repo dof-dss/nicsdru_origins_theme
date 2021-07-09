@@ -1,0 +1,1 @@
+(function($,Drupal){Drupal.behaviors.nicsdruOriginsHoneypot={attach:function attach(context){$(".webform-submission-form .for-pooh-bear",context).once("honeyPot").each(function(){$(this).find("input, select, textarea").attr("tabindex","-1").prop("disabled",true)})}}})(jQuery,Drupal);
