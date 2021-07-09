@@ -16,7 +16,10 @@
       $('.for-pooh-bear', $nodewebform)
         .find('input, select, textarea')
         .attr("tabindex", "-1")
-        .prop("disabled", true);
+        .click(function() {
+          $(this).attr('placeholder', 'Do not provide any extra comments - please leave blank');
+          $(this).attr('title', 'Do not provide any extra comments - please leave blank');
+        });
     }
   };
 })(jQuery, Drupal);
