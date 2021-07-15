@@ -508,9 +508,7 @@ function _nicsdru_origins_social_links() {
     }
 
     $social_links[$id] = Link::fromTextAndUrl($label,
-      Url::fromUri($platform_url, [
-        'attributes' => ['title' => $label],
-      ]))->toRenderable();
+      Url::fromUri($platform_url))->toRenderable();
   }
 
   return $social_links;
