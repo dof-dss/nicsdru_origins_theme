@@ -16,6 +16,7 @@ global-styling:
     js/empty-tags-script.js: { minified: true }
     js/table-xscroll.js: { minified: true }
     js/honeypot.js: { minified: true }
+    js/main-menu-toggle.js: { minified: true }
   dependencies:
     - core/drupal
     - core/jquery

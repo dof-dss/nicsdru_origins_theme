@@ -1,0 +1,1 @@
+(function($,Drupal){Drupal.behaviors.nicsdruOriginsMainMenuToggle={attach:function attach(context){$("#menu-toggle",context).once("mainMenuToggle").each(function(){$(this).keyup(function(event){var enterKeyCode=13;var spaceKeyCode=32;if(event.keyCode===enterKeyCode||event.keyCode===spaceKeyCode){this.checked=!this.checked}})})}}})(jQuery,Drupal);
