@@ -38,7 +38,7 @@
     "imagemin-zopfli": "^6.0.0",
     "kss": "^3.0.1",
     "modernizr": "^3.11.4",
-    "nightwatch": "^1.5.1",
+    "nightwatch": "^1.7.8",
     "nightwatch-accessibility": "^1.8.0",
     "node-sass": "^4.14.1",
     "normalize.css": "^8.0.1",
@@ -118,5 +118,15 @@
     "last 2 versions",
     "ie >= 10"
   ],
-  "dependencies": {}
+  "dependencies": {
+    "axios": "^0.21.1",
+    "is-svg": "^4.3.1",
+    "lodash": "^4.17.21",
+    "merge": "^2.1.1",
+    "netmask": "^2.0.2",
+    "postcss": "^8.3.6",
+    "tar": "^6.1.6",
+    "trim-newlines": "^4.0.2",
+    "yargs-parser": "^20.2.9"
+  }
 }
