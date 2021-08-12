@@ -33,7 +33,7 @@
  * http://www.w3.org/TR/WCAG-TECHS/H42.html for more information.
  */
 #}
-{% set heading_id = attributes.id ~ '-menu'|clean_id %}
+{% set heading_id = attributes.id ~ '-heading'|clean_id %}
 <nav class="main-menu  clearfix" aria-labelledby="{{ heading_id }}"{{ attributes|without('role') }}>
   {# Label. If not displayed, we still provide it for screen readers. #}
   {%- if not configuration.label_display -%}
@@ -42,10 +42,18 @@
   {{ title_prefix -}}
   <h2{{ title_attributes.setAttribute('id', heading_id) }}>{{ configuration.label }}</h2>
   {{- title_suffix }}
-  <label class="visually-hidden toggler-label" for="menu-toggle">{{ 'Open or close the menu'|t }}</label>
-  <input class="toggler" type="checkbox" id="menu-toggle" aria-controls="nav-main-menu">
-  <div class="hamburger"><div></div></div>
+  {# Hamburger button.
 
+  JS is used to make the button active (by removing the hidden attribute) and control
+  various aria attributes that make the button accessible. The hidden attribute and aria
+  attributes can be targetted in CSS to control the display of the nav menu.
+
+  @see src/js/main-menu-toggle.js
+  @see src/scss/3_components/navigation/main-menu.scss
+  #}
+  <button class="hamburger" id="nav-main-toggle" aria-controls="nav-main-menu" aria-expanded="false" aria-label="Open menu" hidden>
+    <div></div>
+  </button>
   {# Wrapping div required to allow us to set a max-width on child elements while retaining
      the background colour full-width on the parent element. #}
   <div class="nav-main" id="nav-main-menu">
