@@ -5,16 +5,11 @@
   background-color: color(brand-primary-medium);
   position: relative;
 
-  @include breakpoint($tab) {
-    padding: 0;
-  }
-
   .nav {
 
     &-main {
       display: flex;
       flex-flow: column nowrap;
-      padding: 1rem 0;
 
       @include breakpoint($tab) {
         flex-flow: row wrap;
@@ -44,28 +39,6 @@
       @include breakpoint($tab) {
         /* TODO: add link state styles */
         padding: 1.8rem 2.3rem;
-
-        // IE fix.
-        // IE does not support outline-offset. So just remove the outline.
-        @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-          position: relative;
-          outline: none !important;
-
-          &::after {
-            content: '';
-            display: block;
-            width: calc(100% - 16px);
-            height: calc(100% - 16px);
-            position: absolute;
-            left: 8px;
-            top: 8px;
-          }
-
-          &:hover::after,
-          &:focus::after {
-            border: 3px solid #fff;
-          }
-        }
       }
     }
 
@@ -183,10 +156,8 @@
       display: none;
     }
 
-    // Hamburger Lines are added to button using a nested div and pseudo elements.
-    // The nested div is the middle line to which we add ::before and ::after
-    // pseudo elements to make the top and bottom lines.
-    & > div {
+    // Hamburger Lines are added to button using a nested span and pseudo elements.
+    & > span {
       position: relative;
       flex: none;
       width: 100%;
@@ -215,7 +186,7 @@
     }
 
     // Hamburger lines animate into a X close symbol when menu is opened.
-    &[aria-expanded='true'] > div {
+    &[aria-expanded='true'] > span {
       transform: rotate(135deg);
 
       /* Turns Lines Into X */
@@ -227,7 +198,7 @@
     }
 
     // Hamburger X close symbol does partial rotation on hover.
-    &[aria-expanded='true']:hover > div {
+    &[aria-expanded='true']:hover > span {
       transform: rotate(225deg);
     }
 
