@@ -37,13 +37,12 @@
     }
 
     &-link {
-      @include link-state-style($link-main-menu);
-      @include adjust-font-size-to(16px, 4);
+      /* TODO: add link state styles */
       display: block;
       padding: 1rem 1.6rem;
 
       @include breakpoint($tab) {
-        @include link-state-style($link-main-menu-horizontal);
+        /* TODO: add link state styles */
         padding: 1.8rem 2.3rem;
 
         // IE fix.
@@ -92,7 +91,7 @@
       }
 
       a {
-        @include link-state-style($link-main-menu-social);
+        /* TODO: add link state styles */
 
         @include breakpoint($tab) {
           width: 4rem;
