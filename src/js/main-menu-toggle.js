@@ -27,10 +27,9 @@
           }
         });
 
-        // The checkbox has role="button" - toggle aria-pressed attribute when the
-        // the checkbox is toggled.
+        // Indicate the toggle has expanded the menu.
         $(this).bind('click keyup', function () {
-           $(this).attr('aria-pressed', this.checked);
+           $(this).attr('aria-expanded', this.checked);
         });
       });
 

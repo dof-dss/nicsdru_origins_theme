@@ -43,12 +43,12 @@
   <h2{{ title_attributes.setAttribute('id', heading_id) }}>{{ configuration.label }}</h2>
   {{- title_suffix }}
   <label class="visually-hidden toggler-label" for="menu-toggle">{{ 'Open or close the menu'|t }}</label>
-  <input class="toggler" type="checkbox" id="menu-toggle" role="button">
+  <input class="toggler" type="checkbox" id="menu-toggle" aria-controls="nav-main-menu">
   <div class="hamburger"><div></div></div>
 
   {# Wrapping div required to allow us to set a max-width on child elements while retaining
      the background colour full-width on the parent element. #}
-  <div class="nav-main">
+  <div class="nav-main" id="nav-main-menu">
   {# Menu. #}
   {%- block content -%}
     {{- content -}}
