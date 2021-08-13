@@ -96,7 +96,6 @@ function nicsdru_origins_theme_page_attachments_alter(array &$page) {
       array_unshift($page['#attached']['html_head'], [
         [
           '#tag' => 'script',
-          '#attributes' => ['type' => 'text/javascript'],
           '#value' => $script,
         ],
         'ga_tracking_options',
