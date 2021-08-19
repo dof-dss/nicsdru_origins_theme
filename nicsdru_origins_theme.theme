@@ -540,8 +540,8 @@ function nicsdru_origins_theme_preprocess_media(&$variables) {
       }
     }
 
-    // Do not output the langcode if is undefined.
     $variables['media_langcode'] = $variables['media']->language()->getId();
+    // Do not output the langcode if is undefined.
     if ($variables['media_langcode'] === 'und') {
       unset($variables['media_langcode']);
     }
