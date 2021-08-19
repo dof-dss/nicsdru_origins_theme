@@ -539,6 +539,11 @@ function nicsdru_origins_theme_preprocess_media(&$variables) {
         $variables['file_type'] = strtoupper(preg_replace('/^application\/(\w+)$/', '\1', $file_mimetype));
       }
     }
+
+    // Do not output the langcode if is undefined.
     $variables['media_langcode'] = $variables['media']->language()->getId();
+    if ($variables['media_langcode'] === 'und') {
+      unset($variables['media_langcode']);
+    }
   }
 }
