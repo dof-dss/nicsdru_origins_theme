@@ -38,7 +38,7 @@
     "imagemin-zopfli": "^6.0.0",
     "kss": "^3.0.1",
     "modernizr": "^3.11.4",
-    "nightwatch": "^1.5.1",
+    "nightwatch": "^1.7.8",
     "nightwatch-accessibility": "^1.8.0",
     "node-sass": "^4.14.1",
     "normalize.css": "^8.0.1",
@@ -68,9 +68,11 @@
     "js-compile-honeypot-lib": "mkdir -p js && uglifyjs src/js/honeypot.js -o js/honeypot.js",
     "js-compile-search-facets-lib": "mkdir -p js && uglifyjs src/js/search-facets-script.js -o js/search-facets-script.js",
     "js-compile-toggle-lib": "mkdir -p js && uglifyjs src/js/toggle-btn-script.js -o js/toggle-btn-script.js",
+    "js-compile-main-menu-toggle": "mkdir -p js && uglifyjs src/js/main-menu-toggle.js -o js/main-menu-toggle.js",
     "js-compile-table-xscroll": "mkdir -p js && uglifyjs src/js/table-xscroll.js -o js/table-xscroll.js",
     "js-compile-moderation-sidebar-lib": "mkdir -p js && uglifyjs src/js/moderation-sidebar.js -o js/moderation-sidebar.js",
     "js-compile-honeypot": "mkdir -p js && uglifyjs src/js/honeypot.js -o js/honeypot.js",
+    "js-compile-notices-and-messages": "mkdir -p js && uglifyjs src/js/notices-and-messages.js -o js/notices-and-messages.js",
     "––––––– CSS SCRIPTS": "–––––––––––––",
     "css": "npm-run-all --sequential scss-dev css-post",
     "css-lint": "sass-lint -c $npm_package_config_sasslintConfig $npm_package_config_scssfile -v -q",
@@ -117,5 +119,15 @@
     "last 2 versions",
     "ie >= 10"
   ],
-  "dependencies": {}
+  "dependencies": {
+    "axios": "^0.21.1",
+    "is-svg": "^4.3.1",
+    "lodash": "^4.17.21",
+    "merge": "^2.1.1",
+    "netmask": "^2.0.2",
+    "postcss": "^8.3.6",
+    "tar": "^6.1.6",
+    "trim-newlines": "^4.0.2",
+    "yargs-parser": "^20.2.9"
+  }
 }

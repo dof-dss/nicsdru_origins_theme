@@ -96,7 +96,6 @@ function nicsdru_origins_theme_page_attachments_alter(array &$page) {
       array_unshift($page['#attached']['html_head'], [
         [
           '#tag' => 'script',
-          '#attributes' => ['type' => 'text/javascript'],
           '#value' => $script,
         ],
         'ga_tracking_options',
@@ -230,6 +229,8 @@ function nicsdru_origins_theme_preprocess_views_view(&$variables) {
   if ($variables['id'] === 'search') {
     $variables['exposed']['#attributes']['class'][] = Html::cleanCssIdentifier('search-form');
     $variables['exposed']['#attributes']['class'][] = Html::cleanCssIdentifier('search-form--site');
+    $variables['exposed']['#attributes']['role'] = 'search';
+    $variables['exposed']['#attributes']['aria-roledescription'] = t('site search');
     // If a label for the search input is not defined in the view, set
     // default label text.
     $search_label =& $variables['exposed']['#info']['filter-search_api_fulltext']['label'];
@@ -268,7 +269,7 @@ function nicsdru_origins_theme_preprocess_input(&$variables) {
     $variables['autocomplete_message'] = t('Checking…');
   }
   // Set the type attribute to 'search' for search form input elements.
-  if ($variables['element']['#type'] == 'search_api_autocomplete') {
+  if ($variables['element']['#type'] == 'search_api_autocomplete' || $variables['element']['#name'] == 'search_api_fulltext' || $variables['element']['#name'] == 'search_api_views_fulltext') {
     $variables['element']['#attributes']['type'] = 'search';
     $variables['attributes']['type'] = 'search';
   }
@@ -540,6 +541,11 @@ function nicsdru_origins_theme_preprocess_media(&$variables) {
         $variables['file_type'] = strtoupper(preg_replace('/^application\/(\w+)$/', '\1', $file_mimetype));
       }
     }
+
     $variables['media_langcode'] = $variables['media']->language()->getId();
+    // Do not output the langcode if is undefined.
+    if ($variables['media_langcode'] === 'und') {
+      unset($variables['media_langcode']);
+    }
   }
 }
