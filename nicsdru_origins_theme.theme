@@ -268,8 +268,21 @@ function nicsdru_origins_theme_preprocess_input(&$variables) {
   if (in_array($type_html, $text_types_html) && !empty($variables['element']['#autocomplete_route_name'])) {
     $variables['autocomplete_message'] = t('Checking…');
   }
+
   // Set the type attribute to 'search' for search form input elements.
-  if ($variables['element']['#type'] == 'search_api_autocomplete' || $variables['element']['#name'] == 'search_api_fulltext' || $variables['element']['#name'] == 'search_api_views_fulltext') {
+  $is_search_page = FALSE;
+
+  if (isset($variables['element']['#name'])) {
+    if ($variables['element']['#name'] === 'search_api_fulltext' || $variables['element']['#name'] === 'search_api_views_fulltext') {
+      $is_search_page = TRUE;
+    }
+  }
+
+  if (isset($variables['element']['#type']) && $variables['element']['#type'] === 'search_api_autocomplete') {
+      $is_search_page = TRUE;
+  }
+
+  if ($is_search_page) {
     $variables['element']['#attributes']['type'] = 'search';
     $variables['attributes']['type'] = 'search';
   }
