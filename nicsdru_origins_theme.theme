@@ -515,7 +515,7 @@ function _nicsdru_origins_social_links() {
     }
 
     // Check for any internal paths.
-    if (preg_match('/^http/', $platform_url) === FALSE) {
+    if (0 === strpos($platform_url, "http")) {
       // Strip leading / if present.
       $platform_url = ltrim($platform_url, '/');
       $platform_url = 'internal:/' . $platform_url;
