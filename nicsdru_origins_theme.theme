@@ -151,7 +151,7 @@ function nicsdru_origins_theme_preprocess_pager(&$variables) {
 
   // Lowercase all text controls.
   foreach ($variables['items'] as $key => &$item) {
-    if (array_key_exists('text', $item) && is_numeric($item['text']) == FALSE) {
+    if (array_key_exists('text', $item) && is_numeric($item['text']) === FALSE) {
       $item['text'] = strtolower($item['text']);
     }
   }
@@ -265,7 +265,7 @@ function nicsdru_origins_theme_preprocess_input(&$variables) {
     'week',
   ];
 
-  if (in_array($type_html, $text_types_html) && !empty($variables['element']['#autocomplete_route_name'])) {
+  if (!empty($variables['element']['#autocomplete_route_name']) && in_array($type_html, $text_types_html)) {
     $variables['autocomplete_message'] = t('Checking…');
   }
 
@@ -360,7 +360,7 @@ function nicsdru_origins_theme_form_user_pass_alter(&$form, FormStateInterface $
  */
 function nicsdru_origins_theme_preprocess_facets_item_list(array &$variables) {
   if (!empty($variables["facet"])) {
-    if (!empty($variables["facet"]->getWidget()) && $variables["facet"]->getWidget()["type"] == 'links') {
+    if (!empty($variables["facet"]->getWidget()) && $variables["facet"]->getWidget()["type"] === 'links') {
       foreach ($variables["items"] as $key => $item) {
         if (array_key_exists('class', $item["value"]["#attributes"])) {
           $variables["items"][$key]["value"]["#attributes"]["class"][] = 'facet-item--link';
@@ -376,7 +376,7 @@ function nicsdru_origins_theme_preprocess_facets_item_list(array &$variables) {
 /**
  * Implements hook_form_system_theme_settings_alter().
  */
-function nicsdru_origins_theme_form_system_theme_settings_alter(&$form, FormStateInterface &$form_state, $form_id = NULL) {
+function nicsdru_origins_theme_form_system_theme_settings_alter(&$form, FormStateInterface $form_state, $form_id = NULL) {
   // Work-around for a core bug affecting admin themes. See issue #943212.
   if (isset($form_id)) {
     return;
@@ -515,7 +515,7 @@ function _nicsdru_origins_social_links() {
     }
 
     // Check for any internal paths.
-    if (preg_match('/^http/', $platform_url) == FALSE) {
+    if (preg_match('/^http/', $platform_url) === FALSE) {
       // Strip leading / if present.
       $platform_url = ltrim($platform_url, '/');
       $platform_url = 'internal:/' . $platform_url;
@@ -532,7 +532,7 @@ function _nicsdru_origins_social_links() {
  * Implements hook_preprocess_media().
  */
 function nicsdru_origins_theme_preprocess_media(&$variables) {
-  if (empty($variables['media']) || $variables['media']->bundle() != 'document') {
+  if (empty($variables['media']) || $variables['media']->bundle() !== 'document') {
     return;
   }
 
