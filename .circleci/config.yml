@@ -97,10 +97,10 @@ jobs:
             cd /home/circleci/project/web
             ../vendor/bin/drupal-check themes/custom -e "*/tests/*"
 
-workflows:
-  version: 2
-  build-static-analysis:
-    jobs:
+#workflows:
+#  version: 2
+#  build-static-analysis:
+#    jobs:
 #      - install
 #      - lint:
 #          requires:
