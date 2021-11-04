@@ -101,12 +101,12 @@ workflows:
   version: 2
   build-static-analysis:
     jobs:
-      - install
-      - lint:
-          requires:
-            - install
+#      - install
+#      - lint:
+#          requires:
+#            - install
 #      - build_assets:
 #          requires:
 #            - install
-      - coding_standards
-      - deprecated_code
+#      - coding_standards
+#      - deprecated_code
