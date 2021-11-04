@@ -3,7 +3,7 @@ type: theme
 base theme: stable
 description: 'Base theme for Drupal 8 sites'
 package: NICS
-core: 8.x
+core_version_requirement: ^8.8 || ^9
 
 libraries:
   - nicsdru_origins_theme/global-styling
