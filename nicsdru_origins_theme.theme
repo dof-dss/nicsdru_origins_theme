@@ -279,7 +279,7 @@ function nicsdru_origins_theme_preprocess_input(&$variables) {
   }
 
   if (isset($variables['element']['#type']) && $variables['element']['#type'] === 'search_api_autocomplete') {
-      $is_search_page = TRUE;
+    $is_search_page = TRUE;
   }
 
   if ($is_search_page) {
@@ -300,7 +300,7 @@ function nicsdru_origins_theme_preprocess_file_link(array &$variables) {
   $variables['attributes']->addClass([
     'file-link',
     'file--ico',
-    'file--ico__' . $file_extension
+    'file--ico__' . $file_extension,
   ]);
 }
 
