@@ -1,0 +1,24 @@
+{#
+/**
+ * @file
+ * Theme override for a link to a file.
+ *
+ * Available variables:
+ * - attributes: The HTML attributes for the containing element.
+ * - link: A link to the file.
+ * - file_size: The size of the file.
+ * - file_url: The URL of the file.
+ * - file_type: Human readable file type (e.g. "Adobe PDF")
+ *
+ * @see template_preprocess_file_link()
+ * @see stable_preprocess_image_widget()
+ */
+#}
+{% if file_url %}
+  <a{{ attributes }} href="{{ file_url }}">
+    {{ link['#title'] }}
+    <span class="meta">{{ file_type }} ({{ file_size }})</span>
+  </a>
+{% else %}
+  {{ link }}
+{% endif %}
