@@ -34,15 +34,15 @@ jobs:
           command: |
             npm run lint
   # Build front-end assets.
-#  build_assets:
-#    docker:
-#      - image: circleci/node:lts
-#    steps:
-#      - attach_workspace:
-#          at: ./
-#      - run:
-#          name: Fetch dependencies
-#          command: npm run build
+  build_assets:
+    docker:
+      - image: circleci/node:lts
+    steps:
+      - attach_workspace:
+          at: ./
+      - run:
+          name: Fetch dependencies
+          command: npm run build
 
   # Static analysis of any PHP/Drupal code.
   coding_standards:
@@ -105,8 +105,8 @@ workflows:
       - lint:
           requires:
             - install
-#      - build_assets:
-#          requires:
-#            - install
+      - build_assets:
+          requires:
+            - install
       - coding_standards
       - deprecated_code
