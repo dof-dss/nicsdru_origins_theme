@@ -307,7 +307,7 @@ function nicsdru_origins_theme_preprocess_file_link(array &$variables) {
   $variables['attributes']->addClass([
     'file-link',
     'file--ico',
-    'file--ico__' . $file_extension,
+    'file--ico__' . strtolower($file_extension),
   ]);
 
   $file_mimetype = $file->getMimeType();
