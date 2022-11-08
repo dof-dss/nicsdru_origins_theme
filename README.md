@@ -13,8 +13,8 @@ This repository contains code for a Drupal 8 theme from which NICS sites could b
 - [Documentation](#documentation)
 
 ## Quick start
-- [Download the latest release](https://github.com/dof-dss/nicsdru_origins_theme/archive/master.zip) or clone the repo: `git clone https://github.com/dof-dss/nicsdru_origins_theme.git`
-- `npm install` **NB:** you encounter issues with the image optimisation libraries if you don't have libjpeg library available on the host machine. To fix this `brew install libjpeg`
+- [Download the latest release](https://github.com/dof-dss/nicsdru_origins_theme/archive/master.zip) or clone the repo: `git clone https://github.com/dof-dss/nicsdru_origins_theme.git`.
+- `npm install` **NB:** you encounter issues with the image optimisation libraries if you don't have libjpeg library available on the host machine. To fix this `brew install libjpeg`.
 
 ## What's included
 
