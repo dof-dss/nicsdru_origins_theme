@@ -23,10 +23,10 @@
 #}
 {%
   set classes = [
-  'facet-summary__list',
-  'list--inline',
-  'list--no-bullet',
-  context.list_style ? 'item-list__' ~ context.list_style,
+    'facet-summary__list',
+    'list--inline',
+    'list--no-bullet',
+    context.list_style ? 'item-list__' ~ context.list_style,
 ]
 %}
 {% set attributes = attributes.addClass(classes).setAttribute('aria-describedby', 'facet-summary-label') %}
@@ -39,9 +39,9 @@
     {%- for item in items -%}
       {%- set facet_name = item.value['#title']['#facet'].description ?: item.value['#title']['#facet'].name -%}
       <li{{ item.attributes }}>
-          <span aria-label="Selected filter" class="facet-item__label">
-            {{ facet_name|t }}
-          </span>
+        <span aria-label="Selected filter" class="facet-item__label">
+          {{ facet_name|t }}
+        </span>
         {{ link(item.value['#title'], item.value["#url"], { 'data-self-ref': ['true']}) }}
       </li>
     {%- endfor -%}
