@@ -27,7 +27,7 @@
     'list--inline',
     'list--no-bullet',
     context.list_style ? 'item-list__' ~ context.list_style,
-]
+  ]
 %}
 {% set attributes = attributes.addClass(classes).setAttribute('aria-describedby', 'facet-summary-label') %}
 {% if items or empty %}
@@ -50,4 +50,3 @@
     {{- empty -}}
   {%- endif -%}
 {%- endif %}
-
