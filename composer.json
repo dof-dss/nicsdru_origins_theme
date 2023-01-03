@@ -14,5 +14,12 @@
             "name": "David Corbett",
             "role": "Maintainer"
         }
-    ]
+    ],
+    "extra": {
+        "patches": {
+            "drupal/core": {
+                "Improve format_size to support a precision parameter": "https://www.drupal.org/files/issues/2019-01-08/2837979-format_size_precision-09.patch"
+            }
+        }
+    }
 }
