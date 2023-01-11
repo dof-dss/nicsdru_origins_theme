@@ -39,6 +39,10 @@
   'file--ico__' ~ file_extension|lower,
 ]
 %}
+
+{% set file_size_split = file_size|split(' ') %}
+{% set file_size = file_size_split[0]|number_format ~ " " ~ file_size_split[1] %}
+
 {% set media_attributes = media_attributes.addClass(file_classes) %}
 {% if file_url %}
   <a{{ media_attributes }} href="{{ file_url }}">
