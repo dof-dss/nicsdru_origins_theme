@@ -414,6 +414,11 @@ a.tabs-secondary--tab-link.is-active {
 // Drupal off canvas dialogue / sidebar.
 #drupal-off-canvas {
 
+  // Fixes css issue in core 9.5.2 stable theme
+  *:not(.foobar), *::before, *::after {
+    box-sizing: border-box;
+  }
+
   a,
   .link {
     &:focus {
