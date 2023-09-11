@@ -23,7 +23,7 @@
   <span class="facet-item__value">{{ value }}</span>
 {% endif %}
 {% if show_count and not is_active %}
-  {% spaceless %}
+  {% apply spaceless %}
   <span class="facet-item__count">(<span>{{ count }}</span> <span class="visually-hidden">{{ 'results'|t }}</span>)</span>
-  {%  endspaceless %}
+  {%  endapply %}
 {% endif %}

@@ -11,7 +11,7 @@
  * @TODO review the need for this template when work around search api autocomplete has been done
  */
 #}
-{% spaceless %}
+{% apply spaceless %}
   {% if autocomplete_message %}
     {% set attributes = attributes.setAttribute('data-autocomplete-msg', autocomplete_message) %}
     <div class="origins-autocomplete" role="presentation">
@@ -22,4 +22,4 @@
   {% else %}
     <input{{ attributes }}/>{{ children }}
   {% endif %}
-{% endspaceless %}
+{% endapply %}
