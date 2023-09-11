@@ -75,7 +75,7 @@ jobs:
           name: Fetch latest Drupal version
           command: |
             cd $PROJECT_ROOT
-            chown -R ug+rw $PROJECT_ROOT
+            chmod -R ug+rw $PROJECT_ROOT
             composer create-project drupal-composer/drupal-project:10.x-dev $PROJECT_ROOT --no-interaction
       - run:
           name: Download dependent contrib modules.
