@@ -7,8 +7,7 @@
 (function ($) {
   Drupal.behaviors.nicsdruOriginsRemoveEmptyTags = {
     attach: function attach(context) {
-      $('p', context)
-        .once('emptyTags')
+      $(once('emptyTags', 'p', context))
         // eslint-disable-next-line
         .filter(function () {
           return (
@@ -22,4 +21,4 @@
         .remove();
     },
   };
-})(jQuery);
+})(jQuery, once);

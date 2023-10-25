@@ -14,7 +14,7 @@
        * declared.
        */
       // eslint-disable-next-line one-var,no-var
-      $('.toggle-list', context).once('toggleBtn').each(function () {
+      $(once('toggleBtn', '.toggle-list', context)).each(function () {
         let maxItems = parseInt($(this).attr('data-toggle-length'), 10);
         if (isNaN(maxItems)) maxItems = 7;
 

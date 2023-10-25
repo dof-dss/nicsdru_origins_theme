@@ -9,8 +9,7 @@
 (function ($, Drupal) {
   Drupal.behaviors.nicsdruOriginsTablesXScroll = {
     attach: function attach (context) {
-      var $tables = $('#main-article table', context);
-      $tables.once('x-scroll').each(function(index) {
+      $(once('x-scroll', '#main-article table', context)).each(function(index) {
         // Only wrap the table if it doesn't already have an .x-scroll wrapper.
         var hasScrollWrapper = $(this).closest('div').hasClass('x-scroll');
         if (!hasScrollWrapper) {
