@@ -15,33 +15,30 @@
           $intLinkText = Drupal.t('opens in a new window / tab');
       var $extLinkMarkup = '<span class="visually-hidden">(' + $extLinkText + ')</span><svg aria-hidden="true" class="ico ico-elink"><title>' + $extLinkText + '</title><use xlink:href="#elink"></use></svg>';
 
-      $("#main-content a[href^='http'], #main-content a[href^='//']", context)
-        .filter(function () {
-          return this.hostname && this.hostname !== location.hostname;
-        })
-        .not('a.no-ext-icon, .social-links a')
-        .once('elink').each(function () {
-          // Set attributes.
-          $(this)
+      $(once('elink', "#main-content a[href^='http'], #main-content a[href^='//']", context)).filter(function () {
+        return this.hostname && this.hostname !== location.hostname;
+      }).not('a.no-ext-icon, .social-links a').each(function () {
+        // Set attributes.
+        $(this)
             .attr('target', '_blank')
             .attr('rel', 'noopener noreferrer');
 
-          // Add the icon.
-          // If the link is a card, append the icon to the .card__title.
-          if ($(this).find('.card__title').length) {
-            $(this).find('.card__title').append($extLinkMarkup);
-          } else {
-            $(this).append($extLinkMarkup);
-          }
-        });
+        // Add the icon.
+        // If the link is a card, append the icon to the .card__title.
+        if ($(this).find('.card__title').length) {
+          $(this).find('.card__title').append($extLinkMarkup);
+        } else {
+          $(this).append($extLinkMarkup);
+        }
+      });
 
       // Internal links with data-ext-url - turn them into external links.
-      $("#main-content a[data-ext-type^='External']", context).once('elink').each(function () {
+      $(once('elink', "#main-content a[data-ext-type^='External']", context)).each(function () {
         $(this).attr('href', $(this).attr('data-ext-url'));
       });
 
       // Internal links in content that open new windows (should be very rare).
-      $("#main-content a[target='_blank']", context).once('elink').each(function () {
+      $(once('elink', "#main-content a[target='_blank']", context)).each(function () {
         $(this).not("a.no-ext-icon, a:has(img), #main-content a[href*='http://'], #main-content a[href*='https://'], #main-content a[href^='//']")
           .append('<span class="visually-hidden">(' + $intLinkText + ')</span><svg aria-hidden="true" class="ico ico-elink"><title>' + $intLinkText + '</title><use xlink:href="#elink"></use></svg>')
           .attr('title', $intLinkText)

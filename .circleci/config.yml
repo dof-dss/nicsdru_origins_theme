@@ -7,7 +7,7 @@ default_docker_image: &docker_image
         PROJECT_ROOT: "/home/docker/project"
         PHP_EXTENSION_GD: 1
         PHP_INI_MEMORY_LIMIT: 1g
-
+        CPPFLAGS: "-DPNG_ARM_NEON_OPT=0"
 jobs:
   install:
     <<: *docker_image

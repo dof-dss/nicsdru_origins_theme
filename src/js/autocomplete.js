@@ -6,7 +6,7 @@
 (function ($, Drupal) {
   Drupal.behaviors.originsAutoCompete = {
     attach: function attach(context) {
-      $(context).find('input.form-autocomplete').once('originsAutoComplete').each(function (index, value) {
+      $(once('originsAutoComplete', 'input.form-autocomplete', context)).each(function (index, value) {
         var $input = $(value);
         var timeout = 400;
         var classRemoveTimeout = void 0;

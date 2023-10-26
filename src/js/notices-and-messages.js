@@ -9,7 +9,7 @@
   Drupal.behaviors.nicsdruNoticesAndMessages = {
     attach: function attach (context) {
 
-      $('.info-notice, .messages', context).once('nicsdruNoticesAndMessages').each(function(index) {
+      $(once('nicsdruNoticesAndMessages', '.info-notice, .messages', context)).each(function(index) {
 
         // Most info notices and custom webform messages are just css styles added to
         // a div or paragraph. To convey the purpose and importance of these notices

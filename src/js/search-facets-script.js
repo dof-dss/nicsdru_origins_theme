@@ -7,7 +7,7 @@
   Drupal.behaviors.nicsdruOriginsFacets = {
     attach: function attach (context) {
       // Add some progressive enhancement to the `.facet--title`.
-      $('.facet--dropdown-links .facet--title', context).once('facetDropdown').each(function (index, widget) {
+      $(once('facetDropdown', '.facet--dropdown-links .facet--title', context)).each(function (index, widget) {
         var $widget = $(widget);
         var $widgetLinks = $widget.nextAll('.facets-widget-links');
         var $facetId = $widgetLinks.attr('id');
