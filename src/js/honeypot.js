@@ -11,7 +11,7 @@
     attach: function attach (context) {
       // Honey pot elements for bots
       // Remove from tab order and disable
-      $('.webform-submission-form .for-pooh-bear', context).once('honeyPot').each(function () {
+      $(once('honeyPot', '.webform-submission-form .for-pooh-bear', context)).each(function () {
         $(this).find('input, select, textarea')
           .attr("tabindex", "-1")
           .prop("disabled", true);

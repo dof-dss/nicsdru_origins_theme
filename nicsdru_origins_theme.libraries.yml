@@ -21,7 +21,7 @@ global-styling:
   dependencies:
     - core/drupal
     - core/jquery
-    - core/jquery.once
+    - core/once
     - core/modernizr
 
 # This library provides styling for common admin interface components - the library is only loaded for
@@ -74,7 +74,7 @@ toggle-list:
   dependencies:
     - core/drupal
     - core/jquery
-    - core/jquery.once
+    - core/once
 
 origins-facets:
   version: VERSION
@@ -86,7 +86,7 @@ origins-facets:
   dependencies:
     - core/drupal
     - core/jquery
-    - core/jquery.once
+    - core/once
 
 moderation-sidebar:
   version: VERSION
@@ -95,7 +95,7 @@ moderation-sidebar:
   dependencies:
     - core/drupal
     - core/jquery
-    - core/jquery.once
+    - core/once
 
 media_library_styles:
   css:
