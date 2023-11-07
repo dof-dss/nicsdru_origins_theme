@@ -186,6 +186,36 @@ a.tabs-secondary--tab-link.is-active {
     margin: 0;
     padding: 0;
   }
+
+  .toolbar {
+    &-icon {
+      &::before {
+        width: 1.539em;
+      }
+    }
+
+    &-bar {
+      .toolbar-tab > .toolbar-icon {
+        &::before {
+          @include breakpoint(36em) {
+            width: 1.539em;
+          }
+        }
+      }
+    }
+
+    &-tray-vertical {
+      width: 18.5em;
+    }
+
+    &-toggle-orientation {
+      button {
+        width: 3em;
+        height: 3em;
+        max-height: 100%;
+      }
+    }
+  }
 }
 
 .user-login-form {
