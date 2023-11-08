@@ -3,7 +3,7 @@
  * A simple script to remove empty tags, in particular 'p' tags from the page.
  */
 
-// eslint-disable-next-line
+/* eslint-disable */
 (function ($) {
   Drupal.behaviors.nicsdruOriginsRemoveEmptyTags = {
     attach: function attach(context) {
