@@ -73,8 +73,8 @@ $relative-font-sizing: if($rhythm-unit == px, false, true);
 // Style guide: init.libraries.compass.lines-for-font-size
 @function lines-for-font-size($font-size) {
   $lines: if($round-to-nearest-half-line,
-             ceil(2 * $font-size / $base-line-height) / 2,
-             ceil($font-size / $base-line-height));
+    ceil(2 * $font-size / $base-line-height) / 2,
+    ceil($font-size / $base-line-height));
   // If lines are cramped include some extra lead.
   @if ($lines * $base-line-height - $font-size) < ($min-line-padding * 2) {
     $lines: $lines + if($round-to-nearest-half-line, .5, 1);
@@ -405,4 +405,47 @@ $relative-font-sizing: if($rhythm-unit == px, false, true);
   $border-style: $default-rhythm-border-style
 ) {
   @include apply-side-rhythm-border(all, $width, $lines, $font-size, $border-style);
+}
+
+// adjust-property-size-to($to-size, $property, [$lines], [$from-size])
+//
+// Adjust a CSS property to have a different property size to maintain the rhythm. `$lines` specifies how many
+// multiples of the baseline rhythm each line of this property should use up. It does not have to be an integer, but it
+// defaults to the smallest integer that is large enough to fit the property. Use `$from-size` to adjust from a font-size
+// other than the base font-size.
+//
+// If the $to-size value is 'px', then it will be converted to 'rem' using the base font-size
+//
+// Weight: 20
+@mixin adjust-property-size-to($to-size, $property, $lines: null, $from-size: $base-font-size) {
+  $output: ();
+
+  @if (length($to-size) > 1) {
+    @each $value in $to-size {
+      @if unit($value) == px {
+        $output: join($output, convert-length($value, $rhythm-unit, $from-size));
+      }
+      @else {
+        $output: join($output, $value);
+      }
+    }
+  }
+  @else {
+    @if unit($to-size) == px {
+      $output: convert-length($to-size, $rhythm-unit, $from-size);
+    }
+    @else {
+      $output: $to-size;
+    }
+  }
+
+  @if $lines == auto {
+    $lines: lines-for-font-size($to-size);
+  }
+
+  @include _output-rhythm($property, $output);
+
+  @if $lines != null {
+    @include adjust-leading-to($lines, $to-size);
+  }
 }

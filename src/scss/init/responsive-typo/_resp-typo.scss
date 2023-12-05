@@ -58,11 +58,11 @@
     }
     @if (length($fs-font-size) > 1) {
       @if (nth($fs-font-size, 2) != null) {
-        line-height: nth($fs-font-size, 2);
+        @include adjust-property-size-to(nth($fs-font-size, 2), line-height);
       }
     }
     @if (length($fs-font-size) > 2) {
-      margin: nth($fs-font-size, 3);
+      @include adjust-property-size-to(nth($fs-font-size, 3), margin);
     }
   }
   @else {
