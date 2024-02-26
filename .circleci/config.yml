@@ -2,7 +2,7 @@ version: 2.1
 
 default_docker_image: &docker_image
   docker:
-    - image: thecodingmachine/php:8.1-v4-apache-node14
+    - image: thecodingmachine/php:8.2-v4-apache-node14
       environment:
         PROJECT_ROOT: "/home/docker/project"
         PHP_EXTENSION_GD: 1
@@ -90,6 +90,26 @@ jobs:
             cd $PROJECT_ROOT/web
             ../vendor/bin/drupal-check themes/custom
 
+  disallowed_functions:
+    <<: *docker_image
+    steps:
+      - checkout:
+          path: ~/nicsdru_origins_theme
+      - run:
+          name: Fetch latest Drupal core and other misc composer tools.
+          command: |
+            cd $PROJECT_ROOT
+            composer create-project drupal/recommended-project:^10 $PROJECT_ROOT --no-interaction
+            composer require --dev phpstan/extension-installer spaze/phpstan-disallowed-calls
+      - run:
+          name: Move custom code into position
+          command: mv ~/nicsdru_origins_theme $PROJECT_ROOT/web/themes/origins
+      - run:
+          name: Check for disallowed function calls
+          command: |
+            CHECK_DIRS="$CHECK_DIRS ${PROJECT_ROOT}/web/themes/origins"
+            vendor/bin/phpstan analyse $CHECK_DIRS -c $PROJECT_ROOT/web/themes/origins/.circleci/phpstan.neon
+
 workflows:
   version: 2
   build-static-analysis:
@@ -103,3 +123,4 @@ workflows:
             - install
       - coding_standards
       - deprecated_code
+      - disallowed_functions
