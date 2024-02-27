@@ -8,6 +8,7 @@
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Link;
+use Drupal\Core\StringTranslation\ByteSizeMarkup;
 use Drupal\Core\Template\Attribute;
 use Drupal\Core\Url;
 use Drupal\file\FileInterface;
@@ -301,7 +302,7 @@ function nicsdru_origins_theme_preprocess_file_link(array &$variables) {
 
   $file = $variables['file'];
 
-  $variables['file_size'] = format_size($file->getSize(), \Drupal::languageManager()->getCurrentLanguage()->getId());
+  $variables['file_size'] = ByteSizeMarkup::create($file->getSize(), \Drupal::languageManager()->getCurrentLanguage()->getId());
   $variables['file_url'] = $file->createFileUrl();
   $file_extension = pathinfo($variables['file_url'], PATHINFO_EXTENSION);
   $variables['attributes']->addClass([
@@ -568,7 +569,7 @@ function nicsdru_origins_theme_preprocess_media(&$variables) {
     }
 
     if (!empty($file)) {
-      $variables['file_size'] = format_size($file->getSize(), \Drupal::languageManager()->getCurrentLanguage()->getId());
+      $variables['file_size'] = ByteSizeMarkup::create($file->getSize(), \Drupal::languageManager()->getCurrentLanguage()->getId());
       $variables['file_url'] = $file->createFileUrl();
       $variables['file_extension'] = pathinfo($variables['file_url'], PATHINFO_EXTENSION);
       $file_mimetype = $file->getMimeType();
