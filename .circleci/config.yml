@@ -1,126 +1,45 @@
 version: 2.1
 
-default_docker_image: &docker_image
-  docker:
-    - image: thecodingmachine/php:8.2-v4-apache-node14
-      environment:
-        PROJECT_ROOT: "/home/docker/project"
-        PHP_EXTENSION_GD: 1
-        PHP_INI_MEMORY_LIMIT: 1g
-        CPPFLAGS: "-DPNG_ARM_NEON_OPT=0"
-jobs:
-  install:
-    <<: *docker_image
-    steps:
-      - checkout
-      - restore_cache:
-          key: node_modules-{{ .Branch }}-{{ checksum "package.json" }}
-      - run:
-          name: Fetch dependencies
-          command: npm install
-      - save_cache:
-          key: node_modules-{{ .Branch }}-{{ checksum "package.json" }}
-          paths:
-            - node_modules
-      - persist_to_workspace:
-          root: ./
-          paths:
-            - ./
-  # Code static analysis.
-  lint:
-    <<: *docker_image
-    steps:
-      - attach_workspace:
-          at: ./
-      - run:
-          name: Lint all frontend code
-          command: |
-            npm run lint
-  # Build front-end assets.
-  build_assets:
-    <<: *docker_image
-    steps:
-      - attach_workspace:
-          at: ./
-      - run:
-          name: Fetch dependencies
-          command: npm run build
+setup: true
 
-  # Static analysis of any PHP/Drupal code.
-  coding_standards:
-    <<: *docker_image
-    steps:
-      - checkout
-      - run:
-          name: Fetch phpcs and dependencies
-          command: |
-            composer require drupal/coder
-            # Move vendor directory up a level as we don't want to code-check all of that.
-            mv vendor ../
-      - run:
-          name: Fetch phpcs convenience script
-          command: |
-            curl https://raw.githubusercontent.com/dof-dss/nidirect-drupal/main/phpcs.sh -o $PROJECT_ROOT/phpcs.sh
-            chmod +x $PROJECT_ROOT/phpcs.sh
-      - run:
-          name: PHPCS analysis
-          command: $PROJECT_ROOT/phpcs.sh ~/ "${PROJECT_ROOT}"
-
-  deprecated_code:
-    <<: *docker_image
-    steps:
-      - checkout:
-          path: ~/nicsdru_origins_theme
-      - run:
-          name: Fetch latest Drupal version
-          command: |
-            cd $PROJECT_ROOT
-            composer create-project drupal/recommended-project:10.2 $PROJECT_ROOT --no-interaction
-      - run:
-          name: Download dependent contrib modules.
-          command: |
-            cd $PROJECT_ROOT
-            composer require mglaman/drupal-check --no-interaction
-      - run:
-          name: Move custom code into position
-          command: mv ~/nicsdru_origins_theme $PROJECT_ROOT/web/themes/custom
-      - run:
-          name: Deprecated code check
-          command: |
-            cd $PROJECT_ROOT/web
-            ../vendor/bin/drupal-check themes/custom
-
-  disallowed_functions:
-    <<: *docker_image
-    steps:
-      - checkout:
-          path: ~/nicsdru_origins_theme
-      - run:
-          name: Fetch latest Drupal core and other misc composer tools.
-          command: |
-            cd $PROJECT_ROOT
-            composer create-project drupal/recommended-project:10.2 $PROJECT_ROOT --no-interaction
-            composer require --dev phpstan/extension-installer spaze/phpstan-disallowed-calls
-      - run:
-          name: Move custom code into position
-          command: mv ~/nicsdru_origins_theme $PROJECT_ROOT/web/themes/origins
-      - run:
-          name: Check for disallowed function calls
-          command: |
-            CHECK_DIRS="$CHECK_DIRS ${PROJECT_ROOT}/web/themes/origins"
-            vendor/bin/phpstan analyse $CHECK_DIRS -c $PROJECT_ROOT/web/themes/origins/.circleci/phpstan.neon
+orbs:
+  continuation: circleci/continuation@0.4.0
 
 workflows:
-  version: 2
-  build-static-analysis:
+  setup:
     jobs:
-      - install
-      - lint:
-          requires:
-            - install
-      - build_assets:
-          requires:
-            - install
-      - coding_standards
-      - deprecated_code
-      - disallowed_functions
+      - fetch-and-continue
+
+jobs:
+  fetch-and-continue:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run:
+          name: Download shared config (cache-busting)
+          command: |
+            wget \
+              --header="Cache-Control: no-cache" \
+              --header="Pragma: no-cache" \
+              "https://raw.githubusercontent.com/dof-dss/webdev-ci/development/shared-config.yml?nocache=$(date +%s)" \
+              -O shared-config.yml
+
+      - run:
+          name: Combine shared jobs and local workflows
+          command: |
+            # Remove the 'version: 2.1' from workflows config (since it's in shared config).
+            tail -n +2 .circleci/workflow-config.yml > workflows-only.yml
+            # Concatenate shared jobs+commands with repo workflows
+            cat shared-config.yml workflows-only.yml > full-config.yml
+
+      - continuation/continue:
+          configuration_path: full-config.yml
+          parameters: |
+            {
+              "php_version": "8.3",
+              "drupal_core_version": "10.4",
+              "custom_code_dirs": "${PROJECT_ROOT}/web/themes/origins",
+              "deprecated_code_dirs": "${PROJECT_ROOT}/web/themes/origins",
+              "supporting_repo_dependent_packages": "mglaman/drupal-check"
+            }
