@@ -38,6 +38,7 @@ jobs:
           parameters: |
             {
               "php_version": "8.3",
+              "node_version": "14",
               "drupal_core_version": "10.4",
               "custom_code_dirs": "${PROJECT_ROOT}/web/themes/origins",
               "deprecated_code_dirs": "${PROJECT_ROOT}/web/themes/origins",
