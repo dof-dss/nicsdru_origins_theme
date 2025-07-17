@@ -4,12 +4,15 @@ workflows:
   static_analysis:
     jobs:
       - theme_install:
+          node_version: << pipeline.parameters.node_version >>
           php_version: << pipeline.parameters.php_version >>
       - theme_lint:
+          node_version: << pipeline.parameters.node_version >>
           php_version: << pipeline.parameters.php_version >>
           requires:
             - theme_install
       - theme_build_assets:
+          node_version: << pipeline.parameters.node_version >>
           php_version: << pipeline.parameters.php_version >>
           requires:
             - theme_install
