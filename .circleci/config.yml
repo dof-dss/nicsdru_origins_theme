@@ -37,9 +37,9 @@ jobs:
           configuration_path: full-config.yml
           parameters: |
             {
-              "php_version": "8.3",
+              "php_version": "8.4",
               "node_version": "18",
-              "drupal_core_version": "10.4",
+              "drupal_core_version": "11.2",
               "custom_code_dirs": "${PROJECT_ROOT}/web/themes/origins",
               "deprecated_code_dirs": "${PROJECT_ROOT}/web/themes/origins",
               "supporting_repo_dependent_packages": "mglaman/drupal-check"
