@@ -67,7 +67,7 @@ function nicsdru_origins_theme_page_attachments_alter(array &$page) {
   // Disable Google Analytics tracking if option is set in the theme, an
   // analytics ID is present and optionally if the EU Cookie Compliance module
   // is installed and options set in the theme.
-  if (theme_get_setting('ga_tracking_disabled')) {
+  if (\Drupal::service('Drupal\Core\Extension\ThemeSettingsProvider')->getSetting('ga_tracking_disabled')) {
     // Fetch the account id from the Google Analytics module config.
     $ga_account = \Drupal::config('google_analytics.settings')->get('account');
 
@@ -75,7 +75,7 @@ function nicsdru_origins_theme_page_attachments_alter(array &$page) {
     // opt-out/disable tracking.
     // See https://developers.google.com/analytics/devguides/collection/analyticsjs/user-opt-out.
     if ($ga_account) {
-      if (theme_get_setting('ga_tracking_disabled_eu')) {
+      if (\Drupal::service('Drupal\Core\Extension\ThemeSettingsProvider')->getSetting('ga_tracking_disabled_eu')) {
         // First check if the cookie-agreed key has been set, if it hasn't then
         // disable tracking. If the cookie-agreed key has been set to anything
         // apart from the 'agree to cookies' value, disable tracking.
@@ -408,25 +408,25 @@ function nicsdru_origins_theme_form_system_theme_settings_alter(&$form, FormStat
   $form['social_links']['social_links_twitter'] = [
     '#type'          => 'textfield',
     '#title'         => t('Twitter'),
-    '#default_value' => theme_get_setting('social_links_twitter'),
+    '#default_value' => \Drupal::service('Drupal\Core\Extension\ThemeSettingsProvider')->getSetting('social_links_twitter'),
     '#placeholder' => 'Enter a URL, such as https://twitter.com/yourorg',
   ];
   $form['social_links']['social_links_facebook'] = [
     '#type'          => 'textfield',
     '#title'         => t('Facebook'),
-    '#default_value' => theme_get_setting('social_links_facebook'),
+    '#default_value' => \Drupal::service('Drupal\Core\Extension\ThemeSettingsProvider')->getSetting('social_links_facebook'),
     '#placeholder' => 'Enter a URL, such as https://facebook.com/yourorg',
   ];
   $form['social_links']['social_links_youtube'] = [
     '#type'          => 'textfield',
     '#title'         => t('YouTube'),
-    '#default_value' => theme_get_setting('social_links_youtube'),
+    '#default_value' => \Drupal::service('Drupal\Core\Extension\ThemeSettingsProvider')->getSetting('social_links_youtube'),
     '#placeholder' => 'Enter a URL, such as https://youtube.com/yourorg',
   ];
   $form['social_links']['social_links_rss'] = [
     '#type'          => 'textfield',
     '#title'         => t('RSS'),
-    '#default_value' => theme_get_setting('social_links_rss'),
+    '#default_value' => \Drupal::service('Drupal\Core\Extension\ThemeSettingsProvider')->getSetting('social_links_rss'),
     '#placeholder' => 'Enter a URL, such as https://example.com/rss.xml',
   ];
 
@@ -446,7 +446,7 @@ function nicsdru_origins_theme_form_system_theme_settings_alter(&$form, FormStat
       $form['ga_tracking_options']['ga_tracking_disabled'] = [
         '#type' => 'checkbox',
         '#title' => t('Disable Google Analytics tracking'),
-        '#default_value' => theme_get_setting('ga_tracking_disabled'),
+        '#default_value' => \Drupal::service('Drupal\Core\Extension\ThemeSettingsProvider')->getSetting('ga_tracking_disabled'),
       ];
 
       $form['ga_tracking_options']['ga_tracking_disabled_eu'] = [
@@ -456,7 +456,7 @@ function nicsdru_origins_theme_form_system_theme_settings_alter(&$form, FormStat
           0 => t('Everyone'),
           1 => t('People who have declined cookies'),
         ],
-        '#default_value' => theme_get_setting('ga_tracking_disabled_eu') ?? 0,
+        '#default_value' => \Drupal::service('Drupal\Core\Extension\ThemeSettingsProvider')->getSetting('ga_tracking_disabled_eu') ?? 0,
         '#attributes' => ['class' => ['container-inline']],
         '#states' => [
           'visible' => [
@@ -523,7 +523,7 @@ function _nicsdru_origins_social_links() {
 
   // Fetch links from the theme settings and use as part of render elements.
   foreach ($platforms as $id => $label) {
-    $platform_url = theme_get_setting("social_links_$id", 'nicsdru_origins_theme');
+    $platform_url = \Drupal::service('Drupal\Core\Extension\ThemeSettingsProvider')->getSetting("social_links_$id", 'nicsdru_origins_theme');
 
     if (empty($platform_url)) {
       // Skip any blank values.
