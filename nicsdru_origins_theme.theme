@@ -287,6 +287,14 @@ function nicsdru_origins_theme_preprocess_input(&$variables) {
     $variables['element']['#attributes']['type'] = 'search';
     $variables['attributes']['type'] = 'search';
   }
+
+  // Remove autocomplete attribute from hidden inputs as per recommendations on D8NID-1474.
+  if (isset($variables['element']['#type']) && $variables['element']['#type'] === 'hidden') {
+    if (array_key_exists('autocomplete', $variables['attributes'])) {
+      unset($variables['attributes']['autocomplete']);
+    }
+  }
+
 }
 
 /**
