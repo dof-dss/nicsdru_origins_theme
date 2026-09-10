@@ -5,9 +5,16 @@
     "keywords": ["Drupal", "theme"],
     "license": "MIT",
     "homepage": "https://github.com/dof-dss/nicsdru_origins_theme",
-    "minimum-stability": "dev",
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        }
+    ],
     "require": {
-        "php": ">=8.0"
+        "php": ">=8.1",
+        "drupal/core": "^10 || ^11",
+        "drupal/stable": "^2.0"
     },
     "config": {
         "allow-plugins": {
